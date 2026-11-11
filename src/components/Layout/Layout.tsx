@@ -5,7 +5,7 @@ import styles from "./Layout.module.css";
 export function Layout() {
   return (
     <div className={styles.layout}>
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
       <Navbar />
