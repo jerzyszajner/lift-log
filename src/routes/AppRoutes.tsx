@@ -3,6 +3,7 @@ import { Layout } from "../components/Layout/Layout";
 import { HomePage } from "../pages/HomePage/HomePage";
 import { HistoryPage } from "../pages/HistoryPage/HistoryPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
+import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 
 export function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ export function AppRoutes() {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/history" element={<HistoryPage />}></Route>
           <Route path="/account" element={<AccountPage />}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
