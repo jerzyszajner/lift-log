@@ -84,3 +84,4 @@ No UI libraries.
 - The whole app is mobile first: base styles are for the phone, larger screens are added with `min-width`. Every new component is styled for mobile right away. Touch targets are at least 44 px.
 - Media queries are written as `@media screen and (min-width: 641px)` and always go at the bottom of the CSS Module file, grouped.
 - On wide screens the app stays one centered column (`max-width` about 480px). No separate desktop layout.
+- Interactive elements (buttons, links) get three states, in this order in the CSS Module file: the base rule with `transition` in it (not in `:hover`, so it animates both ways), then `:active` (touch feedback, works on phone and desktop, outside any media query), then `:hover` inside `@media (hover: hover)` at the bottom. Hover never goes outside `@media (hover: hover)`, so it does not stick on the phone.
