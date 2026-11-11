@@ -1,5 +1,6 @@
 import { Minus, Plus } from "lucide-react";
 import { getNextWeight } from "../../utils/getNextWeight";
+import { parseDigits } from "../../utils/parseDigits";
 import styles from "./SetRow.module.css";
 
 type SetRowProps = {
@@ -26,7 +27,7 @@ export function SetRow({
         aria-label={`Reps, set ${setNumber}`}
         value={reps}
         onFocus={(e) => e.target.select()}
-        onChange={(e) => onRepsChange(Number(e.target.value))}
+        onChange={(e) => onRepsChange(parseDigits(e.target.value))}
       />
       <button
         className={styles.button}
@@ -39,11 +40,11 @@ export function SetRow({
       <input
         className={styles.input}
         type="text"
-        inputMode="decimal"
+        inputMode="numeric"
         aria-label={`Weight, set ${setNumber}`}
         value={weight}
         onFocus={(e) => e.target.select()}
-        onChange={(e) => onWeightChange(Number(e.target.value))}
+        onChange={(e) => onWeightChange(parseDigits(e.target.value))}
       />
       <button
         className={styles.button}
