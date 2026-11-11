@@ -7,7 +7,7 @@ Mockup: https://claude.ai/artifact/U6qndcpKiGC8V2n8MNRRC7
 
 ## Stack
 
-Vite, React, TypeScript, React Router, Firebase (Auth + Firestore), react-hook-form, zod, CSS Modules, lucide-react (icons only), Vitest + Testing Library.
+Vite, React, TypeScript, React Router, Firebase (Auth + Firestore), react-hook-form, zod, @hookform/resolvers (`zodResolver`), CSS Modules, lucide-react (icons only), Vitest + Testing Library.
 Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`, plus `useDocument` only if needed) that unsubscribes in the `useEffect` cleanup. No TanStack Query in this app. Components never call `onSnapshot` directly.
 No UI libraries.
 
