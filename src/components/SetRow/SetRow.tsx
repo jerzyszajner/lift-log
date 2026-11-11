@@ -1,7 +1,5 @@
 import { Minus, Plus } from "lucide-react";
-
 import { getNextWeight } from "../../utils/getNextWeight";
-
 import styles from "./SetRow.module.css";
 
 type SetRowProps = {

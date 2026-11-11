@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { SetRow } from "../../components/SetRow/SetRow";
 
 export function HomePage() {
