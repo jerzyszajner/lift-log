@@ -10,6 +10,7 @@ export function HomePage() {
     <div>
       <div>HomePage</div>
       <SetRow
+        setNumber={1}
         reps={reps}
         weight={weight}
         onRepsChange={setReps}

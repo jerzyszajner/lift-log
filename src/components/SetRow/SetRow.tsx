@@ -5,6 +5,7 @@ import { getNextWeight } from "../../utils/getNextWeight";
 import styles from "./SetRow.module.css";
 
 type SetRowProps = {
+  setNumber: number;
   reps: number;
   weight: number;
   onRepsChange: (reps: number) => void;
@@ -12,6 +13,7 @@ type SetRowProps = {
 };
 
 export function SetRow({
+  setNumber,
   reps,
   weight,
   onRepsChange,
@@ -23,12 +25,14 @@ export function SetRow({
         className={styles.input}
         type="text"
         inputMode="numeric"
+        aria-label={`Reps, set ${setNumber}`}
         value={reps}
         onChange={(e) => onRepsChange(Number(e.target.value))}
       />
       <button
         className={styles.button}
         type="button"
+        aria-label="Decrease weight"
         onClick={() => onWeightChange(getNextWeight(weight, "down"))}
       >
         <Minus />
@@ -37,12 +41,14 @@ export function SetRow({
         className={styles.input}
         type="text"
         inputMode="decimal"
+        aria-label={`Weight, set ${setNumber}`}
         value={weight}
         onChange={(e) => onWeightChange(Number(e.target.value))}
       />
       <button
         className={styles.button}
         type="button"
+        aria-label="Increase weight"
         onClick={() => onWeightChange(getNextWeight(weight, "up"))}
       >
         <Plus />
