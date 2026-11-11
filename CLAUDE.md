@@ -25,7 +25,7 @@ No UI libraries.
 - Named exports only, no `export default`.
 - Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/HomePage/HomePage.tsx`). JSX files are `.tsx`, the rest `.ts`.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`. Protected and public routes are nested layout routes with `<Outlet />`, not wrappers around each route.
-- Routes (adjust in the auth step): `/`, `/days/new`, `/days/:id`, `/workout/:dayId`, `/history`, `/login`, `/signup`, `*`.
+- Routes (adjust in the auth step): `/`, `/days/new`, `/days/:id`, `/workout/:dayId`, `/history`, `/account`, `/login`, `/signup`, `*`.
 - Imports: external packages first, then project files (`../` before `./`), then `import type`, then styles.
 - Folders: `features/<name>/` (auth, days, workout) hold their own components, hooks, services and schemas. `components/` holds only generic parts. Pages stay thin and only compose.
 - Types come from zod schemas (`z.infer`), not written twice.
