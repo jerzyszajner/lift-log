@@ -27,6 +27,7 @@ export function SetRow({
         inputMode="numeric"
         aria-label={`Reps, set ${setNumber}`}
         value={reps}
+        onFocus={(e) => e.target.select()}
         onChange={(e) => onRepsChange(Number(e.target.value))}
       />
       <button
@@ -43,6 +44,7 @@ export function SetRow({
         inputMode="decimal"
         aria-label={`Weight, set ${setNumber}`}
         value={weight}
+        onFocus={(e) => e.target.select()}
         onChange={(e) => onWeightChange(Number(e.target.value))}
       />
       <button
