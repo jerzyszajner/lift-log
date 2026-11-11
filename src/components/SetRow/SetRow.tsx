@@ -1,3 +1,5 @@
+import { Minus, Plus } from "lucide-react";
+
 import { getNextWeight } from "../../utils/getNextWeight";
 
 type SetRowProps = {
@@ -25,7 +27,7 @@ export function SetRow({
         type="button"
         onClick={() => onWeightChange(getNextWeight(weight, "down"))}
       >
-        -
+        <Minus />
       </button>
       <input
         type="text"
@@ -37,7 +39,7 @@ export function SetRow({
         type="button"
         onClick={() => onWeightChange(getNextWeight(weight, "up"))}
       >
-        +
+        <Plus />
       </button>
     </div>
   );
