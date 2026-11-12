@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "../components/Layout/Layout";
-import { HomePage } from "../pages/HomePage/HomePage";
+import { DaysPage } from "../pages/DaysPage/DaysPage";
+import { WorkoutPage } from "../pages/WorkoutPage/WorkoutPage";
 import { HistoryPage } from "../pages/HistoryPage/HistoryPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
@@ -10,11 +11,12 @@ export function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/" element={<DaysPage />}></Route>
           <Route path="/history" element={<HistoryPage />}></Route>
           <Route path="/account" element={<AccountPage />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
+        <Route path="/workout" element={<WorkoutPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
