@@ -1,0 +1,60 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.labels {
+  display: grid;
+  grid-template-columns:
+    var(--spacing-6) 1fr var(--control-height) 1fr var(--control-height)
+    var(--control-height);
+  align-items: center;
+  gap: var(--spacing-3);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.weightLabel {
+  grid-column: 4;
+}
+
+.doneLabel {
+  grid-column: 6;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  height: var(--control-height);
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  background: var(--color-accent-soft);
+  border: 1px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+
+.addButton:active {
+  background: var(--color-accent-soft-strong);
+}
+
+@media (hover: hover) {
+  .addButton:hover {
+    background: var(--color-accent-soft-strong);
+  }
+}

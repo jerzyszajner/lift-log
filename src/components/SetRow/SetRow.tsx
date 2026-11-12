@@ -23,8 +23,8 @@ export function SetRow({
   onDoneChange,
 }: SetRowProps) {
   return (
-    <div className={styles.row}>
-      <span>{setNumber}</span>
+    <div className={done ? `${styles.row} ${styles.done}` : styles.row}>
+      <span className={styles.number}>{setNumber}</span>
       <input
         className={styles.input}
         type="text"
@@ -60,6 +60,7 @@ export function SetRow({
         <Plus />
       </button>
       <input
+        className={styles.checkbox}
         type="checkbox"
         aria-label={`Done, set ${setNumber}`}
         checked={done}

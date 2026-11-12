@@ -1,11 +1,60 @@
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns:
+    var(--spacing-6) 1fr var(--control-height) 1fr var(--control-height)
+    var(--control-height);
   align-items: center;
   gap: var(--spacing-3);
+  border-radius: var(--radius-md);
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+}
+
+.done {
+  background: var(--color-success-soft);
+  box-shadow: 0 0 0 var(--spacing-2) var(--color-success-soft);
+}
+
+.number {
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.checkbox {
+  appearance: none;
+  position: relative;
+  justify-self: center;
+  width: var(--control-height);
+  height: var(--control-height);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.checkbox:checked {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--spacing-4);
+  height: var(--spacing-5);
+  border: solid var(--color-success);
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
 }
 
 .input {
-  flex: 1;
   min-width: 0;
   height: var(--control-height);
   text-align: center;
@@ -21,7 +70,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   width: var(--control-height);
   height: var(--control-height);
   color: var(--color-text);

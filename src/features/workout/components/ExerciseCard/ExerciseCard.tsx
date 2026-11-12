@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { SetRow } from "../../../../components/SetRow/SetRow";
 import type { DayExercise, SetEntry } from "../../schemas/workoutSchemas";
+import styles from "./ExerciseCard.module.css";
 
 type ExerciseCardProps = {
   exercise: DayExercise;
@@ -25,13 +26,13 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
   }
 
   return (
-    <div>
-      <h2>{exercise.name}</h2>
-      <div>
+    <div className={styles.card}>
+      <h2 className={styles.title}>{exercise.name}</h2>
+      <div className={styles.labels}>
         <span>#</span>
         <span>Reps</span>
-        <span>Kg</span>
-        <span>Done</span>
+        <span className={styles.weightLabel}>Kg</span>
+        <span className={styles.doneLabel}>Done</span>
       </div>
       {sets.map((set, index) => (
         <SetRow
@@ -45,7 +46,7 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
           onDoneChange={(done) => updateSet(index, { done })}
         />
       ))}
-      <button type="button" onClick={addSet}>
+      <button className={styles.addButton} type="button" onClick={addSet}>
         <Plus />
         Add set (copies the last one)
       </button>

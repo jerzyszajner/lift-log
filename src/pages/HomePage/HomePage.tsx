@@ -13,7 +13,6 @@ const exercise: DayExercise = {
 export function HomePage() {
   return (
     <div>
-      <div>HomePage</div>
       <ExerciseCard exercise={exercise} />
     </div>
   );
