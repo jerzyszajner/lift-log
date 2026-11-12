@@ -1,0 +1,21 @@
+.link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  min-height: var(--tap-size);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.link:active {
+  color: var(--color-text-muted);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-text-muted);
+  }
+}
