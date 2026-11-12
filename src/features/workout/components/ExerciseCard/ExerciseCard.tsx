@@ -1,28 +1,35 @@
 import { Plus } from "lucide-react";
-import { useState } from "react";
 import { SetRow } from "../../../../components/SetRow/SetRow";
 import type { DayExercise, SetEntry } from "../../schemas/workoutSchemas";
 import styles from "./ExerciseCard.module.css";
 
-type ExerciseCardProps = {
-  exercise: DayExercise;
+export type WorkoutSet = SetEntry & { done: boolean };
+export type WorkoutExercise = Omit<DayExercise, "sets"> & {
+  sets: WorkoutSet[];
 };
 
-type WorkoutSet = SetEntry & { done: boolean };
+type ExerciseCardProps = {
+  exercise: WorkoutExercise;
+  onChange: (exercise: WorkoutExercise) => void;
+};
 
-export function ExerciseCard({ exercise }: ExerciseCardProps) {
-  const [sets, setSets] = useState<WorkoutSet[]>(
-    exercise.sets.map((set) => ({ ...set, done: false })),
-  );
-
+export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
   function updateSet(index: number, changes: Partial<WorkoutSet>) {
-    setSets(sets.map((set, i) => (i === index ? { ...set, ...changes } : set)));
+    onChange({
+      ...exercise,
+      sets: exercise.sets.map((set, i) =>
+        i === index ? { ...set, ...changes } : set,
+      ),
+    });
   }
 
   function addSet() {
-    const lastSet = sets.at(-1);
+    const lastSet = exercise.sets.at(-1);
     if (!lastSet) return;
-    setSets([...sets, { ...lastSet, done: false }]);
+    onChange({
+      ...exercise,
+      sets: [...exercise.sets, { ...lastSet, done: false }],
+    });
   }
 
   return (
@@ -34,7 +41,7 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
         <span className={styles.weightLabel}>Kg</span>
         <span className={styles.doneLabel}>Done</span>
       </div>
-      {sets.map((set, index) => (
+      {exercise.sets.map((set, index) => (
         <SetRow
           key={index}
           setNumber={index + 1}
