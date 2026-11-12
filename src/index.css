@@ -67,6 +67,12 @@ textarea {
   font: inherit;
 }
 
+button,
+a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 button {
   cursor: pointer;
 }
