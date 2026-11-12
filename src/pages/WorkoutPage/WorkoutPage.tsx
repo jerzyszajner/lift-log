@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { BackLink } from "../../components/BackLink/BackLink";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
 import { WorkoutProgress } from "../../features/workout/components/WorkoutProgress/WorkoutProgress";
 import { createWorkout } from "../../features/workout/utils/createWorkout";
 import { formatSets } from "../../features/workout/utils/formatSets";
+import { formatShortDate } from "../../utils/formatShortDate";
 import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
 import type { DayExercise } from "../../features/workout/schemas/workoutSchemas";
 import styles from "./WorkoutPage.module.css";
@@ -53,6 +55,7 @@ const plan: DayExercise[] = [
 ];
 
 export function WorkoutPage() {
+  const [date] = useState(() => new Date());
   const [exercises, setExercises] = useState(() => createWorkout(plan));
   const [step, setStep] = useState<"working" | "confirming" | "finished">(
     "working",
@@ -91,7 +94,10 @@ export function WorkoutPage() {
   return (
     <div className={styles.page}>
       <div className={styles.content}>
-        <Link to="/">‹ Days</Link>
+        <header className={styles.header}>
+          <BackLink to="/" label="Days" />
+          <p className={styles.date}>{formatShortDate(date)}</p>
+        </header>
         <WorkoutProgress done={doneCount} total={allSets.length} />
         {exercises.map((exercise, index) => (
           <ExerciseCard
