@@ -34,7 +34,7 @@
 }
 
 .cancelButton:active {
-  background: var(--color-bg);
+  background: var(--color-border);
 }
 
 .confirmButton:active {
@@ -43,7 +43,7 @@
 
 @media (hover: hover) {
   .cancelButton:hover {
-    background: var(--color-bg);
+    background: var(--color-border);
   }
 
   .confirmButton:hover {
