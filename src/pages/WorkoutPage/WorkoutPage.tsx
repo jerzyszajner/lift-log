@@ -101,12 +101,14 @@ export function WorkoutPage() {
 
   return (
     <main className={styles.page}>
-      <div className={styles.content}>
+      <div className={styles.top}>
         <header className={styles.header}>
           <BackLink to="/" label="Days" onClick={handleBack} />
           <p className={styles.date}>{formatShortDate(date)}</p>
         </header>
         <WorkoutProgress done={doneCount} total={allSets.length} />
+      </div>
+      <div className={styles.content}>
         {exercises.map((exercise, index) => (
           <ExerciseCard
             key={index}

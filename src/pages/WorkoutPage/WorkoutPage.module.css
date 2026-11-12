@@ -8,7 +8,16 @@
 
 .content {
   flex: 1;
-  padding: var(--spacing-5);
+  padding: 0 var(--spacing-5);
+}
+
+.top {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: flow-root;
+  padding: var(--spacing-5) var(--spacing-5) 0;
+  background: var(--color-bg);
 }
 
 .header {
@@ -48,8 +57,7 @@
   z-index: 1;
   bottom: 0;
   padding: var(--spacing-4) var(--spacing-5) var(--spacing-5);
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
 }
 
 .mainButton {
