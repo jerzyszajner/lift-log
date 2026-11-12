@@ -1,3 +1,4 @@
+import { useId } from "react";
 import styles from "./ConfirmBar.module.css";
 
 type ConfirmBarProps = {
@@ -15,10 +16,19 @@ export function ConfirmBar({
   onCancel,
   onConfirm,
 }: ConfirmBarProps) {
+  const messageId = useId();
+
   return (
-    <div className={styles.bar}>
-      <p className={styles.message}>{message}</p>
-      <button className={styles.cancelButton} type="button" onClick={onCancel}>
+    <div className={styles.bar} role="alertdialog" aria-labelledby={messageId}>
+      <p id={messageId} className={styles.message}>
+        {message}
+      </p>
+      <button
+        className={styles.cancelButton}
+        type="button"
+        autoFocus
+        onClick={onCancel}
+      >
         {cancelLabel}
       </button>
       <button

@@ -85,7 +85,7 @@ export function WorkoutPage() {
 
   if (step === "finished") {
     return (
-      <div className={styles.page}>
+      <main className={styles.page}>
         <div className={styles.summary}>
           <h1 className={styles.title}>Workout finished</h1>
           <p className={styles.message}>{formatSets(doneCount)} done</p>
@@ -95,12 +95,12 @@ export function WorkoutPage() {
             View in History
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <div className={styles.content}>
         <header className={styles.header}>
           <BackLink to="/" label="Days" onClick={handleBack} />
@@ -145,6 +145,6 @@ export function WorkoutPage() {
           />
         )}
       </div>
-    </div>
+    </main>
   );
 }
