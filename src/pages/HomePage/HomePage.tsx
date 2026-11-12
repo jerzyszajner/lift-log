@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router";
+import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
+import { createWorkout } from "../../features/workout/utils/createWorkout";
+import { formatSets } from "../../features/workout/utils/formatSets";
 import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
 import type { DayExercise } from "../../features/workout/schemas/workoutSchemas";
 
@@ -23,14 +27,13 @@ const plan: DayExercise[] = [
 ];
 
 export function HomePage() {
-  const [exercises, setExercises] = useState<WorkoutExercise[]>(
-    plan.map((exercise) => ({
-      ...exercise,
-      sets: exercise.sets.map((set) => ({ ...set, done: false })),
-    })),
+  const [exercises, setExercises] = useState(() => createWorkout(plan));
+  const [step, setStep] = useState<"working" | "confirming" | "finished">(
+    "working",
   );
 
   function updateExercise(index: number, updated: WorkoutExercise) {
+    setStep("working");
     setExercises((current) =>
       current.map((exercise, i) => (i === index ? updated : exercise)),
     );
@@ -38,6 +41,20 @@ export function HomePage() {
 
   const allSets = exercises.flatMap((exercise) => exercise.sets);
   const doneCount = allSets.filter((set) => set.done).length;
+
+  function handleFinish() {
+    setStep(doneCount < allSets.length ? "confirming" : "finished");
+  }
+
+  if (step === "finished") {
+    return (
+      <div>
+        <h1>Workout finished</h1>
+        <p>{formatSets(doneCount)} done</p>
+        <Link to="/history">View in History</Link>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -51,6 +68,19 @@ export function HomePage() {
           onChange={(updated) => updateExercise(index, updated)}
         />
       ))}
+      {step === "confirming" ? (
+        <ConfirmBar
+          message={`${formatSets(allSets.length - doneCount)} not done. Finish anyway?`}
+          cancelLabel="Back"
+          confirmLabel="Finish"
+          onCancel={() => setStep("working")}
+          onConfirm={() => setStep("finished")}
+        />
+      ) : (
+        <button type="button" disabled={doneCount === 0} onClick={handleFinish}>
+          Finish workout
+        </button>
+      )}
     </div>
   );
 }
