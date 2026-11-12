@@ -74,10 +74,14 @@ export function WorkoutPage() {
   if (step === "finished") {
     return (
       <div className={styles.page}>
-        <div className={styles.content}>
-          <h1>Workout finished</h1>
-          <p>{formatSets(doneCount)} done</p>
-          <Link to="/history">View in History</Link>
+        <div className={styles.summary}>
+          <h1 className={styles.title}>Workout finished</h1>
+          <p className={styles.message}>{formatSets(doneCount)} done</p>
+        </div>
+        <div className={styles.actions}>
+          <Link className={styles.mainButton} to="/history">
+            View in History
+          </Link>
         </div>
       </div>
     );
@@ -109,7 +113,7 @@ export function WorkoutPage() {
           />
         ) : (
           <button
-            className={styles.finishButton}
+            className={styles.mainButton}
             type="button"
             disabled={doneCount === 0}
             onClick={handleFinish}
