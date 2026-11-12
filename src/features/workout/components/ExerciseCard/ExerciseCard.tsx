@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import { SetRow } from "../../../../components/SetRow/SetRow";
 import type { DayExercise, SetEntry } from "../../schemas/workoutSchemas";
@@ -15,6 +16,12 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
 
   function updateSet(index: number, changes: Partial<WorkoutSet>) {
     setSets(sets.map((set, i) => (i === index ? { ...set, ...changes } : set)));
+  }
+
+  function addSet() {
+    const lastSet = sets.at(-1);
+    if (!lastSet) return;
+    setSets([...sets, { ...lastSet, done: false }]);
   }
 
   return (
@@ -38,6 +45,10 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
           onDoneChange={(done) => updateSet(index, { done })}
         />
       ))}
+      <button type="button" onClick={addSet}>
+        <Plus />
+        Add set (copies the last one)
+      </button>
     </div>
   );
 }
