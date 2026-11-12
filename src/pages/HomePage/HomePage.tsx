@@ -6,6 +6,7 @@ import { createWorkout } from "../../features/workout/utils/createWorkout";
 import { formatSets } from "../../features/workout/utils/formatSets";
 import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
 import type { DayExercise } from "../../features/workout/schemas/workoutSchemas";
+import styles from "./HomePage.module.css";
 
 const plan: DayExercise[] = [
   {
@@ -77,7 +78,12 @@ export function HomePage() {
           onConfirm={() => setStep("finished")}
         />
       ) : (
-        <button type="button" disabled={doneCount === 0} onClick={handleFinish}>
+        <button
+          className={styles.finishButton}
+          type="button"
+          disabled={doneCount === 0}
+          onClick={handleFinish}
+        >
           Finish workout
         </button>
       )}
