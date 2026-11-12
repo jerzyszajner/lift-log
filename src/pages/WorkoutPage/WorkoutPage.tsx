@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
@@ -7,6 +7,7 @@ import { WorkoutProgress } from "../../features/workout/components/WorkoutProgre
 import { createWorkout } from "../../features/workout/utils/createWorkout";
 import { formatSets } from "../../features/workout/utils/formatSets";
 import { formatShortDate } from "../../utils/formatShortDate";
+import type { MouseEvent } from "react";
 import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
 import type { DayExercise } from "../../features/workout/schemas/workoutSchemas";
 import styles from "./WorkoutPage.module.css";
@@ -55,11 +56,12 @@ const plan: DayExercise[] = [
 ];
 
 export function WorkoutPage() {
+  const navigate = useNavigate();
   const [date] = useState(() => new Date());
   const [exercises, setExercises] = useState(() => createWorkout(plan));
-  const [step, setStep] = useState<"working" | "confirming" | "finished">(
-    "working",
-  );
+  const [step, setStep] = useState<
+    "working" | "confirming" | "leaving" | "finished"
+  >("working");
 
   function updateExercise(index: number, updated: WorkoutExercise) {
     setStep("working");
@@ -73,6 +75,12 @@ export function WorkoutPage() {
 
   function handleFinish() {
     setStep(doneCount < allSets.length ? "confirming" : "finished");
+  }
+
+  function handleBack(event: MouseEvent<HTMLAnchorElement>) {
+    if (doneCount === 0) return;
+    event.preventDefault();
+    setStep("leaving");
   }
 
   if (step === "finished") {
@@ -95,7 +103,7 @@ export function WorkoutPage() {
     <div className={styles.page}>
       <div className={styles.content}>
         <header className={styles.header}>
-          <BackLink to="/" label="Days" />
+          <BackLink to="/" label="Days" onClick={handleBack} />
           <p className={styles.date}>{formatShortDate(date)}</p>
         </header>
         <WorkoutProgress done={doneCount} total={allSets.length} />
@@ -108,15 +116,7 @@ export function WorkoutPage() {
         ))}
       </div>
       <div className={styles.actions}>
-        {step === "confirming" ? (
-          <ConfirmBar
-            message={`${formatSets(allSets.length - doneCount)} not done. Finish anyway?`}
-            cancelLabel="Back"
-            confirmLabel="Finish"
-            onCancel={() => setStep("working")}
-            onConfirm={() => setStep("finished")}
-          />
-        ) : (
+        {step === "working" && (
           <button
             className={styles.mainButton}
             type="button"
@@ -125,6 +125,24 @@ export function WorkoutPage() {
           >
             Finish workout
           </button>
+        )}
+        {step === "confirming" && (
+          <ConfirmBar
+            message={`${formatSets(allSets.length - doneCount)} not done. Finish anyway?`}
+            cancelLabel="Back"
+            confirmLabel="Finish"
+            onCancel={() => setStep("working")}
+            onConfirm={() => setStep("finished")}
+          />
+        )}
+        {step === "leaving" && (
+          <ConfirmBar
+            message="Leave without saving?"
+            cancelLabel="Stay"
+            confirmLabel="Leave"
+            onCancel={() => setStep("working")}
+            onConfirm={() => navigate("/")}
+          />
         )}
       </div>
     </div>
