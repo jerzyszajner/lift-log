@@ -6,24 +6,36 @@ type ExerciseCardProps = {
   exercise: DayExercise;
 };
 
-export function ExerciseCard({ exercise }: ExerciseCardProps) {
-  const [sets, setSets] = useState(exercise.sets);
+type WorkoutSet = SetEntry & { done: boolean };
 
-  function updateSet(index: number, changes: Partial<SetEntry>) {
+export function ExerciseCard({ exercise }: ExerciseCardProps) {
+  const [sets, setSets] = useState<WorkoutSet[]>(
+    exercise.sets.map((set) => ({ ...set, done: false })),
+  );
+
+  function updateSet(index: number, changes: Partial<WorkoutSet>) {
     setSets(sets.map((set, i) => (i === index ? { ...set, ...changes } : set)));
   }
 
   return (
     <div>
       <h2>{exercise.name}</h2>
+      <div>
+        <span>#</span>
+        <span>Reps</span>
+        <span>Kg</span>
+        <span>Done</span>
+      </div>
       {sets.map((set, index) => (
         <SetRow
           key={index}
           setNumber={index + 1}
           reps={set.reps}
           weight={set.weight}
+          done={set.done}
           onRepsChange={(reps) => updateSet(index, { reps })}
           onWeightChange={(weight) => updateSet(index, { weight })}
+          onDoneChange={(done) => updateSet(index, { done })}
         />
       ))}
     </div>

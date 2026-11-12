@@ -11,8 +11,10 @@ describe("SetRow", () => {
         setNumber={1}
         reps={10}
         weight={10}
+        done={false}
         onRepsChange={vi.fn()}
         onWeightChange={onWeightChange}
+        onDoneChange={vi.fn()}
       />,
     );
 

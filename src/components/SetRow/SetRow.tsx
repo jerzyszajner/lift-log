@@ -7,19 +7,24 @@ type SetRowProps = {
   setNumber: number;
   reps: number;
   weight: number;
+  done: boolean;
   onRepsChange: (reps: number) => void;
   onWeightChange: (weight: number) => void;
+  onDoneChange: (done: boolean) => void;
 };
 
 export function SetRow({
   setNumber,
   reps,
   weight,
+  done,
   onRepsChange,
   onWeightChange,
+  onDoneChange,
 }: SetRowProps) {
   return (
     <div className={styles.row}>
+      <span>{setNumber}</span>
       <input
         className={styles.input}
         type="text"
@@ -54,6 +59,12 @@ export function SetRow({
       >
         <Plus />
       </button>
+      <input
+        type="checkbox"
+        aria-label={`Done, set ${setNumber}`}
+        checked={done}
+        onChange={(e) => onDoneChange(e.target.checked)}
+      />
     </div>
   );
 }
