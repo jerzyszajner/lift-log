@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
+import { WorkoutProgress } from "../../features/workout/components/WorkoutProgress/WorkoutProgress";
 import { createWorkout } from "../../features/workout/utils/createWorkout";
 import { formatSets } from "../../features/workout/utils/formatSets";
 import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
@@ -91,9 +92,7 @@ export function WorkoutPage() {
     <div className={styles.page}>
       <div className={styles.content}>
         <Link to="/">‹ Days</Link>
-        <p>
-          {doneCount} of {allSets.length} sets
-        </p>
+        <WorkoutProgress done={doneCount} total={allSets.length} />
         {exercises.map((exercise, index) => (
           <ExerciseCard
             key={index}
