@@ -74,26 +74,30 @@ export function WorkoutPage() {
   if (step === "finished") {
     return (
       <div className={styles.page}>
-        <h1>Workout finished</h1>
-        <p>{formatSets(doneCount)} done</p>
-        <Link to="/history">View in History</Link>
+        <div className={styles.content}>
+          <h1>Workout finished</h1>
+          <p>{formatSets(doneCount)} done</p>
+          <Link to="/history">View in History</Link>
+        </div>
       </div>
     );
   }
 
   return (
     <div className={styles.page}>
-      <Link to="/">‹ Days</Link>
-      <p>
-        {doneCount} of {allSets.length} sets
-      </p>
-      {exercises.map((exercise, index) => (
-        <ExerciseCard
-          key={index}
-          exercise={exercise}
-          onChange={(updated) => updateExercise(index, updated)}
-        />
-      ))}
+      <div className={styles.content}>
+        <Link to="/">‹ Days</Link>
+        <p>
+          {doneCount} of {allSets.length} sets
+        </p>
+        {exercises.map((exercise, index) => (
+          <ExerciseCard
+            key={index}
+            exercise={exercise}
+            onChange={(updated) => updateExercise(index, updated)}
+          />
+        ))}
+      </div>
       <div className={styles.actions}>
         {step === "confirming" ? (
           <ConfirmBar

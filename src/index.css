@@ -45,6 +45,7 @@
   --action-height: 56px;
   --tabbar-height: 72px;
   --container-width: 480px;
+  --screen-height: 100dvh;
 }
 
 * {
