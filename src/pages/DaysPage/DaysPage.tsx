@@ -26,10 +26,18 @@ export function DaysPage() {
               </p>
             </div>
             <div className={styles.actions}>
-              <Link className={styles.editLink} to={`/days/${day.id}`}>
+              <Link
+                className={styles.editLink}
+                to={`/days/${day.id}`}
+                aria-label={`Edit ${day.name}`}
+              >
                 <Pencil size={20} />
               </Link>
-              <Link className={styles.startLink} to="/workout">
+              <Link
+                className={styles.startLink}
+                to="/workout"
+                aria-label={`Start ${day.name}`}
+              >
                 <Play size={16} fill="currentColor" />
                 Start
               </Link>
