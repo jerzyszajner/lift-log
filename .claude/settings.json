@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|NotebookEdit|Grep|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '[.tool_input.file_path // empty, .tool_input.notebook_path // empty, .tool_input.path // empty, .tool_input.command // empty] | join(\"\\n\")' | sed 's/\\.env\\.example//g' | grep -Eq '(^|[^A-Za-z0-9_-])\\.env([^A-Za-z0-9_-]|$)' && { echo 'Blocked: .env files are off limits for Claude. Ask the user to edit .env.' >&2; exit 2; } || exit 0",
+            "statusMessage": "Checking for .env access..."
+          }
+        ]
+      }
+    ]
+  }
+}
