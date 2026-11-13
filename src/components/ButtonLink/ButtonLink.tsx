@@ -4,8 +4,20 @@ import styles from "./ButtonLink.module.css";
 
 type ButtonLinkProps = ComponentProps<typeof Link> & {
   variant?: "primary" | "secondary";
+  size?: "default" | "small";
 };
 
-export function ButtonLink({ variant = "primary", ...props }: ButtonLinkProps) {
-  return <Link className={`${styles.link} ${styles[variant]}`} {...props} />;
+export function ButtonLink({
+  variant = "primary",
+  size = "default",
+  ...props
+}: ButtonLinkProps) {
+  const sizeClass = size === "small" ? styles.small : "";
+
+  return (
+    <Link
+      className={`${styles.link} ${sizeClass} ${styles[variant]}`}
+      {...props}
+    />
+  );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Pencil, Play, Plus } from "lucide-react";
+import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
 import { days } from "../../features/days/data/days";
 import styles from "./DaysPage.module.css";
 
@@ -33,14 +34,14 @@ export function DaysPage() {
               >
                 <Pencil size={20} />
               </Link>
-              <Link
-                className={styles.startLink}
+              <ButtonLink
+                size="small"
                 to={`/workout/${day.id}`}
                 aria-label={`Start ${day.name}`}
               >
                 <Play size={16} fill="currentColor" />
                 Start
-              </Link>
+              </ButtonLink>
             </div>
           </li>
         ))}

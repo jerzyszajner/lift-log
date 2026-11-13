@@ -86,26 +86,6 @@
   background: var(--color-border);
 }
 
-.startLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  min-width: var(--action-height);
-  min-height: var(--tap-size);
-  padding: 0 var(--spacing-5);
-  font-weight: 600;
-  color: var(--color-on-accent);
-  text-decoration: none;
-  background: var(--color-accent);
-  border-radius: var(--radius-md);
-  transition: background 0.15s;
-}
-
-.startLink:active {
-  background: var(--color-accent-ink);
-}
-
 @media (hover: hover) {
   .addLink:hover {
     color: var(--color-text);
@@ -113,9 +93,5 @@
 
   .editLink:hover {
     background: var(--color-border);
-  }
-
-  .startLink:hover {
-    background: var(--color-accent-ink);
   }
 }

@@ -12,6 +12,10 @@
   transition: background 0.15s;
 }
 
+.small {
+  min-height: var(--tap-size);
+}
+
 .primary {
   color: var(--color-on-accent);
   background: var(--color-accent);
