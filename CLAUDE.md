@@ -25,7 +25,7 @@ No UI libraries.
 - Named exports only, no `export default`.
 - Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/HomePage/HomePage.tsx`). JSX files are `.tsx`, the rest `.ts`.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`. Protected and public routes are nested layout routes with `<Outlet />`, not wrappers around each route.
-- Routes (adjust in the auth step): `/`, `/days/new`, `/days/:id`, `/workout/:dayId`, `/history`, `/account`, `/login`, `/signup`, `*`.
+- Routes not built yet: `/days/new`, `/days/:id`, `/login`, `/signup`. The rest are in `routes/AppRoutes.tsx`.
 - Imports: external packages first, then project files (`../` before `./`), then `import type`, then styles. No blank lines between imports, the whole block is one group.
 - Folders: `features/<name>/` (auth, days, workout) hold their own components, hooks, services and schemas. `components/` holds only generic parts. Pages stay thin and only compose.
 - Types come from zod schemas (`z.infer`), not written twice.
@@ -39,6 +39,7 @@ No UI libraries.
 - A log keeps its own copy of names and sets, so changing the plan never changes history.
 - Finishing a workout writes the log and updates the day in one `writeBatch`: each done set overwrites the same set number in the plan (`applyToPlan`), extra done sets are appended, undone sets stay as they were. There is no separate "last time" view.
 - One function per document type converts a Firestore snapshot to our type. No copied field lists.
+- Security rules live in `firestore.rules` (source of truth). Change them only there, never in the Firebase console, then deploy: `npx firebase-tools deploy --only firestore:rules` (it overwrites the console).
 
 ## Forms and inputs
 
@@ -68,7 +69,7 @@ No UI libraries.
 
 - Done per component, together with styling, not at the end.
 - Native HTML first. Add `aria` only where something is missing (names for icon buttons, `aria-pressed` on toggles, `role="alert"` on errors).
-- Styles and `aria` are separate commits. Work in stages: make change 1, say "to commit 1", wait for the commit, then make change 2.
+- Styles and `aria` are separate commits. Work in stages: make one change, propose the commit, wait for my approval, then the next change.
 
 ## Workflow
 
