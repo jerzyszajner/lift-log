@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
+import { getDayById } from "../../features/days/utils/getDayById";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
 import { WorkoutProgress } from "../../features/workout/components/WorkoutProgress/WorkoutProgress";
 import { createWorkout } from "../../features/workout/utils/createWorkout";
@@ -9,59 +10,20 @@ import { formatSets } from "../../features/workout/utils/formatSets";
 import { formatShortDate } from "../../utils/formatShortDate";
 import type { MouseEvent } from "react";
 import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
-import type { DayExercise } from "../../features/workout/schemas/workoutSchemas";
 import styles from "./WorkoutPage.module.css";
 
-const plan: DayExercise[] = [
-  {
-    name: "Bench press",
-    sets: [
-      { reps: 10, weight: 60 },
-      { reps: 8, weight: 65 },
-      { reps: 6, weight: 70 },
-    ],
-  },
-  {
-    name: "Biceps curl",
-    sets: [
-      { reps: 12, weight: 10 },
-      { reps: 10, weight: 12.5 },
-      { reps: 8, weight: 15 },
-    ],
-  },
-  {
-    name: "Incline dumbbell press",
-    sets: [
-      { reps: 10, weight: 20 },
-      { reps: 8, weight: 22.5 },
-      { reps: 8, weight: 22.5 },
-    ],
-  },
-  {
-    name: "Hammer curl",
-    sets: [
-      { reps: 12, weight: 12 },
-      { reps: 10, weight: 14 },
-      { reps: 8, weight: 14 },
-    ],
-  },
-  {
-    name: "Cable fly",
-    sets: [
-      { reps: 15, weight: 15 },
-      { reps: 12, weight: 17.5 },
-      { reps: 12, weight: 17.5 },
-    ],
-  },
-];
+type WorkoutStep = "working" | "confirming" | "leaving" | "finished";
 
 export function WorkoutPage() {
   const navigate = useNavigate();
+  const { dayId } = useParams();
+  const day = getDayById(dayId);
+
   const [date] = useState(() => new Date());
-  const [exercises, setExercises] = useState(() => createWorkout(plan));
-  const [step, setStep] = useState<
-    "working" | "confirming" | "leaving" | "finished"
-  >("working");
+  const [exercises, setExercises] = useState(() =>
+    createWorkout(day?.exercises ?? []),
+  );
+  const [step, setStep] = useState<WorkoutStep>("working");
 
   function updateExercise(index: number, updated: WorkoutExercise) {
     setStep("working");
@@ -94,6 +56,22 @@ export function WorkoutPage() {
           <Link className={styles.mainButton} to="/history">
             View in History
           </Link>
+        </div>
+      </main>
+    );
+  }
+
+  if (!day) {
+    return (
+      <main className={styles.page}>
+        <div className={styles.top}>
+          <header className={styles.header}>
+            <BackLink to="/" label="Days" />
+          </header>
+        </div>
+        <div className={styles.summary}>
+          <h1 className={styles.title}>Day not found</h1>
+          <p className={styles.message}>This workout day does not exist.</p>
         </div>
       </main>
     );

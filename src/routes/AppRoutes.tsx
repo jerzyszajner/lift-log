@@ -16,7 +16,7 @@ export function AppRoutes() {
           <Route path="/account" element={<AccountPage />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
-        <Route path="/workout" element={<WorkoutPage />}></Route>
+        <Route path="/workout/:dayId" element={<WorkoutPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

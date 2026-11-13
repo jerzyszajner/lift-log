@@ -35,7 +35,7 @@ export function DaysPage() {
               </Link>
               <Link
                 className={styles.startLink}
-                to="/workout"
+                to={`/workout/${day.id}`}
                 aria-label={`Start ${day.name}`}
               >
                 <Play size={16} fill="currentColor" />
