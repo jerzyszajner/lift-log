@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { Button } from "../Button/Button";
 import styles from "./ConfirmBar.module.css";
 
 type ConfirmBarProps = {
@@ -23,21 +24,10 @@ export function ConfirmBar({
       <p id={messageId} className={styles.message}>
         {message}
       </p>
-      <button
-        className={styles.cancelButton}
-        type="button"
-        autoFocus
-        onClick={onCancel}
-      >
+      <Button variant="secondary" autoFocus onClick={onCancel}>
         {cancelLabel}
-      </button>
-      <button
-        className={styles.confirmButton}
-        type="button"
-        onClick={onConfirm}
-      >
-        {confirmLabel}
-      </button>
+      </Button>
+      <Button onClick={onConfirm}>{confirmLabel}</Button>
     </div>
   );
 }

@@ -53,6 +53,8 @@
 }
 
 .actions {
+  display: flex;
+  flex-direction: column;
   position: sticky;
   z-index: 1;
   bottom: 0;
@@ -76,19 +78,12 @@
   transition: background 0.15s;
 }
 
-.mainButton:disabled {
-  opacity: 1;
-  color: var(--color-text-muted);
-  background: var(--color-border);
-  border-color: var(--color-border);
-}
-
-.mainButton:not(:disabled):active {
+.mainButton:active {
   background: var(--color-accent-ink);
 }
 
 @media (hover: hover) {
-  .mainButton:not(:disabled):hover {
+  .mainButton:hover {
     background: var(--color-accent-ink);
   }
 }

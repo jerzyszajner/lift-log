@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
+import { Button } from "../../components/Button/Button";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { getDayById } from "../../features/days/utils/getDayById";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
@@ -97,14 +98,9 @@ export function WorkoutPage() {
       </div>
       <div className={styles.actions}>
         {step === "working" && (
-          <button
-            className={styles.mainButton}
-            type="button"
-            disabled={doneCount === 0}
-            onClick={handleFinish}
-          >
+          <Button disabled={doneCount === 0} onClick={handleFinish}>
             Finish workout
-          </button>
+          </Button>
         )}
         {step === "confirming" && (
           <ConfirmBar
