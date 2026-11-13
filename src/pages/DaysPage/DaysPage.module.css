@@ -1,0 +1,121 @@
+.page {
+  padding: var(--spacing-6) var(--spacing-5) var(--spacing-5);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-5);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.addLink {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-1);
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.addLink:active {
+  color: var(--color-text);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  min-height: var(--tap-size);
+  padding: var(--spacing-4) var(--spacing-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.info {
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+}
+
+.editLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-size);
+  height: var(--tap-size);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.editLink:active {
+  background: var(--color-border);
+}
+
+.startLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  min-width: var(--action-height);
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-5);
+  font-weight: 600;
+  color: var(--color-on-accent);
+  text-decoration: none;
+  background: var(--color-accent);
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+
+.startLink:active {
+  background: var(--color-accent-ink);
+}
+
+@media (hover: hover) {
+  .addLink:hover {
+    color: var(--color-text);
+  }
+
+  .editLink:hover {
+    background: var(--color-border);
+  }
+
+  .startLink:hover {
+    background: var(--color-accent-ink);
+  }
+}
