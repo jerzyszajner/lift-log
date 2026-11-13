@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { Button } from "../../components/Button/Button";
+import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { getDayById } from "../../features/days/utils/getDayById";
 import { ExerciseCard } from "../../features/workout/components/ExerciseCard/ExerciseCard";
@@ -54,9 +55,7 @@ export function WorkoutPage() {
           <p className={styles.message}>{formatSets(doneCount)} done</p>
         </div>
         <div className={styles.actions}>
-          <Link className={styles.mainButton} to="/history">
-            View in History
-          </Link>
+          <ButtonLink to="/history">View in History</ButtonLink>
         </div>
       </main>
     );
