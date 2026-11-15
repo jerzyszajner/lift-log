@@ -17,12 +17,12 @@ export const dayExerciseSchema = z.object({
 
 export type DayExercise = z.infer<typeof dayExerciseSchema>;
 
-export const workoutDaySchema = z.object({
+export const daySchema = z.object({
   name: z.string().min(1, "Name is required"),
   order: z.number().min(1),
   exercises: z.array(dayExerciseSchema),
 });
 
-export type WorkoutDay = z.infer<typeof workoutDaySchema>;
+export type DayData = z.infer<typeof daySchema>;
 
-export type Day = WorkoutDay & { id: string };
+export type Day = DayData & { id: string };
