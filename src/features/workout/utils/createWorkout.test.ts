@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { DayExercise } from "../schemas/workoutSchemas";
+import type { DayExercise } from "../../days/schemas/daysSchemas";
 import { createWorkout } from "./createWorkout";
 
 const plan: DayExercise[] = [
