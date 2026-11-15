@@ -8,3 +8,5 @@ export const workoutDaySchema = z.object({
 });
 
 export type WorkoutDay = z.infer<typeof workoutDaySchema>;
+
+export type Day = WorkoutDay & { id: string };

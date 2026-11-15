@@ -1,6 +1,6 @@
-import type { WorkoutDay } from "../schemas/daysSchemas";
+import type { Day } from "../schemas/daysSchemas";
 
-export const days: (WorkoutDay & { id: string })[] = [
+export const days: Day[] = [
   {
     id: "chest-biceps",
     name: "Chest and biceps",
