@@ -3,6 +3,7 @@ import { z } from "zod";
 export const setEntrySchema = z.object({
   reps: z
     .number()
+    .int("Reps must be a whole number")
     .min(1, "Reps must be at least 1")
     .max(999, "Reps must be 999 or fewer"),
   weight: z.number().min(0).max(999, "Weight must be 999 kg or less"),
@@ -19,7 +20,7 @@ export type DayExercise = z.infer<typeof dayExerciseSchema>;
 
 export const daySchema = z.object({
   name: z.string().min(1, "Name is required"),
-  order: z.number().min(1),
+  order: z.number().int().min(1),
   exercises: z.array(dayExerciseSchema),
 });
 
