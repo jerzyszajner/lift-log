@@ -1,5 +1,4 @@
-import type { WorkoutExercise } from "../components/ExerciseCard/ExerciseCard";
-import type { DayExercise } from "../schemas/workoutSchemas";
+import type { DayExercise, WorkoutExercise } from "../schemas/workoutSchemas";
 
 export function createWorkout(plan: DayExercise[]): WorkoutExercise[] {
   return plan.map((exercise) => ({

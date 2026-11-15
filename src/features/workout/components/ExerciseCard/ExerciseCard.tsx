@@ -1,12 +1,7 @@
 import { Plus } from "lucide-react";
 import { SetRow } from "../../../../components/SetRow/SetRow";
-import type { DayExercise, SetEntry } from "../../schemas/workoutSchemas";
+import type { WorkoutExercise, WorkoutSet } from "../../schemas/workoutSchemas";
 import styles from "./ExerciseCard.module.css";
-
-export type WorkoutSet = SetEntry & { done: boolean };
-export type WorkoutExercise = Omit<DayExercise, "sets"> & {
-  sets: WorkoutSet[];
-};
 
 type ExerciseCardProps = {
   exercise: WorkoutExercise;

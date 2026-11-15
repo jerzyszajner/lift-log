@@ -11,7 +11,7 @@ import { createWorkout } from "../../features/workout/utils/createWorkout";
 import { formatSets } from "../../features/workout/utils/formatSets";
 import { formatShortDate } from "../../utils/formatShortDate";
 import type { MouseEvent } from "react";
-import type { WorkoutExercise } from "../../features/workout/components/ExerciseCard/ExerciseCard";
+import type { WorkoutExercise } from "../../features/workout/schemas/workoutSchemas";
 import styles from "./WorkoutPage.module.css";
 
 type WorkoutStep = "working" | "confirming" | "leaving" | "finished";

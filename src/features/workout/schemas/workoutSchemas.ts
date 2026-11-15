@@ -16,3 +16,15 @@ export const dayExerciseSchema = z.object({
 });
 
 export type DayExercise = z.infer<typeof dayExerciseSchema>;
+
+export const workoutSetSchema = setEntrySchema.extend({
+  done: z.boolean(),
+});
+
+export type WorkoutSet = z.infer<typeof workoutSetSchema>;
+
+export const workoutExerciseSchema = dayExerciseSchema.extend({
+  sets: z.array(workoutSetSchema),
+});
+
+export type WorkoutExercise = z.infer<typeof workoutExerciseSchema>;
