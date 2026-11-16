@@ -8,7 +8,7 @@ Mockup: https://claude.ai/artifact/U6qndcpKiGC8V2n8MNRRC7
 ## Stack
 
 Vite, React, TypeScript, Firebase (Auth + Firestore), react-hook-form with zod (`zodResolver`), CSS Modules, Vitest + Testing Library. Icons only from lucide-react. No UI libraries.
-Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`, plus `useDocument` only if needed) that unsubscribes in the `useEffect` cleanup. No TanStack Query in this app. Components never call `onSnapshot` directly.
+Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `subscribeTo...` function per collection that returns the unsubscribe function. One generic hook (`useCollection`, plus `useDocument` only if needed) takes such a function, starts it in `useEffect` and unsubscribes in the cleanup. No TanStack Query in this app. Hooks and components never import `firebase/firestore`.
 
 ## Commands
 
@@ -20,7 +20,7 @@ Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`,
 - Code, commits, README and UI in English.
 - Commits: imperative, lowercase, one topic each (e.g. `add set row component`). If the message needs "and", split it. A function and its test are one commit, a component and its use in a page are two, the styles of one component are one. Logic, styles and `aria` never share a commit (attributes that `Field` builds are part of `Field`'s own logic commit).
 - Never commit `.env` files. Branch: `main` only.
-- Components do not touch Firebase directly: use `services/` and hooks.
+- Firebase SDK calls (reads, writes, listeners, auth) live only in `services/`. Hooks and components call service functions. Types and the `FirebaseError` class may be imported anywhere.
 - Errors: log the real error with `console.error(err)`. Show the user only our own text (fixed or mapped, like `getAuthErrorMessage`), never `err.message` from a library.
 
 ## Code style
