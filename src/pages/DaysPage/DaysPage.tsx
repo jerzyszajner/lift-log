@@ -26,9 +26,13 @@ export function DaysPage() {
     <div className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Your days</h1>
-        <div>
+        <div className={styles.headerActions}>
           {(sortedDays.length > 1 || isReordering) && (
-            <button type="button" onClick={toggleReordering}>
+            <button
+              type="button"
+              className={styles.toggle}
+              onClick={toggleReordering}
+            >
               {isReordering ? "Done" : "Reorder"}
             </button>
           )}
