@@ -1,6 +1,13 @@
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  writeBatch,
+} from "firebase/firestore";
 import { db } from "../../../services/firebase";
 import { daySchema } from "../schemas/daysSchemas";
+import { getDaySwap } from "../utils/getDaySwap";
 import { getNextOrder } from "../utils/getNextOrder";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import type { Day, DayData } from "../schemas/daysSchemas";
@@ -24,4 +31,22 @@ export function subscribeToDays(
 export function addDay(uid: string, name: string, days: Day[]) {
   const data: DayData = { name, order: getNextOrder(days), exercises: [] };
   return addDoc(collection(db, "users", uid, "days"), data);
+}
+
+export async function moveDay(
+  uid: string,
+  days: Day[],
+  id: string,
+  direction: "up" | "down",
+) {
+  const swap = getDaySwap(days, id, direction);
+  if (!swap) {
+    return;
+  }
+
+  const batch = writeBatch(db);
+  for (const day of swap) {
+    batch.update(doc(db, "users", uid, "days", day.id), { order: day.order });
+  }
+  await batch.commit();
 }
