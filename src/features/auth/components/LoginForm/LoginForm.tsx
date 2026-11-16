@@ -57,7 +57,7 @@ export function LoginForm() {
           />
         )}
       </Field>
-      {authError && <ErrorMessage>{authError}</ErrorMessage>}
+      {authError && <ErrorMessage role="alert">{authError}</ErrorMessage>}
       <Button type="submit" disabled={isSubmitting}>
         Log in
       </Button>
