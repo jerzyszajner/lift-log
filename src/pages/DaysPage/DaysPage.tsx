@@ -9,7 +9,7 @@ import styles from "./DaysPage.module.css";
 
 export function DaysPage() {
   const { days, isLoading, hasError } = useDays();
-  const { isReordering, toggleReordering, moveError, move } =
+  const { isReordering, toggleReordering, moveError, moveMessage, move } =
     useReorderDays(days);
 
   if (isLoading) {
@@ -46,6 +46,9 @@ export function DaysPage() {
         </div>
       </header>
       {moveError && <ErrorMessage role="alert">{moveError}</ErrorMessage>}
+      <p className={styles.visuallyHidden} aria-live="polite">
+        {moveMessage}
+      </p>
       <ul className={styles.list}>
         {sortedDays.map((day, index) => {
           const isFirst = index === 0;
