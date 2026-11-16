@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Pencil, Play, Plus } from "lucide-react";
+import { ArrowUpDown, Pencil, Play, Plus } from "lucide-react";
 import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { ReorderButtons } from "../../features/days/components/ReorderButtons/ReorderButtons";
@@ -33,6 +33,7 @@ export function DaysPage() {
               className={styles.toggle}
               onClick={toggleReordering}
             >
+              {!isReordering && <ArrowUpDown size={18} />}
               {isReordering ? "Done" : "Reorder"}
             </button>
           )}
