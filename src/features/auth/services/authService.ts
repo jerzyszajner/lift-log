@@ -1,4 +1,8 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../../services/firebase";
 import type { User } from "firebase/auth";
 
@@ -8,4 +12,8 @@ export function subscribeToAuthChanges(callback: (user: User | null) => void) {
 
 export function signIn(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
+}
+
+export function signUp(email: string, password: string) {
+  return createUserWithEmailAndPassword(auth, email, password);
 }
