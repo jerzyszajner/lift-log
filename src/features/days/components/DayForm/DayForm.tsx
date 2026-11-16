@@ -7,6 +7,7 @@ import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { addDaySchema } from "../../schemas/daysSchemas";
 import type { AddDayFormValues } from "../../schemas/daysSchemas";
+import styles from "./DayForm.module.css";
 
 type DayFormProps = {
   onSubmit: (values: AddDayFormValues) => Promise<void>;
@@ -33,16 +34,20 @@ export function DayForm({ onSubmit }: DayFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)} noValidate>
-      <Field label="Day name" error={errors.name?.message}>
-        {(controlProps) => (
-          <Input {...controlProps} {...register("name")} type="text" />
-        )}
-      </Field>
-      {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
-      <Button type="submit" disabled={isSubmitting}>
-        Save day
-      </Button>
+    <form className={styles.form} onSubmit={handleSubmit(submit)} noValidate>
+      <div className={styles.fields}>
+        <Field label="Day name" error={errors.name?.message}>
+          {(controlProps) => (
+            <Input {...controlProps} {...register("name")} type="text" />
+          )}
+        </Field>
+      </div>
+      <div className={styles.actions}>
+        {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
+        <Button type="submit" disabled={isSubmitting}>
+          Save day
+        </Button>
+      </div>
     </form>
   );
 }
