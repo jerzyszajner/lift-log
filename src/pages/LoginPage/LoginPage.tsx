@@ -1,6 +1,6 @@
 import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
 import { Logo } from "../../components/Logo/Logo";
-import { LoginForm } from "../../features/auth/components/LoginForm";
+import { LoginForm } from "../../features/auth/components/LoginForm/LoginForm";
 import styles from "./LoginPage.module.css";
 
 export function LoginPage() {

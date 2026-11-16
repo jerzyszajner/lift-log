@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "../components/Layout/Layout";
-import { ProtectedRoute } from "../features/auth/components/ProtectedRoute";
-import { PublicRoute } from "../features/auth/components/PublicRoute";
+import { ProtectedRoute } from "../features/auth/components/ProtectedRoute/ProtectedRoute";
+import { PublicRoute } from "../features/auth/components/PublicRoute/PublicRoute";
 import { DaysPage } from "../pages/DaysPage/DaysPage";
 import { WorkoutPage } from "../pages/WorkoutPage/WorkoutPage";
 import { HistoryPage } from "../pages/HistoryPage/HistoryPage";

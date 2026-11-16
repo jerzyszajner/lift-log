@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { subscribeToAuthChanges } from "../services/authService";
+import { AuthContext } from "../../context/AuthContext";
+import { subscribeToAuthChanges } from "../../services/authService";
 import type { ReactNode } from "react";
 import type { User } from "firebase/auth";
 

@@ -1,4 +1,4 @@
-import { AuthProvider } from "./features/auth/components/AuthProvider";
+import { AuthProvider } from "./features/auth/components/AuthProvider/AuthProvider";
 import { AppRoutes } from "./routes/AppRoutes";
 
 export function App() {

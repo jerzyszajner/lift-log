@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { describe, expect, test, vi } from "vitest";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { ProtectedRoute } from "./ProtectedRoute";
 import type { User } from "firebase/auth";
 
-vi.mock("../hooks/useAuth");
+vi.mock("../../hooks/useAuth");
 
 function renderProtectedRoute() {
   render(

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../../../components/Button/Button";
-import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
-import { Field } from "../../../components/Field/Field";
-import { Input } from "../../../components/Input/Input";
-import { PasswordInput } from "../../../components/PasswordInput/PasswordInput";
-import { loginSchema } from "../schemas/authSchemas";
-import { signIn } from "../services/authService";
-import { getAuthErrorMessage } from "../utils/getAuthErrorMessage";
-import type { LoginFormValues } from "../schemas/authSchemas";
+import { Button } from "../../../../components/Button/Button";
+import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
+import { Field } from "../../../../components/Field/Field";
+import { Input } from "../../../../components/Input/Input";
+import { PasswordInput } from "../../../../components/PasswordInput/PasswordInput";
+import { loginSchema } from "../../schemas/authSchemas";
+import { signIn } from "../../services/authService";
+import { getAuthErrorMessage } from "../../utils/getAuthErrorMessage";
+import type { LoginFormValues } from "../../schemas/authSchemas";
 import styles from "./LoginForm.module.css";
 
 export function LoginForm() {
