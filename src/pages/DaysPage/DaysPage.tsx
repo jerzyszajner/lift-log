@@ -62,6 +62,7 @@ export function DaysPage() {
               <div className={styles.actions}>
                 {isReordering ? (
                   <ReorderButtons
+                    name={day.name}
                     isFirst={isFirst}
                     isLast={isLast}
                     isDisabled={isMoving}

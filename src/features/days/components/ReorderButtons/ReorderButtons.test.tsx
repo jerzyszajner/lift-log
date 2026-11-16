@@ -11,6 +11,7 @@ function renderButtons(props: {
 }) {
   render(
     <ReorderButtons
+      name="Legs"
       isFirst={props.isFirst ?? false}
       isLast={props.isLast ?? false}
       isDisabled={props.isDisabled ?? false}
