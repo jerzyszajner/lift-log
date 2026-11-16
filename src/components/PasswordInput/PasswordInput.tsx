@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Input } from "../Input/Input";
 import type { ComponentProps } from "react";
+import styles from "./PasswordInput.module.css";
 
 type PasswordInputProps = Omit<ComponentProps<"input">, "type">;
 
@@ -13,10 +14,14 @@ export function PasswordInput(props: PasswordInputProps) {
   }
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Input {...props} type={showPassword ? "text" : "password"} />
-      <button type="button" onClick={togglePasswordVisibility}>
-        {showPassword ? <EyeOff /> : <Eye />}
+      <button
+        className={styles.toggle}
+        type="button"
+        onClick={togglePasswordVisibility}
+      >
+        {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
       </button>
     </div>
   );
