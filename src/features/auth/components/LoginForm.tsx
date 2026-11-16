@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../components/Button/Button";
+import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../components/Field/Field";
 import { Input } from "../../../components/Input/Input";
 import { PasswordInput } from "../../../components/PasswordInput/PasswordInput";
@@ -56,7 +57,7 @@ export function LoginForm() {
           />
         )}
       </Field>
-      {authError && <p>{authError}</p>}
+      {authError && <ErrorMessage>{authError}</ErrorMessage>}
       <Button type="submit" disabled={isSubmitting}>
         Log in
       </Button>
