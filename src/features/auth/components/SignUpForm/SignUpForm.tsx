@@ -10,6 +10,7 @@ import { signUpSchema } from "../../schemas/authSchemas";
 import { signUp } from "../../services/authService";
 import { getAuthErrorMessage } from "../../utils/getAuthErrorMessage";
 import type { SignUpFormValues } from "../../schemas/authSchemas";
+import styles from "./SignUpForm.module.css";
 
 export function SignUpForm() {
   const [authError, setAuthError] = useState("");
@@ -32,7 +33,11 @@ export function SignUpForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <Field label="Email" error={errors.email?.message}>
         {(controlProps) => (
           <Input
