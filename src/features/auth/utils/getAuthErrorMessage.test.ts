@@ -8,6 +8,13 @@ describe("getAuthErrorMessage", () => {
     expect(getAuthErrorMessage(err)).toBe("Incorrect email or password.");
   });
 
+  test("maps the email already in use code to our text", () => {
+    const err = new FirebaseError("auth/email-already-in-use", "library text");
+    expect(getAuthErrorMessage(err)).toBe(
+      "An account with this email already exists.",
+    );
+  });
+
   test("uses the fallback for an unknown Firebase code", () => {
     const err = new FirebaseError("auth/something-new", "library text");
     expect(getAuthErrorMessage(err)).toBe("Something went wrong. Try again.");
