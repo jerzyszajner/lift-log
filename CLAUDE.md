@@ -10,10 +10,15 @@ Mockup: https://claude.ai/artifact/U6qndcpKiGC8V2n8MNRRC7
 Vite, React, TypeScript, Firebase (Auth + Firestore), react-hook-form with zod (`zodResolver`), CSS Modules, Vitest + Testing Library. Icons only from lucide-react. No UI libraries.
 Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`, plus `useDocument` only if needed) that unsubscribes in the `useEffect` cleanup. No TanStack Query in this app. Components never call `onSnapshot` directly.
 
+## Commands
+
+- `npm run dev` starts the app, `npm test -- --run` runs the tests once, `npx vitest run <path>` runs one test file.
+- Before a commit: `npm run lint`, `npm test -- --run` and `npm run build` (it runs `tsc -b`) must pass.
+
 ## Conventions
 
 - Code, commits, README and UI in English.
-- Commits: imperative, lowercase, one topic each (e.g. `add set row component`). If the message needs "and", split it. A function and its test are one commit, a component and its use in a page are two, the styles of one component are one. Logic, styles and `aria` never share a commit.
+- Commits: imperative, lowercase, one topic each (e.g. `add set row component`). If the message needs "and", split it. A function and its test are one commit, a component and its use in a page are two, the styles of one component are one. Logic, styles and `aria` never share a commit (attributes that `Field` builds are part of `Field`'s own logic commit).
 - Never commit `.env` files. Branch: `main` only.
 - Components do not touch Firebase directly: use `services/` and hooks.
 - Errors: log the real error with `console.error(err)`. Show the user only our own text (fixed or mapped, like `getAuthErrorMessage`), never `err.message` from a library.
@@ -22,7 +27,7 @@ Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`,
 
 - Components are `function` declarations, not arrows. No `import React`.
 - Named exports only, no `export default`.
-- Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/HomePage/HomePage.tsx`). JSX files are `.tsx`, the rest `.ts`.
+- Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/DaysPage/DaysPage.tsx`). JSX files are `.tsx`, the rest `.ts`.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`. Protected and public routes are nested layout routes with `<Outlet />`, not wrappers around each route.
 - Imports: external packages first, then project files (`../` before `./`), then `import type`, then styles. No blank lines between imports, the whole block is one group.
 - Folders: `features/<name>/` (auth, days, workout) hold their own components, hooks, services and schemas. `components/` holds only generic parts. Pages stay thin and only compose.
@@ -65,18 +70,15 @@ Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`,
 
 ## Accessibility
 
-- Done per component, together with styling, not at the end.
+- Done per component, right after its styles, as its own commit, not at the end. Attributes that `Field` builds belong to `Field` itself.
 - Native HTML first. Add `aria` only where something is missing (names for icon buttons, `aria-pressed` on toggles, `role="alert"` on errors).
-- Work in stages: make one change, propose the commit message, wait for my approval, commit, then the next change.
 
 ## Workflow
 
 - Progress and next steps live in `notes/PLAN.md`. Work on one step at a time. The "Done when" line decides when a step is closed.
-- When I confirm something works (browser test or commit done), tick the matching checkbox in `notes/PLAN.md` and update the "Next time" line at the end of the session. Never tick based on `tsc` alone.
-- `notes/` is local (in `.gitignore`). Update it without mentioning Git.
-- Before reviewing code or advising a commit, read the files again. I edit between turns.
+- When I confirm something works (browser test or commit done), tick the matching checkbox in `notes/PLAN.md` and update the next-step line at the top of the file at the end of the session. Never tick based on `tsc` alone.
 - Always use Context7 for library/API documentation, setup and configuration, without me asking. Use the library version from `package.json`.
-- Keep this file under 200 lines (Anthropic docs). Add only what cannot be learned from the code or had to be corrected twice. Before adding a rule, check it does not repeat or contradict an existing one. A rule with no exceptions becomes a hook. Run `/doctor prompt-audit` now and then.
+- Keep this file under 200 lines (Anthropic docs). Add only what cannot be learned from the code or had to be corrected twice. Before adding a rule, check it does not repeat or contradict an existing one. A rule with no exceptions becomes a hook or a lint rule.
 
 ## Styling
 
