@@ -1,7 +1,8 @@
 import type { ComponentProps } from "react";
+import styles from "./Input.module.css";
 
 type InputProps = ComponentProps<"input">;
 
 export function Input(props: InputProps) {
-  return <input {...props} />;
+  return <input className={styles.input} {...props} />;
 }

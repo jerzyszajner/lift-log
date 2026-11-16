@@ -1,0 +1,14 @@
+.input {
+  width: 100%;
+  height: var(--control-height);
+  padding: 0 var(--spacing-5);
+  font-weight: 500;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
