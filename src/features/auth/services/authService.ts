@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../../../services/firebase";
 import type { User } from "firebase/auth";
@@ -16,4 +17,8 @@ export function signIn(email: string, password: string) {
 
 export function signUp(email: string, password: string) {
   return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function logOut() {
+  return signOut(auth);
 }
