@@ -18,7 +18,8 @@ function renderButtons(props: {
       onMove={props.onMove ?? vi.fn()}
     />,
   );
-  const [up, down] = screen.getAllByRole("button");
+  const up = screen.getByRole("button", { name: "Move Legs up" });
+  const down = screen.getByRole("button", { name: "Move Legs down" });
   return { up, down };
 }
 
