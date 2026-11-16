@@ -27,3 +27,9 @@ export const daySchema = z.object({
 export type DayData = z.infer<typeof daySchema>;
 
 export type Day = DayData & { id: string };
+
+export const addDaySchema = z.object({
+  name: z.string().trim().min(1, "Enter a day name"),
+});
+
+export type AddDayFormValues = z.infer<typeof addDaySchema>;
