@@ -1,0 +1,26 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-size);
+  height: var(--tap-size);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.button:disabled {
+  opacity: 0.4;
+}
+
+.button:not(:disabled):active {
+  background: var(--color-border);
+}
+
+@media (hover: hover) {
+  .button:not(:disabled):hover {
+    background: var(--color-border);
+  }
+}

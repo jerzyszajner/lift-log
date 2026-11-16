@@ -1,4 +1,5 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
+import styles from "./ReorderButtons.module.css";
 
 type ReorderButtonsProps = {
   isFirst: boolean;
@@ -17,6 +18,7 @@ export function ReorderButtons({
     <>
       <button
         type="button"
+        className={styles.button}
         disabled={isDisabled || isFirst}
         onClick={() => onMove("up")}
       >
@@ -24,6 +26,7 @@ export function ReorderButtons({
       </button>
       <button
         type="button"
+        className={styles.button}
         disabled={isDisabled || isLast}
         onClick={() => onMove("down")}
       >
