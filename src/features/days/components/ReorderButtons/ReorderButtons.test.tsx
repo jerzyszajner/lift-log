@@ -6,7 +6,6 @@ import { ReorderButtons } from "./ReorderButtons";
 function renderButtons(props: {
   isFirst?: boolean;
   isLast?: boolean;
-  isDisabled?: boolean;
   onMove?: () => void;
 }) {
   render(
@@ -14,7 +13,6 @@ function renderButtons(props: {
       name="Legs"
       isFirst={props.isFirst ?? false}
       isLast={props.isLast ?? false}
-      isDisabled={props.isDisabled ?? false}
       onMove={props.onMove ?? vi.fn()}
     />,
   );
@@ -46,13 +44,6 @@ describe("ReorderButtons", () => {
     const { up, down } = renderButtons({ isLast: true });
 
     expect(up).toBeEnabled();
-    expect(down).toBeDisabled();
-  });
-
-  test("disables both while a move is in progress", () => {
-    const { up, down } = renderButtons({ isDisabled: true });
-
-    expect(up).toBeDisabled();
     expect(down).toBeDisabled();
   });
 });

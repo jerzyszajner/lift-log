@@ -9,7 +9,7 @@ import styles from "./DaysPage.module.css";
 
 export function DaysPage() {
   const { days, isLoading, hasError } = useDays();
-  const { isReordering, toggleReordering, isMoving, moveError, move } =
+  const { isReordering, toggleReordering, moveError, move } =
     useReorderDays(days);
 
   if (isLoading) {
@@ -66,7 +66,6 @@ export function DaysPage() {
                     name={day.name}
                     isFirst={isFirst}
                     isLast={isLast}
-                    isDisabled={isMoving}
                     onMove={(direction) => move(day.id, direction)}
                   />
                 ) : (

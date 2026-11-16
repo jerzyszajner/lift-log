@@ -6,7 +6,6 @@ import type { Day } from "../schemas/daysSchemas";
 export function useReorderDays(days: Day[]) {
   const { user } = useAuth();
   const [isReordering, setIsReordering] = useState(false);
-  const [isMoving, setIsMoving] = useState(false);
   const [moveError, setMoveError] = useState("");
 
   function toggleReordering() {
@@ -18,17 +17,14 @@ export function useReorderDays(days: Day[]) {
     if (!user) {
       return;
     }
-    setIsMoving(true);
     setMoveError("");
     try {
       await moveDay(user.uid, days, id, direction);
     } catch (err) {
       console.error(err);
       setMoveError("Could not move the day. Try again.");
-    } finally {
-      setIsMoving(false);
     }
   }
 
-  return { isReordering, toggleReordering, isMoving, moveError, move };
+  return { isReordering, toggleReordering, moveError, move };
 }
