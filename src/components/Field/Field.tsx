@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import type { ReactNode } from "react";
 import styles from "./Field.module.css";
 
@@ -29,9 +30,9 @@ export function Field({ label, error, children }: FieldProps) {
         "aria-describedby": error ? errorId : undefined,
       })}
       {error && (
-        <p id={errorId} role="alert">
+        <ErrorMessage id={errorId} role="alert">
           {error}
-        </p>
+        </ErrorMessage>
       )}
     </div>
   );
