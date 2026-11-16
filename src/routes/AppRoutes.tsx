@@ -7,6 +7,7 @@ import { WorkoutPage } from "../pages/WorkoutPage/WorkoutPage";
 import { HistoryPage } from "../pages/HistoryPage/HistoryPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
+import { SignUpPage } from "../pages/SignUpPage/SignUpPage";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 
 export function AppRoutes() {
@@ -15,6 +16,7 @@ export function AppRoutes() {
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/signup" element={<SignUpPage />}></Route>
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
