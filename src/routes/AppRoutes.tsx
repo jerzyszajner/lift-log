@@ -3,6 +3,7 @@ import { Layout } from "../components/Layout/Layout";
 import { ProtectedRoute } from "../features/auth/components/ProtectedRoute/ProtectedRoute";
 import { PublicRoute } from "../features/auth/components/PublicRoute/PublicRoute";
 import { DaysPage } from "../pages/DaysPage/DaysPage";
+import { NewDayPage } from "../pages/NewDayPage/NewDayPage";
 import { WorkoutPage } from "../pages/WorkoutPage/WorkoutPage";
 import { HistoryPage } from "../pages/HistoryPage/HistoryPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
@@ -25,6 +26,7 @@ export function AppRoutes() {
             <Route path="/account" element={<AccountPage />}></Route>
             <Route path="*" element={<NotFoundPage />}></Route>
           </Route>
+          <Route path="/days/new" element={<NewDayPage />}></Route>
           <Route path="/workout/:dayId" element={<WorkoutPage />}></Route>
         </Route>
       </Routes>
