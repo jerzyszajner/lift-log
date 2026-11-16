@@ -9,6 +9,7 @@ import { loginSchema } from "../schemas/authSchemas";
 import { signIn } from "../services/authService";
 import { getAuthErrorMessage } from "../utils/getAuthErrorMessage";
 import type { LoginFormValues } from "../schemas/authSchemas";
+import styles from "./LoginForm.module.css";
 
 export function LoginForm() {
   const [authError, setAuthError] = useState("");
@@ -31,7 +32,11 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <Field label="Email" error={errors.email?.message}>
         {(controlProps) => (
           <Input
