@@ -28,6 +28,7 @@ Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`,
 - Components are `function` declarations, not arrows. No `import React`.
 - Named exports only, no `export default`.
 - Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/DaysPage/DaysPage.tsx`). JSX files are `.tsx`, the rest `.ts`.
+- Every component lives in its own folder with the same name (`Button/Button.tsx`), together with its `.module.css` and test. Hooks, services, schemas and utils are not components: they stay in their type folders, with the test next to the file.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`. Protected and public routes are nested layout routes with `<Outlet />`, not wrappers around each route.
 - Imports: external packages first, then project files (`../` before `./`), then `import type`, then styles. No blank lines between imports, the whole block is one group.
 - Folders: `features/<name>/` (auth, days, workout) hold their own components, hooks, services and schemas. `components/` holds only generic parts. Pages stay thin and only compose.
