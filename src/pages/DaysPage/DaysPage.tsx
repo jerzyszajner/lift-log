@@ -1,10 +1,21 @@
 import { Link } from "react-router";
 import { Pencil, Play, Plus } from "lucide-react";
 import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
-import { days } from "../../features/days/data/days";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { useDays } from "../../features/days/hooks/useDays";
 import styles from "./DaysPage.module.css";
 
 export function DaysPage() {
+  const { days, isLoading, hasError } = useDays();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (hasError) {
+    return <ErrorMessage>Could not load your days.</ErrorMessage>;
+  }
+
   const sortedDays = [...days].sort((a, b) => a.order - b.order);
 
   return (
