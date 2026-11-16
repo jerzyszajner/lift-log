@@ -7,14 +7,13 @@ Mockup: https://claude.ai/artifact/U6qndcpKiGC8V2n8MNRRC7
 
 ## Stack
 
-Vite, React, TypeScript, React Router, Firebase (Auth + Firestore), react-hook-form, zod, @hookform/resolvers (`zodResolver`), CSS Modules, lucide-react (icons only), Vitest + Testing Library.
+Vite, React, TypeScript, Firebase (Auth + Firestore), react-hook-form with zod (`zodResolver`), CSS Modules, Vitest + Testing Library. Icons only from lucide-react. No UI libraries.
 Data fetching: Firestore `onSnapshot` through one generic hook (`useCollection`, plus `useDocument` only if needed) that unsubscribes in the `useEffect` cleanup. No TanStack Query in this app. Components never call `onSnapshot` directly.
-No UI libraries.
 
 ## Conventions
 
 - Code, commits, README and UI in English.
-- Commits: imperative, lowercase, one change each (e.g. `add set row component`).
+- Commits: imperative, lowercase, one topic each (e.g. `add set row component`). If the message needs "and", split it. A function and its test are one commit, a component and its use in a page are two, the styles of one component are one. Logic, styles and `aria` never share a commit.
 - Never commit `.env` files. Branch: `main` only.
 - Components do not touch Firebase directly: use `services/` and hooks.
 - Errors: log the real error with `console.error(err)`. Show the user only our own text (fixed or mapped, like `getAuthErrorMessage`), never `err.message` from a library.
@@ -25,7 +24,6 @@ No UI libraries.
 - Named exports only, no `export default`.
 - Component and file share one name, PascalCase. Pages end with `Page` and live in their own folder (`pages/HomePage/HomePage.tsx`). JSX files are `.tsx`, the rest `.ts`.
 - Router in Declarative mode (`BrowserRouter`, `Routes`, `Route`), imported from `react-router`. Protected and public routes are nested layout routes with `<Outlet />`, not wrappers around each route.
-- Routes not built yet: `/days/new`, `/days/:id`, `/login`, `/signup`. The rest are in `routes/AppRoutes.tsx`.
 - Imports: external packages first, then project files (`../` before `./`), then `import type`, then styles. No blank lines between imports, the whole block is one group.
 - Folders: `features/<name>/` (auth, days, workout) hold their own components, hooks, services and schemas. `components/` holds only generic parts. Pages stay thin and only compose.
 - Types come from zod schemas (`z.infer`), not written twice.
@@ -69,7 +67,7 @@ No UI libraries.
 
 - Done per component, together with styling, not at the end.
 - Native HTML first. Add `aria` only where something is missing (names for icon buttons, `aria-pressed` on toggles, `role="alert"` on errors).
-- Styles and `aria` are separate commits. Work in stages: make one change, propose the commit, wait for my approval, then the next change.
+- Work in stages: make one change, propose the commit message, wait for my approval, commit, then the next change.
 
 ## Workflow
 
@@ -78,6 +76,7 @@ No UI libraries.
 - `notes/` is local (in `.gitignore`). Update it without mentioning Git.
 - Before reviewing code or advising a commit, read the files again. I edit between turns.
 - Always use Context7 for library/API documentation, setup and configuration, without me asking. Use the library version from `package.json`.
+- Keep this file under 200 lines (Anthropic docs). Add only what cannot be learned from the code or had to be corrected twice. Before adding a rule, check it does not repeat or contradict an existing one. A rule with no exceptions becomes a hook. Run `/doctor prompt-audit` now and then.
 
 ## Styling
 
