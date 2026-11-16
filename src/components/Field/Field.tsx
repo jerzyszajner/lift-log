@@ -1,5 +1,6 @@
 import { useId } from "react";
 import type { ReactNode } from "react";
+import styles from "./Field.module.css";
 
 type FieldControlProps = {
   id: string;
@@ -18,8 +19,10 @@ export function Field({ label, error, children }: FieldProps) {
   const errorId = `${id}-error`;
 
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
+    <div className={styles.field}>
+      <label className={styles.label} htmlFor={id}>
+        {label}
+      </label>
       {children({
         id,
         "aria-invalid": Boolean(error),
