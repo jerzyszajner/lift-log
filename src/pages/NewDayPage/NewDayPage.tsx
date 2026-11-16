@@ -6,6 +6,7 @@ import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { useDays } from "../../features/days/hooks/useDays";
 import { addDay } from "../../features/days/services/daysService";
 import type { AddDayFormValues } from "../../features/days/schemas/daysSchemas";
+import styles from "./NewDayPage.module.css";
 
 export function NewDayPage() {
   const { user } = useAuth();
@@ -29,9 +30,11 @@ export function NewDayPage() {
   }
 
   return (
-    <div>
-      <BackLink to="/" label="Days" />
-      <h1>Add day</h1>
+    <div className={styles.page}>
+      <div className={styles.top}>
+        <BackLink to="/" label="Days" />
+        <h1 className={styles.title}>Add day</h1>
+      </div>
       <DayForm onSubmit={handleSubmit} />
     </div>
   );
