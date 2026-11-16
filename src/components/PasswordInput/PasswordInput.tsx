@@ -19,6 +19,8 @@ export function PasswordInput(props: PasswordInputProps) {
       <button
         className={styles.toggle}
         type="button"
+        aria-label="Show password"
+        aria-pressed={showPassword}
         onClick={togglePasswordVisibility}
       >
         {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
