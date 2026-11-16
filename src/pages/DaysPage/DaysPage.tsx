@@ -27,15 +27,17 @@ export function DaysPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>Your days</h1>
         <div>
-          {sortedDays.length > 1 && (
+          {(sortedDays.length > 1 || isReordering) && (
             <button type="button" onClick={toggleReordering}>
               {isReordering ? "Done" : "Reorder"}
             </button>
           )}
-          <Link className={styles.addLink} to="/days/new">
-            <Plus size={18} />
-            Add day
-          </Link>
+          {!isReordering && (
+            <Link className={styles.addLink} to="/days/new">
+              <Plus size={18} />
+              Add day
+            </Link>
+          )}
         </div>
       </header>
       {moveError && <ErrorMessage role="alert">{moveError}</ErrorMessage>}
