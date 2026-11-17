@@ -59,4 +59,21 @@ describe("SetRow", () => {
 
     expect(onRemove).toHaveBeenCalledTimes(1);
   });
+
+  test("shows the error message only when error is given", () => {
+    const props = {
+      setNumber: 1,
+      reps: 0,
+      weight: 10,
+      onRepsChange: vi.fn(),
+      onWeightChange: vi.fn(),
+    };
+    const { rerender } = render(<SetRow {...props} />);
+
+    expect(screen.queryByText("Reps must be at least 1")).toBeNull();
+
+    rerender(<SetRow {...props} error="Reps must be at least 1" />);
+
+    expect(screen.getByText("Reps must be at least 1")).toBeTruthy();
+  });
 });
