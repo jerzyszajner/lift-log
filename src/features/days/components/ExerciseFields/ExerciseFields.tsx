@@ -1,4 +1,5 @@
-import { Controller, useFieldArray } from "react-hook-form";
+import { Controller, useFieldArray, useWatch } from "react-hook-form";
+import { Button } from "../../../../components/Button/Button";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { SetRow } from "../../../../components/SetRow/SetRow";
@@ -19,11 +20,16 @@ export function ExerciseFields({
   register,
   errors,
 }: ExerciseFieldsProps) {
-  const { fields } = useFieldArray({
+  const { fields, append } = useFieldArray({
     control,
     name: `exercises.${index}.sets`,
   });
+  const sets = useWatch({ control, name: `exercises.${index}.sets` });
   const exerciseErrors = errors.exercises?.[index];
+
+  function addSet() {
+    append({ ...(sets.at(-1) ?? { reps: 10, weight: 0 }) });
+  }
 
   return (
     <>
@@ -55,6 +61,9 @@ export function ExerciseFields({
           )}
         />
       ))}
+      <Button variant="secondary" onClick={addSet}>
+        Add set (copies the last one)
+      </Button>
     </>
   );
 }
