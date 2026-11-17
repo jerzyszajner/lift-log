@@ -4,7 +4,7 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { useDays } from "../../features/days/hooks/useDays";
-import { updateDay } from "../../features/days/services/daysService";
+import { deleteDay, updateDay } from "../../features/days/services/daysService";
 import type { DayFormValues } from "../../features/days/schemas/daysSchemas";
 import styles from "./EditDayPage.module.css";
 
@@ -20,6 +20,14 @@ export function EditDayPage() {
       throw new Error("Cannot edit a day without a signed in user and a day");
     }
     await updateDay(user.uid, day.id, values);
+    navigate("/");
+  }
+
+  async function handleDelete() {
+    if (!user || !day) {
+      throw new Error("Cannot delete a day without a signed in user and a day");
+    }
+    await deleteDay(user.uid, day.id);
     navigate("/");
   }
 
@@ -51,6 +59,7 @@ export function EditDayPage() {
       </div>
       <DayForm
         onSubmit={handleSubmit}
+        onDelete={handleDelete}
         defaultValues={{
           name: day.name,
           weekday: day.weekday,
