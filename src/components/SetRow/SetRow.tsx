@@ -7,17 +7,17 @@ type SetRowProps = {
   setNumber: number;
   reps: number;
   weight: number;
-  done: boolean;
+  done?: boolean;
   onRepsChange: (reps: number) => void;
   onWeightChange: (weight: number) => void;
-  onDoneChange: (done: boolean) => void;
+  onDoneChange?: (done: boolean) => void;
 };
 
 export function SetRow({
   setNumber,
   reps,
   weight,
-  done,
+  done = false,
   onRepsChange,
   onWeightChange,
   onDoneChange,
@@ -59,13 +59,15 @@ export function SetRow({
       >
         <Plus />
       </button>
-      <input
-        className={styles.checkbox}
-        type="checkbox"
-        aria-label={`Done, set ${setNumber}`}
-        checked={done}
-        onChange={(e) => onDoneChange(e.target.checked)}
-      />
+      {onDoneChange && (
+        <input
+          className={styles.checkbox}
+          type="checkbox"
+          aria-label={`Done, set ${setNumber}`}
+          checked={done}
+          onChange={(e) => onDoneChange(e.target.checked)}
+        />
+      )}
     </div>
   );
 }

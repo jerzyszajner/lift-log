@@ -24,4 +24,21 @@ describe("SetRow", () => {
 
     expect(onWeightChange).toHaveBeenCalledWith(12.5);
   });
+
+  test("shows the done checkbox only when onDoneChange is given", () => {
+    const props = {
+      setNumber: 1,
+      reps: 10,
+      weight: 10,
+      onRepsChange: vi.fn(),
+      onWeightChange: vi.fn(),
+    };
+    const { rerender } = render(<SetRow {...props} />);
+
+    expect(screen.queryByRole("checkbox")).toBeNull();
+
+    rerender(<SetRow {...props} onDoneChange={vi.fn()} />);
+
+    expect(screen.getByRole("checkbox", { name: "Done, set 1" })).toBeTruthy();
+  });
 });
