@@ -71,8 +71,9 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
           <ExerciseFields
             key={field.id}
             index={index}
+            control={control}
             register={register}
-            error={errors.exercises?.[index]?.name?.message}
+            errors={errors}
           />
         ))}
       </div>
