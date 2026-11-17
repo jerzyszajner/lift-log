@@ -1,20 +1,20 @@
 :root {
   /* colors */
   --color-bg: #f5f4ef;
-  --color-surface: #ffffff;
-  --color-text: #1a1a18;
-  --color-text-secondary: #4a4943;
-  --color-text-muted: #6b6a63;
+  --color-surface: #fcfbf8;
+  --color-text: #222421;
+  --color-text-secondary: #4f504a;
+  --color-text-muted: #66675f;
   --color-border: #e3e1d8;
-  --color-border-strong: #8a887e;
-  --color-accent: #c2410c;
+  --color-border-strong: #b5b2a6;
+  --color-accent: #2f6f66;
   --color-accent-ink: #9a3412;
   --color-accent-soft: #fff6f1;
   --color-accent-soft-strong: #ffe9dd;
   --color-on-accent: #ffffff;
-  --color-success: #1f7a3a;
-  --color-success-soft: #eaf5ec;
-  --color-danger: #b42318;
+  --color-success: #2f6f66;
+  --color-success-soft: #e3ece8;
+  --color-danger: #a8483f;
   --color-danger-soft: #fff5f4;
   --color-danger-border: #f0c4c0;
 
