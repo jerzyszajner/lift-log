@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../components/Button/Button";
@@ -32,7 +33,7 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
     resolver: zodResolver(dayFormSchema),
     defaultValues: { name: "", weekday: 1, ...defaultValues, exercises },
   });
-  const { fields } = useFieldArray({ control, name: "exercises" });
+  const { fields, append } = useFieldArray({ control, name: "exercises" });
 
   async function submit(values: DayFormValues) {
     setSubmitError("");
@@ -68,6 +69,10 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
             errors={errors}
           />
         ))}
+        <Button variant="add" onClick={() => append(emptyExercise)}>
+          <Plus />
+          Add exercise
+        </Button>
       </div>
       <div className={styles.actions}>
         {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
