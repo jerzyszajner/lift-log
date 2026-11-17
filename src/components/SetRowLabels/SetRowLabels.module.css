@@ -8,11 +8,3 @@
   font-weight: 600;
   color: var(--color-text-muted);
 }
-
-.weightLabel {
-  grid-column: 3;
-}
-
-.lastLabel {
-  grid-column: 5;
-}
