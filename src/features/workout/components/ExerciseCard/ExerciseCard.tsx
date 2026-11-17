@@ -47,7 +47,7 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
       ))}
       <Button variant="addNeutral" onClick={addSet}>
         <Plus />
-        Add set (copies the last one)
+        Add set
       </Button>
     </div>
   );

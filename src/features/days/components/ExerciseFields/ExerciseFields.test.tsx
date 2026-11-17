@@ -45,9 +45,7 @@ describe("ExerciseFields", () => {
 
     await userEvent.clear(getInput("Reps, set 1"));
     await userEvent.type(getInput("Reps, set 1"), "12");
-    await userEvent.click(
-      screen.getByRole("button", { name: "Add set (copies the last one)" }),
-    );
+    await userEvent.click(screen.getByRole("button", { name: "Add set" }));
 
     expect(getInput("Reps, set 2").value).toBe("12");
     expect(getInput("Weight, set 2").value).toBe("60");

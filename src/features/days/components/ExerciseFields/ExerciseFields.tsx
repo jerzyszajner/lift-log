@@ -94,7 +94,7 @@ export function ExerciseFields({
       ))}
       <Button variant="addNeutral" onClick={addSet}>
         <Plus />
-        Add set (copies the last one)
+        Add set
       </Button>
       <Button variant="addNeutral" onClick={onInsertBelow}>
         <Plus />
