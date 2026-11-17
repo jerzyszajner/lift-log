@@ -19,16 +19,26 @@
   border-color: var(--color-border);
 }
 
-.add {
+.add,
+.addNeutral {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-3);
   min-height: var(--control-height);
+  border-style: dashed;
+}
+
+.add {
   color: var(--color-accent-ink);
   background: var(--color-accent-soft);
   border-color: var(--color-accent);
-  border-style: dashed;
+}
+
+.addNeutral {
+  color: var(--color-text-secondary);
+  background: transparent;
+  border-color: var(--color-border-strong);
 }
 
 .button:disabled {
@@ -50,6 +60,10 @@
   background: var(--color-accent-soft-strong);
 }
 
+.addNeutral:not(:disabled):active {
+  background: var(--color-border);
+}
+
 @media (hover: hover) {
   .primary:not(:disabled):hover {
     background: var(--color-accent-ink);
@@ -61,5 +75,9 @@
 
   .add:not(:disabled):hover {
     background: var(--color-accent-soft-strong);
+  }
+
+  .addNeutral:not(:disabled):hover {
+    background: var(--color-border);
   }
 }
