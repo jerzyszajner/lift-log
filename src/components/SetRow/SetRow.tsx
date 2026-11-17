@@ -76,7 +76,7 @@ export function SetRow({
         )}
         {onRemove && (
           <button
-            className={styles.button}
+            className={`${styles.button} ${styles.remove}`}
             type="button"
             aria-label="Remove set"
             onClick={onRemove}

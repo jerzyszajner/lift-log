@@ -81,6 +81,12 @@
   background: var(--color-border);
 }
 
+.remove {
+  color: var(--color-text-muted);
+  background: transparent;
+  border-color: transparent;
+}
+
 @media (hover: hover) {
   .button:hover {
     background: var(--color-border);
