@@ -74,7 +74,7 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
             onRemove={fields.length > 1 ? () => remove(index) : undefined}
           />
         ))}
-        <Button variant="add" onClick={() => append(emptyExercise)}>
+        <Button variant="addNeutral" onClick={() => append(emptyExercise)}>
           <Plus />
           Add exercise
         </Button>
