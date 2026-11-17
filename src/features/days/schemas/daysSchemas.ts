@@ -11,6 +11,8 @@ export const setEntrySchema = z.object({
 
 export type SetEntry = z.infer<typeof setEntrySchema>;
 
+export const defaultSet: SetEntry = { reps: 10, weight: 0 };
+
 export const dayExerciseSchema = z.object({
   name: z.string().trim().min(1, "Enter an exercise name"),
   sets: z.array(setEntrySchema),

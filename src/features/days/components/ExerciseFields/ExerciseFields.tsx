@@ -3,6 +3,7 @@ import { Button } from "../../../../components/Button/Button";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { SetRow } from "../../../../components/SetRow/SetRow";
+import { defaultSet } from "../../schemas/daysSchemas";
 import { getSetError } from "../../utils/getSetError";
 import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import type { DayFormValues } from "../../schemas/daysSchemas";
@@ -28,7 +29,7 @@ export function ExerciseFields({
   const exerciseErrors = errors.exercises?.[index];
 
   function addSet() {
-    append({ ...(sets.at(-1) ?? { reps: 10, weight: 0 }) });
+    append({ ...(sets.at(-1) ?? defaultSet) });
   }
 
   return (

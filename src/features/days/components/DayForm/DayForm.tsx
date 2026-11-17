@@ -5,7 +5,7 @@ import { Button } from "../../../../components/Button/Button";
 import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
-import { dayFormSchema } from "../../schemas/daysSchemas";
+import { dayFormSchema, defaultSet } from "../../schemas/daysSchemas";
 import { ExerciseFields } from "../ExerciseFields/ExerciseFields";
 import { WeekdayPicker } from "../WeekdayPicker/WeekdayPicker";
 import type { DayFormValues } from "../../schemas/daysSchemas";
@@ -16,7 +16,7 @@ type DayFormProps = {
   defaultValues?: DayFormValues;
 };
 
-const emptyExercise = { name: "", sets: [{ reps: 10, weight: 0 }] };
+const emptyExercise = { name: "", sets: [defaultSet] };
 
 export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
