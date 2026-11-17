@@ -30,7 +30,7 @@ export function DaysPage() {
         {days.map((day) => (
           <li key={day.id} className={styles.item}>
             <div className={styles.info}>
-              <p>{getWeekdayLabel(day.weekday)}</p>
+              <p className={styles.weekday}>{getWeekdayLabel(day.weekday)}</p>
               <p className={styles.name}>{day.name}</p>
               <p className={styles.meta}>
                 {day.exercises.length}{" "}

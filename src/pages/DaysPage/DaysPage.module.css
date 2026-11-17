@@ -54,6 +54,12 @@
   min-width: 0;
 }
 
+.weekday {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-accent-ink);
+}
+
 .name {
   font-size: var(--font-size-lg);
   font-weight: 600;
