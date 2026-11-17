@@ -46,6 +46,7 @@ export function DaysPage() {
                 <Pencil size={20} />
               </Link>
               <ButtonLink
+                variant="secondary"
                 size="small"
                 to={`/workout/${day.id}`}
                 aria-label={`Start ${day.name}`}
