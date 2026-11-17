@@ -27,6 +27,7 @@ export function DeleteDay({ onCancel, onDelete }: DeleteDayProps) {
         message="Delete this day?"
         cancelLabel="Cancel"
         confirmLabel="Delete"
+        confirmVariant="danger"
         onCancel={onCancel}
         onConfirm={confirm}
       />
