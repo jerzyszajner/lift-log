@@ -3,20 +3,18 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { SetRow } from "./SetRow";
 
+const baseProps = {
+  setNumber: 1,
+  reps: 10,
+  weight: 10,
+  onRepsChange: vi.fn(),
+  onWeightChange: vi.fn(),
+};
+
 describe("SetRow", () => {
   test("increases weight by 2.5 kg from 10 kg", async () => {
     const onWeightChange = vi.fn();
-    render(
-      <SetRow
-        setNumber={1}
-        reps={10}
-        weight={10}
-        done={false}
-        onRepsChange={vi.fn()}
-        onWeightChange={onWeightChange}
-        onDoneChange={vi.fn()}
-      />,
-    );
+    render(<SetRow {...baseProps} onWeightChange={onWeightChange} />);
 
     await userEvent.click(
       screen.getByRole("button", { name: "Increase weight" }),
@@ -26,34 +24,18 @@ describe("SetRow", () => {
   });
 
   test("shows the done checkbox only when onDoneChange is given", () => {
-    const props = {
-      setNumber: 1,
-      reps: 10,
-      weight: 10,
-      onRepsChange: vi.fn(),
-      onWeightChange: vi.fn(),
-    };
-    const { rerender } = render(<SetRow {...props} />);
+    const { rerender } = render(<SetRow {...baseProps} />);
 
     expect(screen.queryByRole("checkbox")).toBeNull();
 
-    rerender(<SetRow {...props} onDoneChange={vi.fn()} />);
+    rerender(<SetRow {...baseProps} onDoneChange={vi.fn()} />);
 
     expect(screen.getByRole("checkbox", { name: "Done, set 1" })).toBeTruthy();
   });
 
   test("calls onRemove when the remove button is clicked", async () => {
     const onRemove = vi.fn();
-    render(
-      <SetRow
-        setNumber={1}
-        reps={10}
-        weight={10}
-        onRepsChange={vi.fn()}
-        onWeightChange={vi.fn()}
-        onRemove={onRemove}
-      />,
-    );
+    render(<SetRow {...baseProps} onRemove={onRemove} />);
 
     await userEvent.click(screen.getByRole("button", { name: "Remove set" }));
 
@@ -61,18 +43,13 @@ describe("SetRow", () => {
   });
 
   test("shows the error message only when error is given", () => {
-    const props = {
-      setNumber: 1,
-      reps: 0,
-      weight: 10,
-      onRepsChange: vi.fn(),
-      onWeightChange: vi.fn(),
-    };
-    const { rerender } = render(<SetRow {...props} />);
+    const { rerender } = render(<SetRow {...baseProps} reps={0} />);
 
     expect(screen.queryByText("Reps must be at least 1")).toBeNull();
 
-    rerender(<SetRow {...props} error="Reps must be at least 1" />);
+    rerender(
+      <SetRow {...baseProps} reps={0} error="Reps must be at least 1" />,
+    );
 
     expect(screen.getByText("Reps must be at least 1")).toBeTruthy();
   });
