@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
+import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { DeleteDay } from "../../features/days/components/DeleteDay/DeleteDay";
 import { useDays } from "../../features/days/hooks/useDays";
 import { deleteDay, updateDay } from "../../features/days/services/daysService";
+import type { MouseEvent } from "react";
 import type { DayFormValues } from "../../features/days/schemas/daysSchemas";
 import styles from "./EditDayPage.module.css";
+
+type ConfirmStep = "editing" | "deleting" | "leaving";
 
 export function EditDayPage() {
   const { user } = useAuth();
@@ -16,7 +20,8 @@ export function EditDayPage() {
   const { dayId } = useParams();
   const { days, isLoading, hasError } = useDays();
   const day = days.find((item) => item.id === dayId);
-  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
+  const [confirmStep, setConfirmStep] = useState<ConfirmStep>("editing");
 
   async function handleSubmit(values: DayFormValues) {
     if (!user || !day) {
@@ -32,6 +37,12 @@ export function EditDayPage() {
     }
     await deleteDay(user.uid, day.id);
     navigate("/");
+  }
+
+  function handleBack(event: MouseEvent<HTMLAnchorElement>) {
+    if (!isDirty) return;
+    event.preventDefault();
+    setConfirmStep("leaving");
   }
 
   if (isLoading) {
@@ -58,11 +69,11 @@ export function EditDayPage() {
     <div className={styles.page}>
       <div className={styles.top}>
         <div className={styles.header}>
-          <BackLink to="/" label="Days" />
+          <BackLink to="/" label="Days" onClick={handleBack} />
           <button
             className={styles.delete}
             type="button"
-            onClick={() => setIsConfirmingDelete(true)}
+            onClick={() => setConfirmStep("deleting")}
           >
             Delete day
           </button>
@@ -71,11 +82,20 @@ export function EditDayPage() {
       </div>
       <DayForm
         onSubmit={handleSubmit}
+        onDirtyChange={setIsDirty}
         confirmBar={
-          isConfirmingDelete ? (
+          confirmStep === "deleting" ? (
             <DeleteDay
-              onCancel={() => setIsConfirmingDelete(false)}
+              onCancel={() => setConfirmStep("editing")}
               onDelete={handleDelete}
+            />
+          ) : confirmStep === "leaving" ? (
+            <ConfirmBar
+              message="Leave without saving?"
+              cancelLabel="Stay"
+              confirmLabel="Leave"
+              onCancel={() => setConfirmStep("editing")}
+              onConfirm={() => navigate("/")}
             />
           ) : undefined
         }
