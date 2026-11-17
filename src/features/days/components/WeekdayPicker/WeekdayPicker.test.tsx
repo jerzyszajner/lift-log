@@ -4,28 +4,29 @@ import { describe, expect, test, vi } from "vitest";
 import { WeekdayPicker } from "./WeekdayPicker";
 
 describe("WeekdayPicker", () => {
-  test("shows seven days from Monday to Sunday", () => {
-    render(<WeekdayPicker value={1} onChange={vi.fn()} />);
+  test("shows seven days and checks the one that matches the value", () => {
+    render(<WeekdayPicker value={3} onChange={vi.fn()} />);
 
-    const names = screen.getAllByRole("button").map((b) => b.textContent);
+    const radios = screen.getAllByRole("radio") as HTMLInputElement[];
 
-    expect(names).toEqual(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+    expect(screen.getByRole("group", { name: "Day of the week" })).toBeTruthy();
+    expect(radios.map((radio) => radio.checked)).toEqual([
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+    ]);
+    expect(screen.getByRole("radio", { name: "Wed" })).toBe(radios[2]);
   });
 
   test("returns the number of the clicked day", async () => {
     const onChange = vi.fn();
     render(<WeekdayPicker value={1} onChange={onChange} />);
 
-    await userEvent.click(screen.getByRole("button", { name: "Wed" }));
-
-    expect(onChange).toHaveBeenCalledWith(3);
-  });
-
-  test("returns 7 for Sunday", async () => {
-    const onChange = vi.fn();
-    render(<WeekdayPicker value={1} onChange={onChange} />);
-
-    await userEvent.click(screen.getByRole("button", { name: "Sun" }));
+    await userEvent.click(screen.getByRole("radio", { name: "Sun" }));
 
     expect(onChange).toHaveBeenCalledWith(7);
   });

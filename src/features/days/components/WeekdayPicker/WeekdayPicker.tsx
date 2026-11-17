@@ -5,14 +5,25 @@ type WeekdayPickerProps = {
   onChange: (weekday: number) => void;
 };
 
-export function WeekdayPicker({ onChange }: WeekdayPickerProps) {
+export function WeekdayPicker({ value, onChange }: WeekdayPickerProps) {
   return (
-    <div>
-      {weekdayLabels.map((label, index) => (
-        <button key={label} type="button" onClick={() => onChange(index + 1)}>
-          {label}
-        </button>
-      ))}
-    </div>
+    <fieldset>
+      <legend>Day of the week</legend>
+      {weekdayLabels.map((label, index) => {
+        const weekday = index + 1;
+
+        return (
+          <label key={label}>
+            <input
+              type="radio"
+              name="weekday"
+              checked={value === weekday}
+              onChange={() => onChange(weekday)}
+            />
+            {label}
+          </label>
+        );
+      })}
+    </fieldset>
   );
 }
