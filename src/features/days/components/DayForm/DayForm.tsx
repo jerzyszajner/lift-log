@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../components/Button/Button";
@@ -16,6 +16,7 @@ type DayFormProps = {
   onSubmit: (values: DayFormValues) => Promise<void>;
   defaultValues?: DayFormValues;
   confirmBar?: ReactNode;
+  onDirtyChange?: (isDirty: boolean) => void;
 };
 
 const emptyExercise = { name: "", sets: [defaultSet] };
@@ -24,6 +25,7 @@ export function DayForm({
   onSubmit,
   defaultValues,
   confirmBar,
+  onDirtyChange,
 }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
   const exercises = defaultValues?.exercises.length
@@ -33,11 +35,15 @@ export function DayForm({
     register,
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<DayFormValues>({
     resolver: zodResolver(dayFormSchema),
     defaultValues: { name: "", weekday: 1, ...defaultValues, exercises },
   });
+
+  useEffect(() => {
+    onDirtyChange?.(isDirty);
+  }, [isDirty, onDirtyChange]);
   const { fields, insert, remove } = useFieldArray({
     control,
     name: "exercises",
