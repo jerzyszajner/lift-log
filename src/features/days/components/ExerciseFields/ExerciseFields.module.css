@@ -7,3 +7,33 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
 }
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr var(--control-height);
+  align-items: start;
+  gap: var(--spacing-3);
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height);
+  height: var(--control-height);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+
+.remove:active {
+  background: var(--color-border);
+}
+
+@media (hover: hover) {
+  .remove:hover {
+    background: var(--color-border);
+  }
+}

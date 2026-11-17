@@ -39,7 +39,7 @@ export function ExerciseFields({
 
   return (
     <div className={styles.card}>
-      <div>
+      <div className={styles.header}>
         <Field
           label="Exercise name"
           hideLabel
@@ -55,7 +55,7 @@ export function ExerciseFields({
           )}
         </Field>
         {onRemove && (
-          <button type="button" onClick={onRemove}>
+          <button type="button" className={styles.remove} onClick={onRemove}>
             <Trash />
           </button>
         )}
