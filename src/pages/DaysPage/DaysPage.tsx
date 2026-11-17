@@ -22,12 +22,10 @@ export function DaysPage() {
     <div className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Your days</h1>
-        <div className={styles.headerActions}>
-          <Link className={styles.addLink} to="/days/new">
-            <Plus size={18} />
-            Add day
-          </Link>
-        </div>
+        <Link className={styles.addLink} to="/days/new">
+          <Plus size={18} />
+          Add day
+        </Link>
       </header>
       <ul className={styles.list}>
         {sortedDays.map((day) => (
