@@ -10,9 +10,9 @@
 }
 
 .weightLabel {
-  grid-column: 4;
+  grid-column: 3;
 }
 
 .lastLabel {
-  grid-column: 6;
+  grid-column: 5;
 }

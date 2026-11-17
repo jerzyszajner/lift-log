@@ -1,8 +1,4 @@
-.row {
-  display: grid;
-  grid-template-columns: var(--set-row-columns);
-  align-items: center;
-  gap: var(--spacing-3);
+.set {
   border-radius: var(--radius-md);
   transition:
     background 0.15s,
@@ -14,10 +10,17 @@
   box-shadow: 0 0 0 var(--spacing-2) var(--color-success-soft);
 }
 
-.number {
-  text-align: center;
+.label {
+  font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-text-muted);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--set-row-columns);
+  align-items: center;
+  gap: var(--spacing-3);
 }
 
 .checkbox {

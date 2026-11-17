@@ -33,7 +33,7 @@ export function SetRow({
   const describedBy = hasError ? errorId : undefined;
 
   return (
-    <div className={done ? styles.done : undefined}>
+    <div className={done ? `${styles.set} ${styles.done}` : styles.set}>
       <span className={styles.label}>Set {setNumber}</span>
       <div className={styles.row}>
         <input
