@@ -1,9 +1,8 @@
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../services/firebase";
 import { daySchema } from "../schemas/daysSchemas";
-import { getNextOrder } from "../utils/getNextOrder";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
-import type { Day, DayData } from "../schemas/daysSchemas";
+import type { AddDayFormValues, Day, DayData } from "../schemas/daysSchemas";
 
 export function toDay(snapshot: QueryDocumentSnapshot): Day {
   return { id: snapshot.id, ...daySchema.parse(snapshot.data()) };
@@ -21,7 +20,11 @@ export function subscribeToDays(
   );
 }
 
-export function addDay(uid: string, name: string, days: Day[]) {
-  const data: DayData = { name, order: getNextOrder(days), exercises: [] };
+export function addDay(uid: string, values: AddDayFormValues) {
+  const data: DayData = {
+    name: values.name,
+    weekday: values.weekday,
+    exercises: [],
+  };
   return addDoc(collection(db, "users", uid, "days"), data);
 }

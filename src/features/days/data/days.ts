@@ -4,7 +4,7 @@ export const days: Day[] = [
   {
     id: "chest-biceps",
     name: "Chest and biceps",
-    order: 1,
+    weekday: 1,
     exercises: [
       {
         name: "Bench press",
@@ -27,7 +27,7 @@ export const days: Day[] = [
   {
     id: "back-triceps",
     name: "Back and triceps",
-    order: 2,
+    weekday: 2,
     exercises: [
       {
         name: "Lat pulldown",
@@ -50,7 +50,7 @@ export const days: Day[] = [
   {
     id: "legs",
     name: "Legs",
-    order: 3,
+    weekday: 3,
     exercises: [
       {
         name: "Squat",

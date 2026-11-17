@@ -20,7 +20,7 @@ export type DayExercise = z.infer<typeof dayExerciseSchema>;
 
 export const daySchema = z.object({
   name: z.string().min(1, "Name is required"),
-  order: z.number().int().min(1),
+  weekday: z.number().int().min(1).max(7),
   exercises: z.array(dayExerciseSchema),
 });
 

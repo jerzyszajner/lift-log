@@ -16,8 +16,6 @@ export function DaysPage() {
     return <ErrorMessage>Could not load your days.</ErrorMessage>;
   }
 
-  const sortedDays = [...days].sort((a, b) => a.order - b.order);
-
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -28,7 +26,7 @@ export function DaysPage() {
         </Link>
       </header>
       <ul className={styles.list}>
-        {sortedDays.map((day) => (
+        {days.map((day) => (
           <li key={day.id} className={styles.item}>
             <div className={styles.info}>
               <p className={styles.name}>{day.name}</p>
