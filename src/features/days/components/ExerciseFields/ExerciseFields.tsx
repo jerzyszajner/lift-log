@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import { Controller, useFieldArray, useWatch } from "react-hook-form";
 import { Button } from "../../../../components/Button/Button";
 import { Field } from "../../../../components/Field/Field";
@@ -66,7 +67,8 @@ export function ExerciseFields({
           )}
         />
       ))}
-      <Button variant="secondary" onClick={addSet}>
+      <Button variant="add" onClick={addSet}>
+        <Plus />
         Add set (copies the last one)
       </Button>
     </div>
