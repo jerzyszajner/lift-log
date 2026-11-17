@@ -37,7 +37,7 @@ export function DeleteDay({ onDelete }: DeleteDayProps) {
   return (
     <div>
       {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
-      <Button variant="secondary" onClick={() => setIsConfirming(true)}>
+      <Button variant="danger" onClick={() => setIsConfirming(true)}>
         Delete day
       </Button>
     </div>
