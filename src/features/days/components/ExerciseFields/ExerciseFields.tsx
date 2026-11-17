@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Plus, Trash } from "lucide-react";
 import { Controller, useFieldArray, useWatch } from "react-hook-form";
 import { Button } from "../../../../components/Button/Button";
 import { Field } from "../../../../components/Field/Field";
@@ -16,6 +16,7 @@ type ExerciseFieldsProps = {
   control: Control<DayFormValues>;
   register: UseFormRegister<DayFormValues>;
   errors: FieldErrors<DayFormValues>;
+  onRemove?: () => void;
 };
 
 export function ExerciseFields({
@@ -23,6 +24,7 @@ export function ExerciseFields({
   control,
   register,
   errors,
+  onRemove,
 }: ExerciseFieldsProps) {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -37,15 +39,27 @@ export function ExerciseFields({
 
   return (
     <div className={styles.card}>
-      <Field label="Exercise name" error={exerciseErrors?.name?.message}>
-        {(controlProps) => (
-          <Input
-            {...controlProps}
-            {...register(`exercises.${index}.name`)}
-            type="text"
-          />
+      <div>
+        <Field
+          label="Exercise name"
+          hideLabel
+          error={exerciseErrors?.name?.message}
+        >
+          {(controlProps) => (
+            <Input
+              {...controlProps}
+              {...register(`exercises.${index}.name`)}
+              type="text"
+              placeholder="Exercise name"
+            />
+          )}
+        </Field>
+        {onRemove && (
+          <button type="button" onClick={onRemove}>
+            <Trash />
+          </button>
         )}
-      </Field>
+      </div>
       <SetRowLabels />
       {fields.map((field, setIndex) => (
         <Controller

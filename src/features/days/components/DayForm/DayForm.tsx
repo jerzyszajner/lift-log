@@ -33,7 +33,10 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
     resolver: zodResolver(dayFormSchema),
     defaultValues: { name: "", weekday: 1, ...defaultValues, exercises },
   });
-  const { fields, append } = useFieldArray({ control, name: "exercises" });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "exercises",
+  });
 
   async function submit(values: DayFormValues) {
     setSubmitError("");
@@ -67,6 +70,7 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
             control={control}
             register={register}
             errors={errors}
+            onRemove={fields.length > 1 ? () => remove(index) : undefined}
           />
         ))}
         <Button variant="add" onClick={() => append(emptyExercise)}>
