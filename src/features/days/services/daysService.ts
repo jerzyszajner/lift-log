@@ -1,4 +1,10 @@
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "../../../services/firebase";
 import { daySchema } from "../schemas/daysSchemas";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
@@ -14,7 +20,7 @@ export function subscribeToDays(
   onError: (error: Error) => void,
 ) {
   return onSnapshot(
-    collection(db, "users", uid, "days"),
+    query(collection(db, "users", uid, "days"), orderBy("weekday")),
     (snapshot) => onData(snapshot.docs.map(toDay)),
     onError,
   );
