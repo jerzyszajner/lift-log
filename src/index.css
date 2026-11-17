@@ -56,8 +56,8 @@
   --tabbar-height: 72px;
   --container-width: 480px;
   --screen-height: 100dvh;
-  --set-row-columns: 1fr var(--control-height) 1fr var(--control-height)
-    var(--control-height);
+  --stepper-button: 40px;
+  --set-row-columns: 1fr 1fr var(--control-height);
 }
 
 * {

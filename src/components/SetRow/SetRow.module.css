@@ -1,4 +1,7 @@
 .set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
   border-radius: var(--radius-md);
   transition:
     background 0.15s,
@@ -21,6 +24,20 @@
   grid-template-columns: var(--set-row-columns);
   align-items: center;
   gap: var(--spacing-3);
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: var(--stepper-button) 1fr var(--stepper-button);
+  height: var(--control-height);
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.stepper:has([aria-invalid="true"]) {
+  border-color: var(--color-danger);
 }
 
 .checkbox {
@@ -57,30 +74,24 @@
 
 .input {
   min-width: 0;
-  height: var(--control-height);
+  width: 100%;
   text-align: center;
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--color-text);
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-}
-
-.input[aria-invalid="true"] {
-  border-color: var(--color-danger);
+  border: none;
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
 }
 
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--control-height);
-  height: var(--control-height);
   color: var(--color-text);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: transparent;
+  border: none;
   transition: background 0.15s;
 }
 
@@ -89,13 +100,26 @@
 }
 
 .remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height);
+  height: var(--control-height);
   color: var(--color-text-muted);
   background: transparent;
-  border-color: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
 }
 
 @media (hover: hover) {
   .button:hover {
     background: var(--color-border);
+  }
+}
+
+@media screen and (min-width: 390px) {
+  .stepper {
+    grid-template-columns: var(--tap-size) 1fr var(--tap-size);
   }
 }

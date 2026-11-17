@@ -36,60 +36,64 @@ export function SetRow({
     <div className={done ? `${styles.set} ${styles.done}` : styles.set}>
       <span className={styles.label}>Set {setNumber}</span>
       <div className={styles.row}>
-        <button
-          className={styles.button}
-          type="button"
-          aria-label="Decrease weight"
-          onClick={() => onWeightChange(getNextWeight(weight, "down"))}
-        >
-          <Minus />
-        </button>
-        <input
-          className={styles.input}
-          type="text"
-          inputMode="numeric"
-          aria-label={`Weight, set ${setNumber}`}
-          aria-invalid={hasError}
-          aria-describedby={describedBy}
-          value={weight}
-          onFocus={(e) => e.target.select()}
-          onChange={(e) => onWeightChange(parseDigits(e.target.value))}
-        />
-        <button
-          className={styles.button}
-          type="button"
-          aria-label="Increase weight"
-          onClick={() => onWeightChange(getNextWeight(weight, "up"))}
-        >
-          <Plus />
-        </button>
-        <button
-          className={styles.button}
-          type="button"
-          aria-label="Decrease reps"
-          onClick={() => onRepsChange(Math.max(0, reps - 1))}
-        >
-          <Minus />
-        </button>
-        <input
-          className={styles.input}
-          type="text"
-          inputMode="numeric"
-          aria-label={`Reps, set ${setNumber}`}
-          aria-invalid={hasError}
-          aria-describedby={describedBy}
-          value={reps}
-          onFocus={(e) => e.target.select()}
-          onChange={(e) => onRepsChange(parseDigits(e.target.value))}
-        />
-        <button
-          className={styles.button}
-          type="button"
-          aria-label="Increase reps"
-          onClick={() => onRepsChange(reps + 1)}
-        >
-          <Plus />
-        </button>
+        <div className={styles.stepper}>
+          <button
+            className={styles.button}
+            type="button"
+            aria-label="Decrease weight"
+            onClick={() => onWeightChange(getNextWeight(weight, "down"))}
+          >
+            <Minus />
+          </button>
+          <input
+            className={styles.input}
+            type="text"
+            inputMode="numeric"
+            aria-label={`Weight, set ${setNumber}`}
+            aria-invalid={hasError}
+            aria-describedby={describedBy}
+            value={weight}
+            onFocus={(e) => e.target.select()}
+            onChange={(e) => onWeightChange(parseDigits(e.target.value))}
+          />
+          <button
+            className={styles.button}
+            type="button"
+            aria-label="Increase weight"
+            onClick={() => onWeightChange(getNextWeight(weight, "up"))}
+          >
+            <Plus />
+          </button>
+        </div>
+        <div className={styles.stepper}>
+          <button
+            className={styles.button}
+            type="button"
+            aria-label="Decrease reps"
+            onClick={() => onRepsChange(Math.max(0, reps - 1))}
+          >
+            <Minus />
+          </button>
+          <input
+            className={styles.input}
+            type="text"
+            inputMode="numeric"
+            aria-label={`Reps, set ${setNumber}`}
+            aria-invalid={hasError}
+            aria-describedby={describedBy}
+            value={reps}
+            onFocus={(e) => e.target.select()}
+            onChange={(e) => onRepsChange(parseDigits(e.target.value))}
+          />
+          <button
+            className={styles.button}
+            type="button"
+            aria-label="Increase reps"
+            onClick={() => onRepsChange(reps + 1)}
+          >
+            <Plus />
+          </button>
+        </div>
         {onDoneChange && (
           <input
             className={styles.checkbox}
@@ -101,7 +105,7 @@ export function SetRow({
         )}
         {onRemove && (
           <button
-            className={`${styles.button} ${styles.remove}`}
+            className={styles.remove}
             type="button"
             aria-label="Remove set"
             onClick={onRemove}
