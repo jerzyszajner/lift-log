@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../components/Button/Button";
@@ -35,7 +34,7 @@ export function DayForm({ onSubmit, defaultValues, onDelete }: DayFormProps) {
     resolver: zodResolver(dayFormSchema),
     defaultValues: { name: "", weekday: 1, ...defaultValues, exercises },
   });
-  const { fields, append, insert, remove } = useFieldArray({
+  const { fields, insert, remove } = useFieldArray({
     control,
     name: "exercises",
   });
@@ -76,10 +75,6 @@ export function DayForm({ onSubmit, defaultValues, onDelete }: DayFormProps) {
             onRemove={fields.length > 1 ? () => remove(index) : undefined}
           />
         ))}
-        <Button variant="addNeutral" onClick={() => append(emptyExercise)}>
-          <Plus />
-          Add exercise
-        </Button>
         {onDelete && <DeleteDay onDelete={onDelete} />}
       </div>
       <div className={styles.actions}>
