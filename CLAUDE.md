@@ -19,7 +19,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 
 - Code, commits, README and UI in English.
 - Commits: imperative, lowercase, one topic each (e.g. `add set row component`). If the message needs "and", split it. A function and its test are one commit, a component and its use in a page are two, the styles of one component are one. Logic, styles and `aria` never share a commit (attributes that `Field` builds are part of `Field`'s own logic commit).
-- Never commit `.env` files. Branch: `main` only.
+- Never commit `.env` files. Branch: `main` only, except `weekday-instead-of-order` until the user decides about the merge (no merging and no pushing before that).
 - Firebase SDK calls (reads, writes, listeners, auth) live only in `services/`. Hooks and components call service functions. Types and the `FirebaseError` class may be imported anywhere.
 - Errors: log the real error with `console.error(err)`. Show the user only our own text (fixed or mapped, like `getAuthErrorMessage`), never `err.message` from a library.
 
@@ -39,7 +39,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 
 - Firestore paths: `users/{uid}/days/{id}` and `users/{uid}/logs/{id}`. No `userId` field in documents, no `where("userId", ...)`. Security rules: only the owner.
 - A set is `{ reps: number, weight: number }`. Weight is kg, stored as a number. Dates are strings `YYYY-MM-DD`.
-- A day is just a named workout (for example `Chest and biceps`). No weekday field. Days are sorted by an `order` number (a new day gets the highest + 1). The list never reorders by itself. Moving a day swaps the `order` of two neighbours in one `writeBatch`, with up and down buttons, no drag and drop.
+- A day is a named workout (for example `Chest and biceps`) with a `weekday` number, 1 to 7, Monday is 1. Two days may share a weekday (no validation). `subscribeToDays` sorts with one `orderBy("weekday")`, nothing sorts in the pages. Changing the weekday of a day moves it in the list by itself (`onSnapshot`). The date stays only in logs and History, `weekday` is a plan field.
 - A log keeps its own copy of names and sets, so changing the plan never changes history.
 - Finishing a workout writes the log and updates the day in one `writeBatch`: each done set overwrites the same set number in the plan (`applyToPlan`), extra done sets are appended, undone sets stay as they were. There is no separate "last time" view.
 - One function per document type converts a Firestore snapshot to our type. No copied field lists.
