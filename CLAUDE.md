@@ -19,7 +19,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 
 - Code, commits, README and UI in English.
 - Commits: imperative, lowercase, one topic each (e.g. `add set row component`). If the message needs "and", split it. A function and its test are one commit, a component and its use in a page are two, the styles of one component are one. Logic, styles and `aria` never share a commit (attributes that `Field` builds are part of `Field`'s own logic commit).
-- Never commit `.env` files. Branch: `main` only, except `weekday-instead-of-order` until the user decides about the merge (no merging and no pushing before that).
+- Never commit `.env` files. Branch: `main` only.
 - Firebase SDK calls (reads, writes, listeners, auth) live only in `services/`. Hooks and components call service functions. Types and the `FirebaseError` class may be imported anywhere.
 - Errors: log the real error with `console.error(err)`. Show the user only our own text (fixed or mapped, like `getAuthErrorMessage`), never `err.message` from a library.
 
