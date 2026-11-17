@@ -107,6 +107,11 @@
   background: var(--color-pressed);
 }
 
+.button:focus-visible,
+.input:focus-visible {
+  outline-offset: -2px;
+}
+
 .remove {
   display: flex;
   align-items: center;
