@@ -22,7 +22,7 @@
   min-height: var(--tap-size);
   padding: 0 var(--spacing-1);
   font-weight: 600;
-  color: var(--color-accent-ink);
+  color: var(--color-text-secondary);
   text-decoration: none;
   transition: color 0.15s;
 }
@@ -57,7 +57,7 @@
 .weekday {
   font-size: var(--font-size-xs);
   font-weight: 600;
-  color: var(--color-accent-ink);
+  color: var(--color-text-muted);
 }
 
 .name {
@@ -89,7 +89,7 @@
 }
 
 .editLink:active {
-  background: var(--color-border);
+  background: var(--color-pressed);
 }
 
 @media (hover: hover) {
@@ -97,7 +97,7 @@
     color: var(--color-text);
   }
 
-  .editLink:hover {
-    background: var(--color-border);
+  .editLink:hover:not(:active) {
+    background: var(--color-hover);
   }
 }
