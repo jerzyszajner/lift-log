@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
@@ -43,4 +44,8 @@ export function updateDay(uid: string, id: string, values: DayFormValues) {
     weekday: values.weekday,
     exercises: values.exercises,
   });
+}
+
+export function deleteDay(uid: string, id: string) {
+  return deleteDoc(doc(db, "users", uid, "days", id));
 }
