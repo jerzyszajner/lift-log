@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../components/Button/Button";
 import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { addDaySchema } from "../../schemas/daysSchemas";
+import { WeekdayPicker } from "../WeekdayPicker/WeekdayPicker";
 import type { AddDayFormValues } from "../../schemas/daysSchemas";
 import styles from "./DayForm.module.css";
 
@@ -17,10 +18,12 @@ export function DayForm({ onSubmit }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<AddDayFormValues>({
     resolver: zodResolver(addDaySchema),
+    defaultValues: { name: "", weekday: 1 },
   });
 
   async function submit(values: AddDayFormValues) {
@@ -41,6 +44,13 @@ export function DayForm({ onSubmit }: DayFormProps) {
             <Input {...controlProps} {...register("name")} type="text" />
           )}
         </Field>
+        <Controller
+          name="weekday"
+          control={control}
+          render={({ field }) => (
+            <WeekdayPicker value={field.value} onChange={field.onChange} />
+          )}
+        />
       </div>
       <div className={styles.actions}>
         {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
