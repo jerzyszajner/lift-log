@@ -54,6 +54,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 - Focus selects the whole value. An empty field becomes `0` (no restoring of the previous value, no local text state). Zod checks the ranges.
 - Kg buttons use `getNextWeight(current, direction)` (pure function in `utils/`, tested): below 10 kg step 1, from 10 kg up step 2.5, going down from 10 kg gives 9.
 - Buttons have general labels ("Increase weight"). Set inputs have `aria-label` ("Reps, set 1").
+- Input text is at least 16 px, so iOS does not zoom in on focus. No `maximum-scale`.
 
 ## Simplicity
 
@@ -66,7 +67,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 
 - Top left of every sub screen: a back arrow with the name of the screen it returns to (`‹ Days`, `‹ History`), as a `<Link>`.
 - Bottom of the screen: the one main action, full width, in thumb reach (`Save day`, `Finish workout`). A secondary action sits next to it only when it is safe.
-- Destructive actions (`Delete day`, `Delete account`) are never next to the main one. They live in the content and ask for confirmation.
+- Destructive actions are never next to the main one and ask for confirmation. `Delete day` is `danger` text in the top right corner, in line with `‹ Days`; tapping it turns the bottom bar into "Delete this day?" with `Cancel` and a red `Delete`. `Delete account` lives in the content.
 - Leaving a workout with done sets asks "Leave without saving?". Screens with the tab bar have no back arrow.
 
 ## Accessibility
@@ -85,6 +86,6 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 
 - Global tokens only in `src/index.css` (`--color-*`, `--spacing-*`). Use only those values.
 - The whole app is mobile first: base styles are for the phone, larger screens are added with `min-width`. Every new component is styled for mobile right away. Touch targets are at least 44 px.
-- Media queries are written as `@media screen and (min-width: 641px)` and always go at the bottom of the CSS Module file, grouped.
+- Media queries are written as `@media screen and (min-width: 641px)` and always go at the bottom of the CSS Module file, grouped. One exception: the `SetRow` stepper buttons are 40 px in the base styles and 44 px from `min-width: 390px`, so the number field keeps room on narrow phones.
 - On wide screens the app stays one centered column (`max-width` about 480px). No separate desktop layout.
-- Interactive elements (buttons, links) get three states, in this order in the CSS Module file: the base rule with `transition` in it (not in `:hover`, so it animates both ways), then `:active` (touch feedback, works on phone and desktop, outside any media query), then `:hover` inside `@media (hover: hover)` at the bottom. Hover never goes outside `@media (hover: hover)`, so it does not stick on the phone.
+- Interactive elements (buttons, links) get three states, in this order in the CSS Module file: the base rule with `transition` in it (not in `:hover`, so it animates both ways), then `:active` (touch feedback, works on phone and desktop, outside any media query), then `:hover` inside `@media (hover: hover)` at the bottom. Hover never goes outside `@media (hover: hover)`, so it does not stick on the phone. Write it as `:hover:not(:active)`, so hover does not cover pressed. Neutral states use `--color-hover` and `--color-pressed`.
