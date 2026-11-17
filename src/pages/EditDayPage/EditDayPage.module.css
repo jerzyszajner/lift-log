@@ -10,6 +10,27 @@
   padding: var(--spacing-5) var(--spacing-5) 0;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete {
+  min-height: var(--tap-size);
+  padding: 0 var(--spacing-4);
+  font-weight: 600;
+  color: var(--color-danger);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+
+.delete:active {
+  background: var(--color-danger-pressed);
+}
+
 .title {
   margin-top: var(--spacing-4);
   font-size: var(--font-size-2xl);
@@ -20,4 +41,10 @@
 .message {
   margin-top: var(--spacing-3);
   color: var(--color-text-secondary);
+}
+
+@media (hover: hover) {
+  .delete:hover:not(:active) {
+    background: var(--color-danger-hover);
+  }
 }
