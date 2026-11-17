@@ -3,6 +3,7 @@ import { Pencil, Play, Plus } from "lucide-react";
 import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { useDays } from "../../features/days/hooks/useDays";
+import { getWeekdayLabel } from "../../features/days/utils/getWeekdayLabel";
 import styles from "./DaysPage.module.css";
 
 export function DaysPage() {
@@ -29,6 +30,7 @@ export function DaysPage() {
         {days.map((day) => (
           <li key={day.id} className={styles.item}>
             <div className={styles.info}>
+              <p>{getWeekdayLabel(day.weekday)}</p>
               <p className={styles.name}>{day.name}</p>
               <p className={styles.meta}>
                 {day.exercises.length}{" "}
