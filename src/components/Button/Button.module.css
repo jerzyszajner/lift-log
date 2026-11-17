@@ -41,6 +41,12 @@
   border-color: var(--color-border-strong);
 }
 
+.danger {
+  color: var(--color-danger);
+  background: var(--color-surface);
+  border-color: var(--color-danger-border);
+}
+
 .button:disabled {
   opacity: 1;
   color: var(--color-text-muted);
@@ -64,6 +70,10 @@
   background: var(--color-border);
 }
 
+.danger:not(:disabled):active {
+  background: var(--color-danger-soft);
+}
+
 @media (hover: hover) {
   .primary:not(:disabled):hover {
     background: var(--color-accent-ink);
@@ -79,5 +89,9 @@
 
   .addNeutral:not(:disabled):hover {
     background: var(--color-border);
+  }
+
+  .danger:not(:disabled):hover {
+    background: var(--color-danger-soft);
   }
 }
