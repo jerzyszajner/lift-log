@@ -36,13 +36,12 @@
 
 .selected {
   font-weight: 700;
-  color: var(--color-on-accent);
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+  background: var(--color-selected);
+  border-color: var(--color-text-muted);
 }
 
 .option:active:not(.selected) {
-  background: var(--color-border);
+  background: var(--color-pressed);
 }
 
 .option:has(:focus-visible) {
@@ -57,7 +56,7 @@
 }
 
 @media (hover: hover) {
-  .option:hover:not(.selected) {
-    background: var(--color-border);
+  .option:hover:not(.selected):not(:active) {
+    background: var(--color-hover);
   }
 }
