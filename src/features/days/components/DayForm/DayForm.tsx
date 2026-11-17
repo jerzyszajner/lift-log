@@ -20,11 +20,9 @@ const emptyExercise = { name: "", sets: [{ reps: 10, weight: 0 }] };
 
 export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
-  const initialValues = defaultValues ?? {
-    name: "",
-    weekday: 1,
-    exercises: [],
-  };
+  const exercises = defaultValues?.exercises.length
+    ? defaultValues.exercises
+    : [emptyExercise];
   const {
     register,
     control,
@@ -32,13 +30,7 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<DayFormValues>({
     resolver: zodResolver(dayFormSchema),
-    defaultValues: {
-      ...initialValues,
-      exercises:
-        initialValues.exercises.length > 0
-          ? initialValues.exercises
-          : [emptyExercise],
-    },
+    defaultValues: { name: "", weekday: 1, ...defaultValues, exercises },
   });
   const { fields } = useFieldArray({ control, name: "exercises" });
 
