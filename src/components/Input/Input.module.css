@@ -7,8 +7,15 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  transition: border-color 0.15s;
 }
 
 .input[aria-invalid="true"] {
   border-color: var(--color-danger);
+}
+
+@media (hover: hover) {
+  .input:hover:not(:disabled):not([aria-invalid="true"]) {
+    border-color: var(--color-border-strong);
+  }
 }
