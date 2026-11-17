@@ -1,4 +1,4 @@
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import { getNextWeight } from "../../utils/getNextWeight";
 import { parseDigits } from "../../utils/parseDigits";
 import styles from "./SetRow.module.css";
@@ -11,6 +11,7 @@ type SetRowProps = {
   onRepsChange: (reps: number) => void;
   onWeightChange: (weight: number) => void;
   onDoneChange?: (done: boolean) => void;
+  onRemove?: () => void;
 };
 
 export function SetRow({
@@ -21,6 +22,7 @@ export function SetRow({
   onRepsChange,
   onWeightChange,
   onDoneChange,
+  onRemove,
 }: SetRowProps) {
   return (
     <div className={done ? `${styles.row} ${styles.done}` : styles.row}>
@@ -67,6 +69,11 @@ export function SetRow({
           checked={done}
           onChange={(e) => onDoneChange(e.target.checked)}
         />
+      )}
+      {onRemove && (
+        <button className={styles.button} type="button" onClick={onRemove}>
+          <X />
+        </button>
       )}
     </div>
   );
