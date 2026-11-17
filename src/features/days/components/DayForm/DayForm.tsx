@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../components/Button/Button";
 import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { dayFormSchema } from "../../schemas/daysSchemas";
+import { ExerciseFields } from "../ExerciseFields/ExerciseFields";
 import { WeekdayPicker } from "../WeekdayPicker/WeekdayPicker";
 import type { DayFormValues } from "../../schemas/daysSchemas";
 import styles from "./DayForm.module.css";
@@ -15,8 +16,15 @@ type DayFormProps = {
   defaultValues?: DayFormValues;
 };
 
+const emptyExercise = { name: "", sets: [{ reps: 10, weight: 0 }] };
+
 export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
+  const initialValues = defaultValues ?? {
+    name: "",
+    weekday: 1,
+    exercises: [],
+  };
   const {
     register,
     control,
@@ -24,8 +32,15 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<DayFormValues>({
     resolver: zodResolver(dayFormSchema),
-    defaultValues: defaultValues ?? { name: "", weekday: 1, exercises: [] },
+    defaultValues: {
+      ...initialValues,
+      exercises:
+        initialValues.exercises.length > 0
+          ? initialValues.exercises
+          : [emptyExercise],
+    },
   });
+  const { fields } = useFieldArray({ control, name: "exercises" });
 
   async function submit(values: DayFormValues) {
     setSubmitError("");
@@ -52,6 +67,14 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
             <WeekdayPicker value={field.value} onChange={field.onChange} />
           )}
         />
+        {fields.map((field, index) => (
+          <ExerciseFields
+            key={field.id}
+            index={index}
+            register={register}
+            error={errors.exercises?.[index]?.name?.message}
+          />
+        ))}
       </div>
       <div className={styles.actions}>
         {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
