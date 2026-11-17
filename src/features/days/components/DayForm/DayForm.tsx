@@ -24,7 +24,7 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<DayFormValues>({
     resolver: zodResolver(dayFormSchema),
-    defaultValues: defaultValues ?? { name: "", weekday: 1 },
+    defaultValues: defaultValues ?? { name: "", weekday: 1, exercises: [] },
   });
 
   async function submit(values: DayFormValues) {

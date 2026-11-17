@@ -51,7 +51,11 @@ export function EditDayPage() {
       </div>
       <DayForm
         onSubmit={handleSubmit}
-        defaultValues={{ name: day.name, weekday: day.weekday }}
+        defaultValues={{
+          name: day.name,
+          weekday: day.weekday,
+          exercises: day.exercises,
+        }}
       />
     </div>
   );

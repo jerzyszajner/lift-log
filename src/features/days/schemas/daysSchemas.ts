@@ -12,7 +12,7 @@ export const setEntrySchema = z.object({
 export type SetEntry = z.infer<typeof setEntrySchema>;
 
 export const dayExerciseSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z.string().trim().min(1, "Enter an exercise name"),
   sets: z.array(setEntrySchema),
 });
 
@@ -35,6 +35,7 @@ export const dayFormSchema = z.object({
     .int("Weekday must be a whole number")
     .min(1, "Weekday must be 1 or more")
     .max(7, "Weekday must be 7 or less"),
+  exercises: z.array(dayExerciseSchema),
 });
 
 export type DayFormValues = z.infer<typeof dayFormSchema>;
