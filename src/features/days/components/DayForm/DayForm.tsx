@@ -12,9 +12,10 @@ import styles from "./DayForm.module.css";
 
 type DayFormProps = {
   onSubmit: (values: AddDayFormValues) => Promise<void>;
+  defaultValues?: AddDayFormValues;
 };
 
-export function DayForm({ onSubmit }: DayFormProps) {
+export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
   const {
     register,
@@ -23,7 +24,7 @@ export function DayForm({ onSubmit }: DayFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<AddDayFormValues>({
     resolver: zodResolver(addDaySchema),
-    defaultValues: { name: "", weekday: 1 },
+    defaultValues: defaultValues ?? { name: "", weekday: 1 },
   });
 
   async function submit(values: AddDayFormValues) {
