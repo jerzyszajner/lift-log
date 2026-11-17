@@ -6,6 +6,7 @@ type ConfirmBarProps = {
   message: string;
   cancelLabel: string;
   confirmLabel: string;
+  confirmVariant?: "primary" | "danger";
   onCancel: () => void;
   onConfirm: () => void;
 };
@@ -14,6 +15,7 @@ export function ConfirmBar({
   message,
   cancelLabel,
   confirmLabel,
+  confirmVariant = "primary",
   onCancel,
   onConfirm,
 }: ConfirmBarProps) {
@@ -27,7 +29,9 @@ export function ConfirmBar({
       <Button variant="secondary" autoFocus onClick={onCancel}>
         {cancelLabel}
       </Button>
-      <Button onClick={onConfirm}>{confirmLabel}</Button>
+      <Button variant={confirmVariant} onClick={onConfirm}>
+        {confirmLabel}
+      </Button>
     </div>
   );
 }
