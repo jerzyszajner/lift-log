@@ -64,6 +64,10 @@
   border-radius: var(--radius-md);
 }
 
+.input[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
 .button {
   display: flex;
   align-items: center;
