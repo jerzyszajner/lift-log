@@ -72,6 +72,14 @@
   transform: translate(-50%, -60%) rotate(45deg);
 }
 
+.checkbox:active {
+  background: var(--color-pressed);
+}
+
+.checkbox:checked:active {
+  background: var(--color-success-pressed);
+}
+
 .input {
   min-width: 0;
   width: 100%;
@@ -96,7 +104,7 @@
 }
 
 .button:active {
-  background: var(--color-border);
+  background: var(--color-pressed);
 }
 
 .remove {
@@ -112,9 +120,22 @@
   transition: background 0.15s;
 }
 
+.remove:active {
+  background: var(--color-pressed);
+}
+
 @media (hover: hover) {
-  .button:hover {
-    background: var(--color-border);
+  .checkbox:not(:checked):hover:not(:active) {
+    background: var(--color-hover);
+  }
+
+  .checkbox:checked:hover:not(:active) {
+    background: var(--color-success-hover);
+  }
+
+  .button:hover:not(:active),
+  .remove:hover:not(:active) {
+    background: var(--color-hover);
   }
 }
 
