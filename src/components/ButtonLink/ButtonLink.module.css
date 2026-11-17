@@ -9,7 +9,9 @@
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
-  transition: background 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
 }
 
 .small {
@@ -29,19 +31,21 @@
 }
 
 .primary:active {
-  background: var(--color-accent-ink);
+  background: var(--color-accent-pressed);
+  border-color: var(--color-accent-pressed);
 }
 
 .secondary:active {
-  background: var(--color-border);
+  background: var(--color-pressed);
 }
 
 @media (hover: hover) {
-  .primary:hover {
-    background: var(--color-accent-ink);
+  .primary:hover:not(:active) {
+    background: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
   }
 
-  .secondary:hover {
-    background: var(--color-border);
+  .secondary:hover:not(:active) {
+    background: var(--color-hover);
   }
 }
