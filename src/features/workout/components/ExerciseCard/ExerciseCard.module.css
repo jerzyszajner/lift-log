@@ -21,19 +21,19 @@
   width: 100%;
   height: var(--control-height);
   font-weight: 600;
-  color: var(--color-accent-ink);
-  background: var(--color-accent-soft);
-  border: 1px dashed var(--color-accent);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1.5px dashed var(--color-border-strong);
   border-radius: var(--radius-md);
   transition: background 0.15s;
 }
 
 .addButton:active {
-  background: var(--color-accent-soft-strong);
+  background: var(--color-pressed);
 }
 
 @media (hover: hover) {
-  .addButton:hover {
-    background: var(--color-accent-soft-strong);
+  .addButton:hover:not(:active) {
+    background: var(--color-hover);
   }
 }
