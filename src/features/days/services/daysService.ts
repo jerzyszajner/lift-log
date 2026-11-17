@@ -32,7 +32,7 @@ export function addDay(uid: string, values: DayFormValues) {
   const data: DayData = {
     name: values.name,
     weekday: values.weekday,
-    exercises: [],
+    exercises: values.exercises,
   };
   return addDoc(collection(db, "users", uid, "days"), data);
 }
@@ -41,5 +41,6 @@ export function updateDay(uid: string, id: string, values: DayFormValues) {
   return updateDoc(doc(db, "users", uid, "days", id), {
     name: values.name,
     weekday: values.weekday,
+    exercises: values.exercises,
   });
 }
