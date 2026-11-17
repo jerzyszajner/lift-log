@@ -46,6 +46,8 @@
   --tabbar-height: 72px;
   --container-width: 480px;
   --screen-height: 100dvh;
+  --set-row-columns: var(--spacing-6) 1fr var(--control-height) 1fr
+    var(--control-height) var(--control-height);
 }
 
 * {
