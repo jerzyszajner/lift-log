@@ -31,10 +31,17 @@ export function SetRow({
   const hasError = Boolean(error);
   const errorId = useId();
   const describedBy = hasError ? errorId : undefined;
+  const labelId = useId();
 
   return (
-    <div className={done ? `${styles.set} ${styles.done}` : styles.set}>
-      <span className={styles.label}>Set {setNumber}</span>
+    <div
+      className={done ? `${styles.set} ${styles.done}` : styles.set}
+      role="group"
+      aria-labelledby={labelId}
+    >
+      <span className={styles.label} id={labelId}>
+        Set {setNumber}
+      </span>
       <div className={styles.row}>
         <div className={styles.stepper}>
           <button

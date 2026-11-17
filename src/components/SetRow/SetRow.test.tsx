@@ -12,6 +12,12 @@ const baseProps = {
 };
 
 describe("SetRow", () => {
+  test("names the set group by its label", () => {
+    render(<SetRow {...baseProps} />);
+
+    expect(screen.getByRole("group", { name: "Set 1" })).toBeTruthy();
+  });
+
   test("increases weight by 2.5 kg from 10 kg", async () => {
     const onWeightChange = vi.fn();
     render(<SetRow {...baseProps} onWeightChange={onWeightChange} />);
