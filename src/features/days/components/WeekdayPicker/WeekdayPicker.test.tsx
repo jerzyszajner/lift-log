@@ -19,14 +19,14 @@ describe("WeekdayPicker", () => {
       false,
       false,
     ]);
-    expect(screen.getByRole("radio", { name: "Wed" })).toBe(radios[2]);
+    expect(screen.getByRole("radio", { name: "Wednesday" })).toBe(radios[2]);
   });
 
   test("returns the number of the clicked day", async () => {
     const onChange = vi.fn();
     render(<WeekdayPicker value={1} onChange={onChange} />);
 
-    await userEvent.click(screen.getByRole("radio", { name: "Sun" }));
+    await userEvent.click(screen.getByRole("radio", { name: "Sunday" }));
 
     expect(onChange).toHaveBeenCalledWith(7);
   });

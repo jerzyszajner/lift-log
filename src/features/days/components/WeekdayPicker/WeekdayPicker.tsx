@@ -14,6 +14,7 @@ export function WeekdayPicker({ value, onChange }: WeekdayPickerProps) {
       <legend className={styles.legend}>Day of the week</legend>
       {weekdays.map((weekday) => {
         const isSelected = value === weekday;
+        const label = getWeekdayLabel(weekday);
 
         return (
           <label
@@ -26,10 +27,11 @@ export function WeekdayPicker({ value, onChange }: WeekdayPickerProps) {
               className={styles.input}
               type="radio"
               name="weekday"
+              aria-label={label}
               checked={isSelected}
               onChange={() => onChange(weekday)}
             />
-            {getWeekdayLabel(weekday).slice(0, 3)}
+            {label.slice(0, 3)}
           </label>
         );
       })}
