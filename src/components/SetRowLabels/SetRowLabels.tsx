@@ -7,8 +7,8 @@ type SetRowLabelsProps = {
 export function SetRowLabels({ lastLabel }: SetRowLabelsProps) {
   return (
     <div className={styles.labels}>
-      <span>Reps</span>
-      <span className={styles.weightLabel}>Kg</span>
+      <span>Weight (kg)</span>
+      <span className={styles.weightLabel}>Reps</span>
       {lastLabel && <span className={styles.lastLabel}>{lastLabel}</span>}
     </div>
   );

@@ -36,17 +36,6 @@ export function SetRow({
     <div className={done ? `${styles.set} ${styles.done}` : styles.set}>
       <span className={styles.label}>Set {setNumber}</span>
       <div className={styles.row}>
-        <input
-          className={styles.input}
-          type="text"
-          inputMode="numeric"
-          aria-label={`Reps, set ${setNumber}`}
-          aria-invalid={hasError}
-          aria-describedby={describedBy}
-          value={reps}
-          onFocus={(e) => e.target.select()}
-          onChange={(e) => onRepsChange(parseDigits(e.target.value))}
-        />
         <button
           className={styles.button}
           type="button"
@@ -74,6 +63,17 @@ export function SetRow({
         >
           <Plus />
         </button>
+        <input
+          className={styles.input}
+          type="text"
+          inputMode="numeric"
+          aria-label={`Reps, set ${setNumber}`}
+          aria-invalid={hasError}
+          aria-describedby={describedBy}
+          value={reps}
+          onFocus={(e) => e.target.select()}
+          onChange={(e) => onRepsChange(parseDigits(e.target.value))}
+        />
         {onDoneChange && (
           <input
             className={styles.checkbox}
