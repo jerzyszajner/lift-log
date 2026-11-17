@@ -38,7 +38,11 @@ export function ExerciseFields({
   }
 
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      role="group"
+      aria-label={`Exercise ${index + 1}`}
+    >
       <div className={styles.header}>
         <Field
           label="Exercise name"
@@ -55,7 +59,12 @@ export function ExerciseFields({
           )}
         </Field>
         {onRemove && (
-          <button type="button" className={styles.remove} onClick={onRemove}>
+          <button
+            type="button"
+            className={styles.remove}
+            aria-label={`Remove exercise ${index + 1}`}
+            onClick={onRemove}
+          >
             <Trash />
           </button>
         )}
