@@ -41,4 +41,22 @@ describe("SetRow", () => {
 
     expect(screen.getByRole("checkbox", { name: "Done, set 1" })).toBeTruthy();
   });
+
+  test("calls onRemove when the remove button is clicked", async () => {
+    const onRemove = vi.fn();
+    render(
+      <SetRow
+        setNumber={1}
+        reps={10}
+        weight={10}
+        onRepsChange={vi.fn()}
+        onWeightChange={vi.fn()}
+        onRemove={onRemove}
+      />,
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Remove set" }));
+
+    expect(onRemove).toHaveBeenCalledTimes(1);
+  });
 });
