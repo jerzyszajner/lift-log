@@ -29,11 +29,11 @@
 }
 
 .remove:active {
-  background: var(--color-border);
+  background: var(--color-pressed);
 }
 
 @media (hover: hover) {
-  .remove:hover {
-    background: var(--color-border);
+  .remove:hover:not(:active) {
+    background: var(--color-hover);
   }
 }
