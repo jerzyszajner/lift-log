@@ -11,17 +11,23 @@ type FieldControlProps = {
 
 type FieldProps = {
   label: string;
+  hideLabel?: boolean;
   error?: string;
   children: (controlProps: FieldControlProps) => ReactNode;
 };
 
-export function Field({ label, error, children }: FieldProps) {
+export function Field({ label, hideLabel, error, children }: FieldProps) {
   const id = useId();
   const errorId = `${id}-error`;
 
   return (
     <div className={styles.field}>
-      <label className={styles.label} htmlFor={id}>
+      <label
+        className={
+          hideLabel ? `${styles.label} ${styles.hidden}` : styles.label
+        }
+        htmlFor={id}
+      >
         {label}
       </label>
       {children({
