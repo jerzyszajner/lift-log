@@ -7,6 +7,7 @@ import { defaultSet } from "../../schemas/daysSchemas";
 import { getSetError } from "../../utils/getSetError";
 import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import type { DayFormValues } from "../../schemas/daysSchemas";
+import styles from "./ExerciseFields.module.css";
 
 type ExerciseFieldsProps = {
   index: number;
@@ -33,7 +34,7 @@ export function ExerciseFields({
   }
 
   return (
-    <>
+    <div className={styles.card}>
       <Field label="Exercise name" error={exerciseErrors?.name?.message}>
         {(controlProps) => (
           <Input
@@ -66,6 +67,6 @@ export function ExerciseFields({
       <Button variant="secondary" onClick={addSet}>
         Add set (copies the last one)
       </Button>
-    </>
+    </div>
   );
 }
