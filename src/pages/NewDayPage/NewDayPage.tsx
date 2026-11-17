@@ -3,14 +3,14 @@ import { BackLink } from "../../components/BackLink/BackLink";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { addDay } from "../../features/days/services/daysService";
-import type { AddDayFormValues } from "../../features/days/schemas/daysSchemas";
+import type { DayFormValues } from "../../features/days/schemas/daysSchemas";
 import styles from "./NewDayPage.module.css";
 
 export function NewDayPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  async function handleSubmit(values: AddDayFormValues) {
+  async function handleSubmit(values: DayFormValues) {
     if (!user) {
       throw new Error("Cannot add a day without a signed in user");
     }

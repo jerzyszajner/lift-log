@@ -10,7 +10,7 @@ import {
 import { db } from "../../../services/firebase";
 import { daySchema } from "../schemas/daysSchemas";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
-import type { AddDayFormValues, Day, DayData } from "../schemas/daysSchemas";
+import type { DayFormValues, Day, DayData } from "../schemas/daysSchemas";
 
 export function toDay(snapshot: QueryDocumentSnapshot): Day {
   return { id: snapshot.id, ...daySchema.parse(snapshot.data()) };
@@ -28,7 +28,7 @@ export function subscribeToDays(
   );
 }
 
-export function addDay(uid: string, values: AddDayFormValues) {
+export function addDay(uid: string, values: DayFormValues) {
   const data: DayData = {
     name: values.name,
     weekday: values.weekday,
@@ -37,7 +37,7 @@ export function addDay(uid: string, values: AddDayFormValues) {
   return addDoc(collection(db, "users", uid, "days"), data);
 }
 
-export function updateDay(uid: string, id: string, values: AddDayFormValues) {
+export function updateDay(uid: string, id: string, values: DayFormValues) {
   return updateDoc(doc(db, "users", uid, "days", id), {
     name: values.name,
     weekday: values.weekday,

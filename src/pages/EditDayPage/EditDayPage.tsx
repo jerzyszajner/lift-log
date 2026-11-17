@@ -5,7 +5,7 @@ import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { useDays } from "../../features/days/hooks/useDays";
 import { updateDay } from "../../features/days/services/daysService";
-import type { AddDayFormValues } from "../../features/days/schemas/daysSchemas";
+import type { DayFormValues } from "../../features/days/schemas/daysSchemas";
 import styles from "./EditDayPage.module.css";
 
 export function EditDayPage() {
@@ -15,7 +15,7 @@ export function EditDayPage() {
   const { days, isLoading, hasError } = useDays();
   const day = days.find((item) => item.id === dayId);
 
-  async function handleSubmit(values: AddDayFormValues) {
+  async function handleSubmit(values: DayFormValues) {
     if (!user || !day) {
       throw new Error("Cannot edit a day without a signed in user and a day");
     }

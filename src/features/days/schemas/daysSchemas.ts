@@ -28,7 +28,7 @@ export type DayData = z.infer<typeof daySchema>;
 
 export type Day = DayData & { id: string };
 
-export const addDaySchema = z.object({
+export const dayFormSchema = z.object({
   name: z.string().trim().min(1, "Enter a day name"),
   weekday: z
     .number()
@@ -37,4 +37,4 @@ export const addDaySchema = z.object({
     .max(7, "Weekday must be 7 or less"),
 });
 
-export type AddDayFormValues = z.infer<typeof addDaySchema>;
+export type DayFormValues = z.infer<typeof dayFormSchema>;

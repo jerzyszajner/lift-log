@@ -5,14 +5,14 @@ import { Button } from "../../../../components/Button/Button";
 import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
-import { addDaySchema } from "../../schemas/daysSchemas";
+import { dayFormSchema } from "../../schemas/daysSchemas";
 import { WeekdayPicker } from "../WeekdayPicker/WeekdayPicker";
-import type { AddDayFormValues } from "../../schemas/daysSchemas";
+import type { DayFormValues } from "../../schemas/daysSchemas";
 import styles from "./DayForm.module.css";
 
 type DayFormProps = {
-  onSubmit: (values: AddDayFormValues) => Promise<void>;
-  defaultValues?: AddDayFormValues;
+  onSubmit: (values: DayFormValues) => Promise<void>;
+  defaultValues?: DayFormValues;
 };
 
 export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
@@ -22,12 +22,12 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<AddDayFormValues>({
-    resolver: zodResolver(addDaySchema),
+  } = useForm<DayFormValues>({
+    resolver: zodResolver(dayFormSchema),
     defaultValues: defaultValues ?? { name: "", weekday: 1 },
   });
 
-  async function submit(values: AddDayFormValues) {
+  async function submit(values: DayFormValues) {
     setSubmitError("");
     try {
       await onSubmit(values);
