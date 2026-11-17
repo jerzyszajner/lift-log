@@ -19,6 +19,18 @@
   border-color: var(--color-border);
 }
 
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  min-height: var(--control-height);
+  color: var(--color-accent-ink);
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  border-style: dashed;
+}
+
 .button:disabled {
   opacity: 1;
   color: var(--color-text-muted);
@@ -34,6 +46,10 @@
   background: var(--color-border);
 }
 
+.add:not(:disabled):active {
+  background: var(--color-accent-soft-strong);
+}
+
 @media (hover: hover) {
   .primary:not(:disabled):hover {
     background: var(--color-accent-ink);
@@ -41,5 +57,9 @@
 
   .secondary:not(:disabled):hover {
     background: var(--color-border);
+  }
+
+  .add:not(:disabled):hover {
+    background: var(--color-accent-soft-strong);
   }
 }
