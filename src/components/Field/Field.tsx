@@ -22,12 +22,7 @@ export function Field({ label, hideLabel, error, children }: FieldProps) {
 
   return (
     <div className={styles.field}>
-      <label
-        className={
-          hideLabel ? `${styles.label} ${styles.hidden}` : styles.label
-        }
-        htmlFor={id}
-      >
+      <label className={hideLabel ? styles.hidden : styles.label} htmlFor={id}>
         {label}
       </label>
       {children({
