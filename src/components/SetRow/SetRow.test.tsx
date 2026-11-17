@@ -23,6 +23,17 @@ describe("SetRow", () => {
     expect(onWeightChange).toHaveBeenCalledWith(12.5);
   });
 
+  test("does not decrease reps below 0", async () => {
+    const onRepsChange = vi.fn();
+    render(<SetRow {...baseProps} reps={0} onRepsChange={onRepsChange} />);
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "Decrease reps" }),
+    );
+
+    expect(onRepsChange).toHaveBeenCalledWith(0);
+  });
+
   test("shows the done checkbox only when onDoneChange is given", () => {
     const { rerender } = render(<SetRow {...baseProps} />);
 

@@ -63,6 +63,14 @@ export function SetRow({
         >
           <Plus />
         </button>
+        <button
+          className={styles.button}
+          type="button"
+          aria-label="Decrease reps"
+          onClick={() => onRepsChange(Math.max(0, reps - 1))}
+        >
+          <Minus />
+        </button>
         <input
           className={styles.input}
           type="text"
@@ -74,6 +82,14 @@ export function SetRow({
           onFocus={(e) => e.target.select()}
           onChange={(e) => onRepsChange(parseDigits(e.target.value))}
         />
+        <button
+          className={styles.button}
+          type="button"
+          aria-label="Increase reps"
+          onClick={() => onRepsChange(reps + 1)}
+        >
+          <Plus />
+        </button>
         {onDoneChange && (
           <input
             className={styles.checkbox}
