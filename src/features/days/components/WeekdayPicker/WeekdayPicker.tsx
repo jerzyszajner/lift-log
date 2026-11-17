@@ -1,6 +1,7 @@
+import { getWeekdayLabel } from "../../utils/getWeekdayLabel";
 import styles from "./WeekdayPicker.module.css";
 
-const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const weekdays = [1, 2, 3, 4, 5, 6, 7];
 
 type WeekdayPickerProps = {
   value: number;
@@ -11,13 +12,12 @@ export function WeekdayPicker({ value, onChange }: WeekdayPickerProps) {
   return (
     <fieldset className={styles.picker}>
       <legend className={styles.legend}>Day of the week</legend>
-      {weekdayLabels.map((label, index) => {
-        const weekday = index + 1;
+      {weekdays.map((weekday) => {
         const isSelected = value === weekday;
 
         return (
           <label
-            key={label}
+            key={weekday}
             className={
               isSelected ? `${styles.option} ${styles.selected}` : styles.option
             }
@@ -29,7 +29,7 @@ export function WeekdayPicker({ value, onChange }: WeekdayPickerProps) {
               checked={isSelected}
               onChange={() => onChange(weekday)}
             />
-            {label}
+            {getWeekdayLabel(weekday).slice(0, 3)}
           </label>
         );
       })}
