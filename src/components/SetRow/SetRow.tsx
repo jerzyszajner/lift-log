@@ -77,7 +77,7 @@ export function SetRow({
             className={styles.button}
             type="button"
             aria-label="Decrease reps"
-            onClick={() => onRepsChange(Math.max(0, reps - 1))}
+            onClick={() => onRepsChange(Math.max(1, reps - 1))}
           >
             <Minus />
           </button>
