@@ -4,7 +4,10 @@
   font-weight: 600;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
-  transition: background 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .primary {
@@ -19,26 +22,15 @@
   border-color: var(--color-border);
 }
 
-.add,
 .addNeutral {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-3);
   min-height: var(--control-height);
-  border-style: dashed;
-}
-
-.add {
-  color: var(--color-accent-ink);
-  background: var(--color-accent-soft);
-  border-color: var(--color-accent);
-}
-
-.addNeutral {
   color: var(--color-text-secondary);
   background: transparent;
-  border-color: var(--color-border-strong);
+  border: 1.5px dashed var(--color-border-strong);
 }
 
 .danger {
@@ -49,25 +41,22 @@
 
 .button:disabled {
   opacity: 1;
-  color: var(--color-text-muted);
-  background: var(--color-border);
-  border-color: var(--color-border);
+  color: var(--color-disabled-text);
+  background: var(--color-disabled-bg);
+  border-color: var(--color-disabled-bg);
 }
 
 .primary:not(:disabled):active {
-  background: var(--color-accent-ink);
+  background: var(--color-accent-pressed);
+  border-color: var(--color-accent-pressed);
 }
 
 .secondary:not(:disabled):active {
-  background: var(--color-border);
-}
-
-.add:not(:disabled):active {
-  background: var(--color-accent-soft-strong);
+  background: var(--color-pressed);
 }
 
 .addNeutral:not(:disabled):active {
-  background: var(--color-border);
+  background: var(--color-pressed);
 }
 
 .danger:not(:disabled):active {
@@ -75,23 +64,20 @@
 }
 
 @media (hover: hover) {
-  .primary:not(:disabled):hover {
-    background: var(--color-accent-ink);
+  .primary:not(:disabled):hover:not(:active) {
+    background: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
   }
 
-  .secondary:not(:disabled):hover {
-    background: var(--color-border);
+  .secondary:not(:disabled):hover:not(:active) {
+    background: var(--color-hover);
   }
 
-  .add:not(:disabled):hover {
-    background: var(--color-accent-soft-strong);
+  .addNeutral:not(:disabled):hover:not(:active) {
+    background: var(--color-hover);
   }
 
-  .addNeutral:not(:disabled):hover {
-    background: var(--color-border);
-  }
-
-  .danger:not(:disabled):hover {
+  .danger:not(:disabled):hover:not(:active) {
     background: var(--color-danger-soft);
   }
 }

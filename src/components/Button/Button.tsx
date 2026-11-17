@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import styles from "./Button.module.css";
 
 type ButtonProps = ComponentProps<"button"> & {
-  variant?: "primary" | "secondary" | "add" | "addNeutral" | "danger";
+  variant?: "primary" | "secondary" | "addNeutral" | "danger";
 };
 
 export function Button({
