@@ -96,10 +96,10 @@ export function ExerciseFields({
         <Plus />
         Add set (copies the last one)
       </Button>
-      <button type="button" onClick={onInsertBelow}>
+      <Button variant="addNeutral" onClick={onInsertBelow}>
         <Plus />
         Add exercise below
-      </button>
+      </Button>
     </div>
   );
 }
