@@ -22,14 +22,22 @@
   font-size: var(--font-size-sm);
   font-weight: 600;
   text-decoration: none;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .active {
   color: var(--color-accent);
 }
 
+.link:not(.active):active {
+  color: var(--color-text);
+  background: var(--color-hover);
+}
+
 @media (hover: hover) {
-  .link:not(.active):hover {
+  .link:not(.active):hover:not(:active) {
     color: var(--color-text);
   }
 }
