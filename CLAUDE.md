@@ -3,7 +3,7 @@
 Strength training tracker. Plan training days (exercises, sets with reps and kg), then log the real results during a workout. Used mostly on a phone, also on desktop. Learning project (React + TypeScript).
 
 Scope, data model and decisions: `notes/HANDOFF.md`. Step by step plan: `notes/PLAN.md`.
-Mockup: https://claude.ai/artifact/U6qndcpKiGC8V2n8MNRRC7
+Mockups: screens https://claude.ai/artifact/UhwNDW4xysNdqgVC5e2aDn, states and tokens https://claude.ai/artifact/WjRTMk6LNTxr9AcPGhocTj
 
 ## Stack
 
