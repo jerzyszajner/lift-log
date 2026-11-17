@@ -30,6 +30,11 @@ export type Day = DayData & { id: string };
 
 export const addDaySchema = z.object({
   name: z.string().trim().min(1, "Enter a day name"),
+  weekday: z
+    .number()
+    .int("Weekday must be a whole number")
+    .min(1, "Weekday must be 1 or more")
+    .max(7, "Weekday must be 7 or less"),
 });
 
 export type AddDayFormValues = z.infer<typeof addDaySchema>;
