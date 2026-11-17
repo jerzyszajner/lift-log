@@ -1,4 +1,5 @@
 import { Minus, Plus, Trash } from "lucide-react";
+import { useId } from "react";
 import { getNextWeight } from "../../utils/getNextWeight";
 import { parseDigits } from "../../utils/parseDigits";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
@@ -28,6 +29,8 @@ export function SetRow({
   error,
 }: SetRowProps) {
   const hasError = Boolean(error);
+  const errorId = useId();
+  const describedBy = hasError ? errorId : undefined;
 
   return (
     <div>
@@ -39,6 +42,7 @@ export function SetRow({
           inputMode="numeric"
           aria-label={`Reps, set ${setNumber}`}
           aria-invalid={hasError}
+          aria-describedby={describedBy}
           value={reps}
           onFocus={(e) => e.target.select()}
           onChange={(e) => onRepsChange(parseDigits(e.target.value))}
@@ -57,6 +61,7 @@ export function SetRow({
           inputMode="numeric"
           aria-label={`Weight, set ${setNumber}`}
           aria-invalid={hasError}
+          aria-describedby={describedBy}
           value={weight}
           onFocus={(e) => e.target.select()}
           onChange={(e) => onWeightChange(parseDigits(e.target.value))}
@@ -89,7 +94,11 @@ export function SetRow({
           </button>
         )}
       </div>
-      {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
+      {error && (
+        <ErrorMessage id={errorId} role="alert">
+          {error}
+        </ErrorMessage>
+      )}
     </div>
   );
 }

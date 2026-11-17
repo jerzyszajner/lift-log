@@ -76,4 +76,21 @@ describe("SetRow", () => {
       screen.getByRole("textbox", { name: "Weight, set 1" }).ariaInvalid,
     ).toBe("true");
   });
+
+  test("links both inputs to the error message", () => {
+    const { rerender } = render(<SetRow {...baseProps} reps={0} />);
+    const reps = screen.getByRole("textbox", { name: "Reps, set 1" });
+    const weight = screen.getByRole("textbox", { name: "Weight, set 1" });
+
+    expect(reps.getAttribute("aria-describedby")).toBeNull();
+
+    rerender(
+      <SetRow {...baseProps} reps={0} error="Reps must be at least 1" />,
+    );
+    const errorId = screen.getByRole("alert").id;
+
+    expect(errorId).not.toBe("");
+    expect(reps.getAttribute("aria-describedby")).toBe(errorId);
+    expect(weight.getAttribute("aria-describedby")).toBe(errorId);
+  });
 });
