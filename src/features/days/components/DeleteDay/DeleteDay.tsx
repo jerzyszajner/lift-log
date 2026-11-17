@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { Button } from "../../../../components/Button/Button";
 import { ConfirmBar } from "../../../../components/ConfirmBar/ConfirmBar";
 import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 
 type DeleteDayProps = {
+  onCancel: () => void;
   onDelete: () => Promise<void>;
 };
 
-export function DeleteDay({ onDelete }: DeleteDayProps) {
-  const [isConfirming, setIsConfirming] = useState(false);
+export function DeleteDay({ onCancel, onDelete }: DeleteDayProps) {
   const [error, setError] = useState("");
 
   async function confirm() {
@@ -18,28 +17,19 @@ export function DeleteDay({ onDelete }: DeleteDayProps) {
     } catch (err) {
       console.error(err);
       setError("Could not delete the day. Try again.");
-      setIsConfirming(false);
     }
   }
 
-  if (isConfirming) {
-    return (
+  return (
+    <>
+      {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
       <ConfirmBar
         message="Delete this day?"
         cancelLabel="Cancel"
         confirmLabel="Delete"
-        onCancel={() => setIsConfirming(false)}
+        onCancel={onCancel}
         onConfirm={confirm}
       />
-    );
-  }
-
-  return (
-    <div>
-      {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
-      <Button variant="danger" onClick={() => setIsConfirming(true)}>
-        Delete day
-      </Button>
-    </div>
+    </>
   );
 }

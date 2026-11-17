@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
+import { DeleteDay } from "../../features/days/components/DeleteDay/DeleteDay";
 import { useDays } from "../../features/days/hooks/useDays";
 import { deleteDay, updateDay } from "../../features/days/services/daysService";
 import type { DayFormValues } from "../../features/days/schemas/daysSchemas";
@@ -14,6 +16,7 @@ export function EditDayPage() {
   const { dayId } = useParams();
   const { days, isLoading, hasError } = useDays();
   const day = days.find((item) => item.id === dayId);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
 
   async function handleSubmit(values: DayFormValues) {
     if (!user || !day) {
@@ -54,12 +57,28 @@ export function EditDayPage() {
   return (
     <div className={styles.page}>
       <div className={styles.top}>
-        <BackLink to="/" label="Days" />
+        <div className={styles.header}>
+          <BackLink to="/" label="Days" />
+          <button
+            className={styles.delete}
+            type="button"
+            onClick={() => setIsConfirmingDelete(true)}
+          >
+            Delete day
+          </button>
+        </div>
         <h1 className={styles.title}>Edit day</h1>
       </div>
       <DayForm
         onSubmit={handleSubmit}
-        onDelete={handleDelete}
+        confirmBar={
+          isConfirmingDelete ? (
+            <DeleteDay
+              onCancel={() => setIsConfirmingDelete(false)}
+              onDelete={handleDelete}
+            />
+          ) : undefined
+        }
         defaultValues={{
           name: day.name,
           weekday: day.weekday,

@@ -6,21 +6,25 @@ import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { dayFormSchema, defaultSet } from "../../schemas/daysSchemas";
-import { DeleteDay } from "../DeleteDay/DeleteDay";
 import { ExerciseFields } from "../ExerciseFields/ExerciseFields";
 import { WeekdayPicker } from "../WeekdayPicker/WeekdayPicker";
+import type { ReactNode } from "react";
 import type { DayFormValues } from "../../schemas/daysSchemas";
 import styles from "./DayForm.module.css";
 
 type DayFormProps = {
   onSubmit: (values: DayFormValues) => Promise<void>;
   defaultValues?: DayFormValues;
-  onDelete?: () => Promise<void>;
+  confirmBar?: ReactNode;
 };
 
 const emptyExercise = { name: "", sets: [defaultSet] };
 
-export function DayForm({ onSubmit, defaultValues, onDelete }: DayFormProps) {
+export function DayForm({
+  onSubmit,
+  defaultValues,
+  confirmBar,
+}: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
   const exercises = defaultValues?.exercises.length
     ? defaultValues.exercises
@@ -75,13 +79,18 @@ export function DayForm({ onSubmit, defaultValues, onDelete }: DayFormProps) {
             onRemove={fields.length > 1 ? () => remove(index) : undefined}
           />
         ))}
-        {onDelete && <DeleteDay onDelete={onDelete} />}
       </div>
       <div className={styles.actions}>
-        {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
-        <Button type="submit" disabled={isSubmitting}>
-          Save day
-        </Button>
+        {confirmBar ?? (
+          <>
+            {submitError && (
+              <ErrorMessage role="alert">{submitError}</ErrorMessage>
+            )}
+            <Button type="submit" disabled={isSubmitting}>
+              Save day
+            </Button>
+          </>
+        )}
       </div>
     </form>
   );
