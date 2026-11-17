@@ -34,9 +34,9 @@
 }
 
 .danger {
-  color: var(--color-danger);
-  background: var(--color-surface);
-  border-color: var(--color-danger-border);
+  color: var(--color-on-accent);
+  background: var(--color-danger);
+  border-color: var(--color-danger);
 }
 
 .button:disabled {
@@ -60,7 +60,8 @@
 }
 
 .danger:not(:disabled):active {
-  background: var(--color-danger-soft);
+  background: var(--color-danger-solid-pressed);
+  border-color: var(--color-danger-solid-pressed);
 }
 
 @media (hover: hover) {
@@ -78,6 +79,7 @@
   }
 
   .danger:not(:disabled):hover:not(:active) {
-    background: var(--color-danger-soft);
+    background: var(--color-danger-solid-hover);
+    border-color: var(--color-danger-solid-hover);
   }
 }
