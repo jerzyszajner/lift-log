@@ -1,4 +1,4 @@
-import { Minus, Plus, X } from "lucide-react";
+import { Minus, Plus, Trash } from "lucide-react";
 import { getNextWeight } from "../../utils/getNextWeight";
 import { parseDigits } from "../../utils/parseDigits";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
@@ -81,7 +81,7 @@ export function SetRow({
             aria-label="Remove set"
             onClick={onRemove}
           >
-            <X />
+            <Trash />
           </button>
         )}
       </div>
