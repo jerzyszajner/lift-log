@@ -53,4 +53,27 @@ describe("SetRow", () => {
 
     expect(screen.getByText("Reps must be at least 1")).toBeTruthy();
   });
+
+  test("announces the error and marks both inputs invalid", () => {
+    const { rerender } = render(<SetRow {...baseProps} reps={0} />);
+
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(
+      screen.getByRole("textbox", { name: "Reps, set 1" }).ariaInvalid,
+    ).toBe("false");
+
+    rerender(
+      <SetRow {...baseProps} reps={0} error="Reps must be at least 1" />,
+    );
+
+    expect(screen.getByRole("alert").textContent).toBe(
+      "Reps must be at least 1",
+    );
+    expect(
+      screen.getByRole("textbox", { name: "Reps, set 1" }).ariaInvalid,
+    ).toBe("true");
+    expect(
+      screen.getByRole("textbox", { name: "Weight, set 1" }).ariaInvalid,
+    ).toBe("true");
+  });
 });

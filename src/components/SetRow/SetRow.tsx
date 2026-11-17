@@ -27,6 +27,8 @@ export function SetRow({
   onRemove,
   error,
 }: SetRowProps) {
+  const hasError = Boolean(error);
+
   return (
     <div>
       <div className={done ? `${styles.row} ${styles.done}` : styles.row}>
@@ -36,6 +38,7 @@ export function SetRow({
           type="text"
           inputMode="numeric"
           aria-label={`Reps, set ${setNumber}`}
+          aria-invalid={hasError}
           value={reps}
           onFocus={(e) => e.target.select()}
           onChange={(e) => onRepsChange(parseDigits(e.target.value))}
@@ -53,6 +56,7 @@ export function SetRow({
           type="text"
           inputMode="numeric"
           aria-label={`Weight, set ${setNumber}`}
+          aria-invalid={hasError}
           value={weight}
           onFocus={(e) => e.target.select()}
           onChange={(e) => onWeightChange(parseDigits(e.target.value))}
@@ -85,7 +89,7 @@ export function SetRow({
           </button>
         )}
       </div>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
     </div>
   );
 }
