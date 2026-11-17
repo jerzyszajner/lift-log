@@ -50,7 +50,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 - A `Field` component (label, control, error) builds `id`, `aria-invalid`, `aria-describedby` and `role="alert"` once, with `useId()`. Do not repeat these by hand per field.
 - Validation runs on submit (default react-hook-form mode), then live. Not `onBlur`.
 - A field error shows right under its field (`Field` renders it) and the field gets a red border. An error that belongs to no single field (wrong email or password at login) shows as one message above the submit button. Login never says which of email or password was wrong. Messages are our own text, mapped from the error code (`getAuthErrorMessage`).
-- Reps and kg are `type="text"` with `inputMode` (`numeric`, `decimal`). Not `type="number"`, no wheel picker.
+- Reps and kg are `type="text"` with `inputMode="numeric"` (digits only). A decimal kg value (for example 12.5) comes only from the `+` and `-` buttons, see `notes/LIMITATIONS.md`. Not `type="number"`, no wheel picker.
 - Focus selects the whole value. An empty field becomes `0` (no restoring of the previous value, no local text state). Zod checks the ranges.
 - Kg buttons use `getNextWeight(current, direction)` (pure function in `utils/`, tested): below 10 kg step 1, from 10 kg up step 2.5, going down from 10 kg gives 9.
 - Buttons have general labels ("Increase weight"). Set inputs have `aria-label` ("Reps, set 1").
