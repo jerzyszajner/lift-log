@@ -16,6 +16,7 @@ type ExerciseFieldsProps = {
   control: Control<DayFormValues>;
   register: UseFormRegister<DayFormValues>;
   errors: FieldErrors<DayFormValues>;
+  onInsertBelow: () => void;
   onRemove?: () => void;
 };
 
@@ -24,6 +25,7 @@ export function ExerciseFields({
   control,
   register,
   errors,
+  onInsertBelow,
   onRemove,
 }: ExerciseFieldsProps) {
   const { fields, append, remove } = useFieldArray({
@@ -94,6 +96,10 @@ export function ExerciseFields({
         <Plus />
         Add set (copies the last one)
       </Button>
+      <button type="button" onClick={onInsertBelow}>
+        <Plus />
+        Add exercise below
+      </button>
     </div>
   );
 }

@@ -1,11 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { ExerciseFields } from "./ExerciseFields";
 import type { DayFormValues, SetEntry } from "../../schemas/daysSchemas";
 
-function FormWithExercise({ sets }: { sets: SetEntry[] }) {
+function FormWithExercise({
+  sets,
+  onInsertBelow = () => {},
+}: {
+  sets: SetEntry[];
+  onInsertBelow?: () => void;
+}) {
   const {
     control,
     register,
@@ -24,6 +30,7 @@ function FormWithExercise({ sets }: { sets: SetEntry[] }) {
       control={control}
       register={register}
       errors={errors}
+      onInsertBelow={onInsertBelow}
     />
   );
 }
@@ -63,5 +70,21 @@ describe("ExerciseFields", () => {
     expect(getInput("Reps, set 1").value).toBe("10");
     expect(screen.queryByRole("textbox", { name: "Reps, set 2" })).toBeNull();
     expect(screen.queryByRole("button", { name: "Remove set" })).toBeNull();
+  });
+
+  test("asks to insert an exercise below", async () => {
+    const onInsertBelow = vi.fn();
+    render(
+      <FormWithExercise
+        sets={[{ reps: 8, weight: 60 }]}
+        onInsertBelow={onInsertBelow}
+      />,
+    );
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "Add exercise below" }),
+    );
+
+    expect(onInsertBelow).toHaveBeenCalledTimes(1);
   });
 });
