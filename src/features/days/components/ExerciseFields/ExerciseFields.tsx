@@ -20,7 +20,7 @@ export function ExerciseFields({
   register,
   errors,
 }: ExerciseFieldsProps) {
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: `exercises.${index}.sets`,
   });
@@ -53,6 +53,7 @@ export function ExerciseFields({
               reps={set.value.reps}
               weight={set.value.weight}
               error={getSetError(exerciseErrors?.sets?.[setIndex])}
+              onRemove={fields.length > 1 ? () => remove(setIndex) : undefined}
               onRepsChange={(reps) => set.onChange({ ...set.value, reps })}
               onWeightChange={(weight) =>
                 set.onChange({ ...set.value, weight })
