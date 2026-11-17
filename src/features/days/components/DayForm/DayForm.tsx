@@ -7,6 +7,7 @@ import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { dayFormSchema, defaultSet } from "../../schemas/daysSchemas";
+import { DeleteDay } from "../DeleteDay/DeleteDay";
 import { ExerciseFields } from "../ExerciseFields/ExerciseFields";
 import { WeekdayPicker } from "../WeekdayPicker/WeekdayPicker";
 import type { DayFormValues } from "../../schemas/daysSchemas";
@@ -15,11 +16,12 @@ import styles from "./DayForm.module.css";
 type DayFormProps = {
   onSubmit: (values: DayFormValues) => Promise<void>;
   defaultValues?: DayFormValues;
+  onDelete?: () => Promise<void>;
 };
 
 const emptyExercise = { name: "", sets: [defaultSet] };
 
-export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
+export function DayForm({ onSubmit, defaultValues, onDelete }: DayFormProps) {
   const [submitError, setSubmitError] = useState("");
   const exercises = defaultValues?.exercises.length
     ? defaultValues.exercises
@@ -78,6 +80,7 @@ export function DayForm({ onSubmit, defaultValues }: DayFormProps) {
           <Plus />
           Add exercise
         </Button>
+        {onDelete && <DeleteDay onDelete={onDelete} />}
       </div>
       <div className={styles.actions}>
         {submitError && <ErrorMessage role="alert">{submitError}</ErrorMessage>}
