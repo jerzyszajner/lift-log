@@ -1,9 +1,11 @@
 import {
   addDoc,
   collection,
+  doc,
   onSnapshot,
   orderBy,
   query,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../services/firebase";
 import { daySchema } from "../schemas/daysSchemas";
@@ -33,4 +35,11 @@ export function addDay(uid: string, values: AddDayFormValues) {
     exercises: [],
   };
   return addDoc(collection(db, "users", uid, "days"), data);
+}
+
+export function updateDay(uid: string, id: string, values: AddDayFormValues) {
+  return updateDoc(doc(db, "users", uid, "days", id), {
+    name: values.name,
+    weekday: values.weekday,
+  });
 }
