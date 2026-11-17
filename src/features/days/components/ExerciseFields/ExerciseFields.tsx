@@ -3,6 +3,7 @@ import { Button } from "../../../../components/Button/Button";
 import { Field } from "../../../../components/Field/Field";
 import { Input } from "../../../../components/Input/Input";
 import { SetRow } from "../../../../components/SetRow/SetRow";
+import { SetRowLabels } from "../../../../components/SetRowLabels/SetRowLabels";
 import { defaultSet } from "../../schemas/daysSchemas";
 import { getSetError } from "../../utils/getSetError";
 import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
@@ -44,6 +45,7 @@ export function ExerciseFields({
           />
         )}
       </Field>
+      <SetRowLabels />
       {fields.map((field, setIndex) => (
         <Controller
           key={field.id}
