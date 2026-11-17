@@ -6,6 +6,7 @@ import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { useDays } from "../../features/days/hooks/useDays";
 import { updateDay } from "../../features/days/services/daysService";
 import type { AddDayFormValues } from "../../features/days/schemas/daysSchemas";
+import styles from "./EditDayPage.module.css";
 
 export function EditDayPage() {
   const { user } = useAuth();
@@ -32,18 +33,22 @@ export function EditDayPage() {
 
   if (!day) {
     return (
-      <div>
-        <BackLink to="/" label="Days" />
-        <h1>Day not found</h1>
-        <p>This workout day does not exist.</p>
+      <div className={styles.page}>
+        <div className={styles.top}>
+          <BackLink to="/" label="Days" />
+          <h1 className={styles.title}>Day not found</h1>
+          <p className={styles.message}>This workout day does not exist.</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <BackLink to="/" label="Days" />
-      <h1>Edit day</h1>
+    <div className={styles.page}>
+      <div className={styles.top}>
+        <BackLink to="/" label="Days" />
+        <h1 className={styles.title}>Edit day</h1>
+      </div>
       <DayForm
         onSubmit={handleSubmit}
         defaultValues={{ name: day.name, weekday: day.weekday }}
