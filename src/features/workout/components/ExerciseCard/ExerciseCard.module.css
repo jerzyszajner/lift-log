@@ -12,28 +12,3 @@
   font-size: var(--font-size-xl);
   font-weight: 700;
 }
-
-.addButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-3);
-  width: 100%;
-  height: var(--control-height);
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  background: transparent;
-  border: 1.5px dashed var(--color-border-strong);
-  border-radius: var(--radius-md);
-  transition: background 0.15s;
-}
-
-.addButton:active {
-  background: var(--color-pressed);
-}
-
-@media (hover: hover) {
-  .addButton:hover:not(:active) {
-    background: var(--color-hover);
-  }
-}
