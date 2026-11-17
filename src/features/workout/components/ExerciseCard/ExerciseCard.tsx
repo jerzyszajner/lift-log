@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
 import { SetRow } from "../../../../components/SetRow/SetRow";
+import { SetRowLabels } from "../../../../components/SetRowLabels/SetRowLabels";
 import type { WorkoutExercise, WorkoutSet } from "../../schemas/workoutSchemas";
 import styles from "./ExerciseCard.module.css";
 
@@ -30,12 +31,7 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
   return (
     <div className={styles.card}>
       <h2 className={styles.title}>{exercise.name}</h2>
-      <div className={styles.labels}>
-        <span>#</span>
-        <span>Reps</span>
-        <span className={styles.weightLabel}>Kg</span>
-        <span className={styles.doneLabel}>Done</span>
-      </div>
+      <SetRowLabels lastLabel="Done" />
       {exercise.sets.map((set, index) => (
         <SetRow
           key={index}
