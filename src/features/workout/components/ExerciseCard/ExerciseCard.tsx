@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import { Button } from "../../../../components/Button/Button";
 import { SetRow } from "../../../../components/SetRow/SetRow";
 import { SetRowLabels } from "../../../../components/SetRowLabels/SetRowLabels";
 import type { WorkoutExercise, WorkoutSet } from "../../schemas/workoutSchemas";
@@ -44,10 +45,10 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
           onDoneChange={(done) => updateSet(index, { done })}
         />
       ))}
-      <button className={styles.addButton} type="button" onClick={addSet}>
+      <Button variant="addNeutral" onClick={addSet}>
         <Plus />
         Add set (copies the last one)
-      </button>
+      </Button>
     </div>
   );
 }
