@@ -48,6 +48,7 @@ export function SetRow({
             className={styles.button}
             type="button"
             aria-label="Decrease weight"
+            disabled={done}
             onClick={() => onWeightChange(getNextWeight(weight, "down"))}
           >
             <Minus />
@@ -59,6 +60,7 @@ export function SetRow({
             aria-label={`Weight, set ${setNumber}`}
             aria-invalid={hasError}
             aria-describedby={describedBy}
+            disabled={done}
             value={weight}
             onFocus={(e) => e.target.select()}
             onChange={(e) => onWeightChange(parseDigits(e.target.value))}
@@ -67,6 +69,7 @@ export function SetRow({
             className={styles.button}
             type="button"
             aria-label="Increase weight"
+            disabled={done}
             onClick={() => onWeightChange(getNextWeight(weight, "up"))}
           >
             <Plus />
@@ -77,6 +80,7 @@ export function SetRow({
             className={styles.button}
             type="button"
             aria-label="Decrease reps"
+            disabled={done}
             onClick={() => onRepsChange(Math.max(1, reps - 1))}
           >
             <Minus />
@@ -88,6 +92,7 @@ export function SetRow({
             aria-label={`Reps, set ${setNumber}`}
             aria-invalid={hasError}
             aria-describedby={describedBy}
+            disabled={done}
             value={reps}
             onFocus={(e) => e.target.select()}
             onChange={(e) => onRepsChange(parseDigits(e.target.value))}
@@ -96,6 +101,7 @@ export function SetRow({
             className={styles.button}
             type="button"
             aria-label="Increase reps"
+            disabled={done}
             onClick={() => onRepsChange(reps + 1)}
           >
             <Plus />

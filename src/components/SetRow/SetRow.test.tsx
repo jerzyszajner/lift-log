@@ -50,6 +50,29 @@ describe("SetRow", () => {
     expect(screen.getByRole("checkbox", { name: "Done, set 1" })).toBeTruthy();
   });
 
+  test("locks the values of a done set", async () => {
+    const onWeightChange = vi.fn();
+    render(
+      <SetRow
+        {...baseProps}
+        done
+        onDoneChange={vi.fn()}
+        onWeightChange={onWeightChange}
+      />,
+    );
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "Increase weight" }),
+    );
+
+    expect(onWeightChange).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole("textbox", { name: "Weight, set 1" }),
+    ).toBeDisabled();
+    expect(screen.getByRole("textbox", { name: "Reps, set 1" })).toBeDisabled();
+    expect(screen.getByRole("checkbox", { name: "Done, set 1" })).toBeEnabled();
+  });
+
   test("calls onRemove when the remove button is clicked", async () => {
     const onRemove = vi.fn();
     render(<SetRow {...baseProps} onRemove={onRemove} />);
