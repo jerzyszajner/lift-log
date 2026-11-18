@@ -15,16 +15,11 @@
   position: sticky;
   z-index: 1;
   top: 0;
-  display: flow-root;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
   padding: var(--spacing-5) var(--spacing-5) 0;
   background: var(--color-bg);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-4);
 }
 
 .date {
