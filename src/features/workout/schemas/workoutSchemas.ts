@@ -15,3 +15,11 @@ export const workoutExerciseSchema = dayExerciseSchema.extend({
 });
 
 export type WorkoutExercise = z.infer<typeof workoutExerciseSchema>;
+
+export const logSchema = z.object({
+  date: z.iso.date(),
+  dayName: z.string().min(1),
+  exercises: z.array(dayExerciseSchema),
+});
+
+export type LogData = z.infer<typeof logSchema>;
