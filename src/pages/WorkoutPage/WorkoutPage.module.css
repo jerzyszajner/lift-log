@@ -10,7 +10,6 @@
   position: sticky;
   z-index: 1;
   top: 0;
-  display: flow-root;
   padding: var(--spacing-5) var(--spacing-5) 0;
   background: var(--color-bg);
 }
