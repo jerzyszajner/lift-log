@@ -4,9 +4,15 @@ import { BackLink } from "../../../../components/BackLink/BackLink";
 import { Button } from "../../../../components/Button/Button";
 import { ButtonLink } from "../../../../components/ButtonLink/ButtonLink";
 import { ConfirmBar } from "../../../../components/ConfirmBar/ConfirmBar";
+import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
+import { formatDate } from "../../../../utils/formatDate";
 import { formatShortDate } from "../../../../utils/formatShortDate";
+import { useAuth } from "../../../auth/hooks/useAuth";
+import { finishWorkout } from "../../services/workoutService";
+import { applyToPlan } from "../../utils/applyToPlan";
 import { createWorkout } from "../../utils/createWorkout";
 import { formatSets } from "../../utils/formatSets";
+import { getDoneExercises } from "../../utils/getDoneExercises";
 import { ExerciseCard } from "../ExerciseCard/ExerciseCard";
 import { WorkoutProgress } from "../WorkoutProgress/WorkoutProgress";
 import type { MouseEvent } from "react";
@@ -14,20 +20,26 @@ import type { Day } from "../../../days/schemas/daysSchemas";
 import type { WorkoutExercise } from "../../schemas/workoutSchemas";
 import styles from "./WorkoutSession.module.css";
 
-type WorkoutStep = "working" | "confirming" | "leaving" | "finished";
+type WorkoutStep =
+  | "working"
+  | "confirming"
+  | "leaving"
+  | "saving"
+  | "finished";
 
 type WorkoutSessionProps = {
   day: Day;
 };
 
 export function WorkoutSession({ day }: WorkoutSessionProps) {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [date] = useState(() => new Date());
-  const [exercises, setExercises] = useState(() =>
-    createWorkout(day.exercises),
-  );
+  const [plan] = useState(() => day.exercises);
+  const [exercises, setExercises] = useState(() => createWorkout(plan));
   const [step, setStep] = useState<WorkoutStep>("working");
+  const [error, setError] = useState("");
 
   function updateExercise(index: number, updated: WorkoutExercise) {
     setStep("working");
@@ -39,8 +51,37 @@ export function WorkoutSession({ day }: WorkoutSessionProps) {
   const allSets = exercises.flatMap((exercise) => exercise.sets);
   const doneCount = allSets.filter((set) => set.done).length;
 
+  async function saveWorkout() {
+    setStep("saving");
+    setError("");
+    try {
+      if (!user) {
+        throw new Error("Cannot save a workout without a signed in user");
+      }
+      await finishWorkout(
+        user.uid,
+        day.id,
+        {
+          date: formatDate(date),
+          dayName: day.name,
+          exercises: getDoneExercises(exercises),
+        },
+        applyToPlan(plan, exercises),
+      );
+      setStep("finished");
+    } catch (err) {
+      console.error(err);
+      setError("Could not save the workout. Try again.");
+      setStep("working");
+    }
+  }
+
   function handleFinish() {
-    setStep(doneCount < allSets.length ? "confirming" : "finished");
+    if (doneCount < allSets.length) {
+      setStep("confirming");
+      return;
+    }
+    saveWorkout();
   }
 
   function handleBack(event: MouseEvent<HTMLAnchorElement>) {
@@ -82,10 +123,16 @@ export function WorkoutSession({ day }: WorkoutSessionProps) {
         ))}
       </div>
       <div className={styles.actions}>
-        {step === "working" && (
-          <Button disabled={doneCount === 0} onClick={handleFinish}>
-            Finish workout
-          </Button>
+        {(step === "working" || step === "saving") && (
+          <>
+            {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
+            <Button
+              disabled={doneCount === 0 || step === "saving"}
+              onClick={handleFinish}
+            >
+              Finish workout
+            </Button>
+          </>
         )}
         {step === "confirming" && (
           <ConfirmBar
@@ -93,7 +140,7 @@ export function WorkoutSession({ day }: WorkoutSessionProps) {
             cancelLabel="Back"
             confirmLabel="Finish"
             onCancel={() => setStep("working")}
-            onConfirm={() => setStep("finished")}
+            onConfirm={saveWorkout}
           />
         )}
         {step === "leaving" && (
