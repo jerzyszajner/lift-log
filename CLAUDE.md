@@ -68,7 +68,7 @@ Data fetching: Firestore `onSnapshot` is called only in `services/`, in one `sub
 - Top left of every sub screen: a back arrow with the name of the screen it returns to (`‹ Days`, `‹ History`), as a `<Link>`.
 - Bottom of the screen: the one main action, full width, in thumb reach (`Save day`, `Finish workout`). A secondary action sits next to it only when it is safe.
 - Destructive actions are never next to the main one and ask for confirmation. `Delete day` is `danger` text in the top right corner, in line with `‹ Days`; tapping it turns the bottom bar into "Delete this day?" with `Cancel` and a red `Delete`. `Delete account` lives in the content.
-- Leaving a workout with done sets asks "Leave without saving?". Screens with the tab bar have no back arrow.
+- Leaving a workout with done sets, or a day form with unsaved changes, asks "Leave without saving?". Screens with the tab bar have no back arrow.
 
 ## Accessibility
 
