@@ -33,10 +33,6 @@ async function finishFirstSet() {
     </MemoryRouter>,
   );
 
-  await userEvent.type(
-    screen.getByRole("textbox", { name: "Weight, set 1" }),
-    "70",
-  );
   await userEvent.click(screen.getByRole("checkbox", { name: "Done, set 1" }));
   await userEvent.click(screen.getByRole("button", { name: "Finish workout" }));
   await userEvent.click(screen.getByRole("button", { name: "Finish" }));
@@ -67,13 +63,13 @@ describe("WorkoutSession", () => {
       {
         date: "2026-11-18",
         dayName: "Chest",
-        exercises: [{ name: "Bench press", sets: [{ reps: 10, weight: 70 }] }],
+        exercises: [{ name: "Bench press", sets: [{ reps: 10, weight: 50 }] }],
       },
       [
         {
           name: "Bench press",
           sets: [
-            { reps: 10, weight: 70 },
+            { reps: 10, weight: 50 },
             { reps: 8, weight: 60 },
           ],
         },

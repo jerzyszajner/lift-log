@@ -1,4 +1,5 @@
-import { Plus } from "lucide-react";
+import { Lock, LockOpen, Plus } from "lucide-react";
+import { useState } from "react";
 import { Button } from "../../../../components/Button/Button";
 import { SetRow } from "../../../../components/SetRow/SetRow";
 import { SetRowLabels } from "../../../../components/SetRowLabels/SetRowLabels";
@@ -11,6 +12,8 @@ type ExerciseCardProps = {
 };
 
 export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
+  const [isUnlocked, setIsUnlocked] = useState(false);
+
   function updateSet(index: number, changes: Partial<WorkoutSet>) {
     onChange({
       ...exercise,
@@ -31,8 +34,17 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
 
   return (
     <div className={styles.card}>
-      <h2 className={styles.title}>{exercise.name}</h2>
-      <SetRowLabels lastLabel="Done" />
+      <div className={styles.header}>
+        <h2 className={styles.title}>{exercise.name}</h2>
+        <button
+          className={styles.lock}
+          type="button"
+          onClick={() => setIsUnlocked(!isUnlocked)}
+        >
+          {isUnlocked ? <LockOpen /> : <Lock />}
+        </button>
+      </div>
+      {isUnlocked && <SetRowLabels lastLabel="Done" />}
       {exercise.sets.map((set, index) => (
         <SetRow
           key={index}
@@ -40,16 +52,18 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
           reps={set.reps}
           weight={set.weight}
           done={set.done}
-          locked={set.done}
+          locked={!isUnlocked || set.done}
           onRepsChange={(reps) => updateSet(index, { reps })}
           onWeightChange={(weight) => updateSet(index, { weight })}
           onDoneChange={(done) => updateSet(index, { done })}
         />
       ))}
-      <Button variant="addNeutral" onClick={addSet}>
-        <Plus />
-        Add set
-      </Button>
+      {isUnlocked && (
+        <Button variant="addNeutral" onClick={addSet}>
+          <Plus />
+          Add set
+        </Button>
+      )}
     </div>
   );
 }
