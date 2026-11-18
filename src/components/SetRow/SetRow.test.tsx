@@ -53,6 +53,7 @@ describe("SetRow", () => {
   test("shows values as text when locked", () => {
     render(<SetRow {...baseProps} locked onDoneChange={vi.fn()} />);
 
+    expect(screen.getByRole("group", { name: "Set 1" })).toBeTruthy();
     expect(screen.getByText("10 kg × 10")).toBeTruthy();
     expect(screen.queryByRole("textbox")).toBeNull();
     expect(screen.getByRole("checkbox", { name: "Done, set 1" })).toBeEnabled();

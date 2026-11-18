@@ -34,6 +34,11 @@ export function SetRow({
   const errorId = useId();
   const describedBy = hasError ? errorId : undefined;
   const labelId = useId();
+  const label = (
+    <span className={styles.label} id={labelId}>
+      Set {setNumber}
+    </span>
+  );
 
   return (
     <div
@@ -41,13 +46,14 @@ export function SetRow({
       role="group"
       aria-labelledby={labelId}
     >
-      <span className={styles.label} id={labelId}>
-        Set {setNumber}
-      </span>
+      {!locked && label}
       <div className={styles.row}>
         {locked ? (
           <span className={styles.value}>
-            {weight} kg × {reps}
+            {label}
+            <span>
+              {weight} kg × {reps}
+            </span>
           </span>
         ) : (
           <>
