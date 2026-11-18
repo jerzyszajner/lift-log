@@ -1,0 +1,20 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, auto) 1fr;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-height: var(--tap-size);
+}
+
+.title {
+  overflow: hidden;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.action {
+  justify-self: end;
+}

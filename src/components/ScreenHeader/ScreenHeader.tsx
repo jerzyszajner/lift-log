@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import styles from "./ScreenHeader.module.css";
 
 type ScreenHeaderProps = {
   title: string;
@@ -8,10 +9,10 @@ type ScreenHeaderProps = {
 
 export function ScreenHeader({ title, back, children }: ScreenHeaderProps) {
   return (
-    <header>
+    <header className={styles.header}>
       <div>{back}</div>
-      <h1>{title}</h1>
-      <div>{children}</div>
+      <h1 className={styles.title}>{title}</h1>
+      <div className={styles.action}>{children}</div>
     </header>
   );
 }
