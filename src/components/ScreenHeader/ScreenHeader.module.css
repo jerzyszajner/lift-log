@@ -15,6 +15,11 @@
   text-overflow: ellipsis;
 }
 
+.back {
+  white-space: nowrap;
+}
+
 .action {
   justify-self: end;
+  white-space: nowrap;
 }

@@ -10,7 +10,7 @@ type ScreenHeaderProps = {
 export function ScreenHeader({ title, back, children }: ScreenHeaderProps) {
   return (
     <header className={styles.header}>
-      <div>{back}</div>
+      <div className={styles.back}>{back}</div>
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.action}>{children}</div>
     </header>
