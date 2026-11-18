@@ -10,12 +10,6 @@
   padding: var(--spacing-5) var(--spacing-5) 0;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .delete {
   min-height: var(--tap-size);
   padding: 0 var(--spacing-4);
@@ -29,13 +23,6 @@
 
 .delete:active {
   background: var(--color-danger-pressed);
-}
-
-.title {
-  margin-top: var(--spacing-4);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  line-height: 1.15;
 }
 
 .message {
