@@ -3,8 +3,8 @@
   align-items: center;
   gap: var(--spacing-1);
   min-height: var(--tap-size);
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-size: var(--font-size-base);
+  font-weight: 600;
   color: var(--color-text);
   text-decoration: none;
   transition: color 0.15s;
