@@ -39,7 +39,7 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
         <button
           className={styles.lock}
           type="button"
-          aria-label="Unlock exercise"
+          aria-label={`Unlock ${exercise.name}`}
           aria-pressed={isUnlocked}
           onClick={() => setIsUnlocked(!isUnlocked)}
         >

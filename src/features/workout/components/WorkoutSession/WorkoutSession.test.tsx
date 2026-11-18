@@ -34,7 +34,7 @@ async function finishFirstSet() {
   );
 
   await userEvent.click(
-    screen.getByRole("button", { name: "Unlock exercise" }),
+    screen.getByRole("button", { name: "Unlock Bench press" }),
   );
   await userEvent.type(
     screen.getByRole("textbox", { name: "Weight, set 1" }),
