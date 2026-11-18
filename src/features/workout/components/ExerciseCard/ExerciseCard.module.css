@@ -8,7 +8,38 @@
   border-radius: var(--radius-lg);
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
 .title {
   font-size: var(--font-size-xl);
   font-weight: 700;
+}
+
+.lock {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-size);
+  height: var(--tap-size);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+
+.lock:active {
+  background: var(--color-pressed);
+}
+
+@media (hover: hover) {
+  .lock:hover:not(:active) {
+    background: var(--color-hover);
+  }
 }
