@@ -40,6 +40,7 @@ export function ExerciseCard({ exercise, onChange }: ExerciseCardProps) {
           reps={set.reps}
           weight={set.weight}
           done={set.done}
+          locked={set.done}
           onRepsChange={(reps) => updateSet(index, { reps })}
           onWeightChange={(weight) => updateSet(index, { weight })}
           onDoneChange={(done) => updateSet(index, { done })}

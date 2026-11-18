@@ -10,6 +10,7 @@ type SetRowProps = {
   reps: number;
   weight: number;
   done?: boolean;
+  locked?: boolean;
   onRepsChange: (reps: number) => void;
   onWeightChange: (weight: number) => void;
   onDoneChange?: (done: boolean) => void;
@@ -22,6 +23,7 @@ export function SetRow({
   reps,
   weight,
   done = false,
+  locked = false,
   onRepsChange,
   onWeightChange,
   onDoneChange,
@@ -43,70 +45,72 @@ export function SetRow({
         Set {setNumber}
       </span>
       <div className={styles.row}>
-        <div className={styles.stepper}>
-          <button
-            className={styles.button}
-            type="button"
-            aria-label="Decrease weight"
-            disabled={done}
-            onClick={() => onWeightChange(getNextWeight(weight, "down"))}
-          >
-            <Minus />
-          </button>
-          <input
-            className={styles.input}
-            type="text"
-            inputMode="numeric"
-            aria-label={`Weight, set ${setNumber}`}
-            aria-invalid={hasError}
-            aria-describedby={describedBy}
-            disabled={done}
-            value={weight}
-            onFocus={(e) => e.target.select()}
-            onChange={(e) => onWeightChange(parseDigits(e.target.value))}
-          />
-          <button
-            className={styles.button}
-            type="button"
-            aria-label="Increase weight"
-            disabled={done}
-            onClick={() => onWeightChange(getNextWeight(weight, "up"))}
-          >
-            <Plus />
-          </button>
-        </div>
-        <div className={styles.stepper}>
-          <button
-            className={styles.button}
-            type="button"
-            aria-label="Decrease reps"
-            disabled={done}
-            onClick={() => onRepsChange(Math.max(1, reps - 1))}
-          >
-            <Minus />
-          </button>
-          <input
-            className={styles.input}
-            type="text"
-            inputMode="numeric"
-            aria-label={`Reps, set ${setNumber}`}
-            aria-invalid={hasError}
-            aria-describedby={describedBy}
-            disabled={done}
-            value={reps}
-            onFocus={(e) => e.target.select()}
-            onChange={(e) => onRepsChange(parseDigits(e.target.value))}
-          />
-          <button
-            className={styles.button}
-            type="button"
-            aria-label="Increase reps"
-            disabled={done}
-            onClick={() => onRepsChange(reps + 1)}
-          >
-            <Plus />
-          </button>
-        </div>
+        {locked ? (
+          <span className={styles.value}>
+            {weight} kg × {reps}
+          </span>
+        ) : (
+          <>
+            <div className={styles.stepper}>
+              <button
+                className={styles.button}
+                type="button"
+                aria-label="Decrease weight"
+                onClick={() => onWeightChange(getNextWeight(weight, "down"))}
+              >
+                <Minus />
+              </button>
+              <input
+                className={styles.input}
+                type="text"
+                inputMode="numeric"
+                aria-label={`Weight, set ${setNumber}`}
+                aria-invalid={hasError}
+                aria-describedby={describedBy}
+                value={weight}
+                onFocus={(e) => e.target.select()}
+                onChange={(e) => onWeightChange(parseDigits(e.target.value))}
+              />
+              <button
+                className={styles.button}
+                type="button"
+                aria-label="Increase weight"
+                onClick={() => onWeightChange(getNextWeight(weight, "up"))}
+              >
+                <Plus />
+              </button>
+            </div>
+            <div className={styles.stepper}>
+              <button
+                className={styles.button}
+                type="button"
+                aria-label="Decrease reps"
+                onClick={() => onRepsChange(Math.max(1, reps - 1))}
+              >
+                <Minus />
+              </button>
+              <input
+                className={styles.input}
+                type="text"
+                inputMode="numeric"
+                aria-label={`Reps, set ${setNumber}`}
+                aria-invalid={hasError}
+                aria-describedby={describedBy}
+                value={reps}
+                onFocus={(e) => e.target.select()}
+                onChange={(e) => onRepsChange(parseDigits(e.target.value))}
+              />
+              <button
+                className={styles.button}
+                type="button"
+                aria-label="Increase reps"
+                onClick={() => onRepsChange(reps + 1)}
+              >
+                <Plus />
+              </button>
+            </div>
+          </>
+        )}
         {onDoneChange && (
           <input
             className={styles.checkbox}
