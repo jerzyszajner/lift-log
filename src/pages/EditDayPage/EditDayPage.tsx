@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { ScreenHeader } from "../../components/ScreenHeader/ScreenHeader";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { DeleteDay } from "../../features/days/components/DeleteDay/DeleteDay";
@@ -57,8 +58,10 @@ export function EditDayPage() {
     return (
       <div className={styles.page}>
         <div className={styles.top}>
-          <BackLink to="/" label="Days" />
-          <h1 className={styles.title}>Day not found</h1>
+          <ScreenHeader
+            title="Day not found"
+            back={<BackLink to="/" label="Days" />}
+          />
           <p className={styles.message}>This workout day does not exist.</p>
         </div>
       </div>
@@ -68,8 +71,10 @@ export function EditDayPage() {
   return (
     <div className={styles.page}>
       <div className={styles.top}>
-        <div className={styles.header}>
-          <BackLink to="/" label="Days" onClick={handleBack} />
+        <ScreenHeader
+          title="Edit day"
+          back={<BackLink to="/" label="Days" onClick={handleBack} />}
+        >
           <button
             className={styles.delete}
             type="button"
@@ -77,8 +82,7 @@ export function EditDayPage() {
           >
             Delete day
           </button>
-        </div>
-        <h1 className={styles.title}>Edit day</h1>
+        </ScreenHeader>
       </div>
       <DayForm
         onSubmit={handleSubmit}
