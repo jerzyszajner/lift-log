@@ -42,6 +42,7 @@ export function WorkoutSession({ day }: WorkoutSessionProps) {
   const [error, setError] = useState("");
 
   function updateExercise(index: number, updated: WorkoutExercise) {
+    if (step === "saving") return;
     setStep("working");
     setExercises((current) =>
       current.map((exercise, i) => (i === index ? updated : exercise)),
@@ -85,7 +86,7 @@ export function WorkoutSession({ day }: WorkoutSessionProps) {
   }
 
   function handleBack(event: MouseEvent<HTMLAnchorElement>) {
-    if (doneCount === 0) return;
+    if (doneCount === 0 || step === "saving") return;
     event.preventDefault();
     setStep("leaving");
   }
