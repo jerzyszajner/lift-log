@@ -20,7 +20,7 @@ export function DaysPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Training days</h1>
+        <h1 className={styles.title}>Workout days</h1>
         <Link className={styles.addLink} to="/days/new">
           <Plus size={18} />
           Add day
