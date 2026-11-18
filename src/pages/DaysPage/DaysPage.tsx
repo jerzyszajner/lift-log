@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Pencil, Play, Plus } from "lucide-react";
 import { ButtonLink } from "../../components/ButtonLink/ButtonLink";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { ScreenHeader } from "../../components/ScreenHeader/ScreenHeader";
 import { useDays } from "../../features/days/hooks/useDays";
 import { getWeekdayLabel } from "../../features/days/utils/getWeekdayLabel";
 import styles from "./DaysPage.module.css";
@@ -19,13 +20,12 @@ export function DaysPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Workout days</h1>
+      <ScreenHeader title="Workout days">
         <Link className={styles.addLink} to="/days/new">
           <Plus size={18} />
           Add day
         </Link>
-      </header>
+      </ScreenHeader>
       <ul className={styles.list}>
         {days.map((day) => (
           <li key={day.id} className={styles.item}>

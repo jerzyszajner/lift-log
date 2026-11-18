@@ -5,6 +5,7 @@ import { Button } from "../../../../components/Button/Button";
 import { ButtonLink } from "../../../../components/ButtonLink/ButtonLink";
 import { ConfirmBar } from "../../../../components/ConfirmBar/ConfirmBar";
 import { ErrorMessage } from "../../../../components/ErrorMessage/ErrorMessage";
+import { ScreenHeader } from "../../../../components/ScreenHeader/ScreenHeader";
 import { formatDate } from "../../../../utils/formatDate";
 import { formatShortDate } from "../../../../utils/formatShortDate";
 import { useAuth } from "../../../auth/hooks/useAuth";
@@ -108,10 +109,12 @@ export function WorkoutSession({ day }: WorkoutSessionProps) {
   return (
     <main className={styles.page}>
       <div className={styles.top}>
-        <header className={styles.header}>
-          <BackLink to="/" label="Days" onClick={handleBack} />
+        <ScreenHeader
+          title={day.name}
+          back={<BackLink to="/" label="Days" onClick={handleBack} />}
+        >
           <p className={styles.date}>{formatShortDate(date)}</p>
-        </header>
+        </ScreenHeader>
         <WorkoutProgress done={doneCount} total={allSets.length} />
       </div>
       <div className={styles.content}>

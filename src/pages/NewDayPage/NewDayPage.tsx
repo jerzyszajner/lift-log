@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { ConfirmBar } from "../../components/ConfirmBar/ConfirmBar";
+import { ScreenHeader } from "../../components/ScreenHeader/ScreenHeader";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { DayForm } from "../../features/days/components/DayForm/DayForm";
 import { addDay } from "../../features/days/services/daysService";
@@ -32,8 +33,10 @@ export function NewDayPage() {
   return (
     <div className={styles.page}>
       <div className={styles.top}>
-        <BackLink to="/" label="Days" onClick={handleBack} />
-        <h1 className={styles.title}>Add day</h1>
+        <ScreenHeader
+          title="Add day"
+          back={<BackLink to="/" label="Days" onClick={handleBack} />}
+        />
       </div>
       <DayForm
         onSubmit={handleSubmit}

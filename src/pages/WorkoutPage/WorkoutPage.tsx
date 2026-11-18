@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { BackLink } from "../../components/BackLink/BackLink";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { ScreenHeader } from "../../components/ScreenHeader/ScreenHeader";
 import { useDays } from "../../features/days/hooks/useDays";
 import { WorkoutSession } from "../../features/workout/components/WorkoutSession/WorkoutSession";
 import styles from "./WorkoutPage.module.css";
@@ -22,12 +23,12 @@ export function WorkoutPage() {
     return (
       <main className={styles.page}>
         <div className={styles.top}>
-          <header className={styles.header}>
-            <BackLink to="/" label="Days" />
-          </header>
+          <ScreenHeader
+            title="Day not found"
+            back={<BackLink to="/" label="Days" />}
+          />
         </div>
         <div className={styles.summary}>
-          <h1 className={styles.title}>Day not found</h1>
           <p className={styles.message}>This workout day does not exist.</p>
         </div>
       </main>

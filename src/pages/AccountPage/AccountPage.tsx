@@ -1,4 +1,5 @@
 import { Button } from "../../components/Button/Button";
+import { ScreenHeader } from "../../components/ScreenHeader/ScreenHeader";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { logOut } from "../../features/auth/services/authService";
 import styles from "./AccountPage.module.css";
@@ -16,7 +17,7 @@ export function AccountPage() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Account</h1>
+      <ScreenHeader title="Account" />
       <div className={styles.card}>
         <p className={styles.label}>Signed in as</p>
         <p className={styles.email}>{user?.email}</p>
